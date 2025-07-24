@@ -22,292 +22,57 @@
 
 /* Animación del cielo */
 @keyframes skyGradient {
-  0% {
-    background: linear-gradient(
-      180deg,
-      rgba(135, 206, 235, 0.8) 0%,   /* Cielo azul claro - mediodía */
-      rgba(100, 149, 237, 0.7) 20%,
-      rgba(70, 130, 180, 0.8) 40%,
-      rgba(30, 144, 255, 0.9) 60%,
-      rgba(25, 25, 112, 0.9) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  4% {
-    background: linear-gradient(
-      180deg,
-      rgba(154, 211, 232, 0.75) 0%,  /* Azul claro suave */
-      rgba(117, 169, 236, 0.65) 20%,
-      rgba(85, 140, 190, 0.75) 40%,
-      rgba(50, 127, 227, 0.85) 60%,
-      rgba(27, 25, 102, 0.85) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  8% {
-    background: linear-gradient(
-      180deg,
-      rgba(173, 216, 230, 0.7) 0%,   /* Cielo azul suave - tarde temprana */
-      rgba(135, 206, 235, 0.6) 20%,
-      rgba(100, 149, 237, 0.7) 40%,
-      rgba(70, 130, 180, 0.8) 60%,
-      rgba(30, 144, 255, 0.9) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  12% {
-    background: linear-gradient(
-      180deg,
-      rgba(191, 221, 229, 0.65) 0%,  /* Azul muy suave */
-      rgba(152, 189, 234, 0.55) 20%,
-      rgba(115, 159, 237, 0.65) 40%,
-      rgba(90, 130, 180, 0.75) 60%,
-      rgba(32, 144, 255, 0.85) 80%,
-      rgba(15, 23, 42, 0.95) 100%
-    );
-  }
-  16% {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 218, 185, 0.6) 0%,   /* Cielo melocotón suave */
-      rgba(255, 192, 203, 0.5) 20%,
-      rgba(255, 182, 193, 0.6) 40%,
-      rgba(255, 160, 122, 0.7) 60%,
-      rgba(255, 140, 0, 0.8) 80%,
-      rgba(15, 23, 42, 0.9) 100%
-    );
-  }
-  20% {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 191, 142, 0.65) 0%,  /* Melocotón intenso */
-      rgba(255, 182, 193, 0.55) 20%,
-      rgba(255, 171, 185, 0.65) 40%,
-      rgba(255, 150, 112, 0.75) 60%,
-      rgba(255, 130, 0, 0.85) 80%,
-      rgba(15, 23, 42, 0.9) 100%
-    );
-  }
-  24% {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 165, 0, 0.7) 0%,     /* Naranja dorado temprano */
-      rgba(255, 140, 0, 0.6) 20%,
-      rgba(255, 120, 0, 0.7) 40%,
-      rgba(255, 100, 0, 0.8) 60%,
-      rgba(255, 69, 0, 0.9) 80%,
-      rgba(15, 23, 42, 0.9) 100%
-    );
-  }
-  28% {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 127, 0, 0.75) 0%,    /* Naranja intenso */
-      rgba(255, 110, 0, 0.65) 20%,
-      rgba(255, 90, 0, 0.75) 40%,
-      rgba(255, 70, 0, 0.85) 60%,
-      rgba(255, 50, 0, 0.95) 80%,
-      rgba(15, 23, 42, 0.9) 100%
-    );
-  }
-  32% {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 69, 0, 0.8) 0%,      /* Naranja rojizo intenso */
-      rgba(255, 50, 0, 0.7) 20%,
-      rgba(255, 30, 0, 0.8) 40%,
-      rgba(255, 10, 0, 0.9) 60%,
-      rgba(220, 20, 60, 0.9) 80%,
-      rgba(15, 23, 42, 0.9) 100%
-    );
-  }
-  36% {
-    background: linear-gradient(
-      180deg,
-      rgba(237, 44, 30, 0.85) 0%,    /* Rojo naranja */
-      rgba(220, 35, 30, 0.75) 20%,
-      rgba(200, 25, 30, 0.85) 40%,
-      rgba(180, 15, 30, 0.95) 60%,
-      rgba(200, 20, 60, 0.95) 80%,
-      rgba(15, 23, 42, 0.95) 100%
-    );
-  }
-  40% {
-    background: linear-gradient(
-      180deg,
-      rgba(220, 20, 60, 0.9) 0%,     /* Rojo carmesí */
-      rgba(200, 20, 60, 0.8) 20%,
-      rgba(180, 20, 60, 0.9) 40%,
-      rgba(160, 20, 60, 1) 60%,
-      rgba(140, 20, 60, 1) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  44% {
-    background: linear-gradient(
-      180deg,
-      rgba(200, 20, 60, 0.85) 0%,    /* Rojo profundo temprano */
-      rgba(180, 20, 60, 0.75) 20%,
-      rgba(160, 20, 60, 0.85) 40%,
-      rgba(140, 20, 60, 0.95) 60%,
-      rgba(120, 20, 60, 1) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  48% {
-    background: linear-gradient(
-      180deg,
-      rgba(160, 20, 60, 0.8) 0%,     /* Rojo profundo */
-      rgba(140, 20, 60, 0.7) 20%,
-      rgba(120, 20, 60, 0.8) 40%,
-      rgba(100, 20, 60, 0.9) 60%,
-      rgba(80, 20, 60, 1) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  52% {
-    background: linear-gradient(
-      180deg,
-      rgba(140, 20, 60, 0.75) 0%,    /* Púrpura rojizo temprano */
-      rgba(120, 20, 60, 0.65) 20%,
-      rgba(100, 20, 60, 0.75) 40%,
-      rgba(80, 20, 60, 0.85) 60%,
-      rgba(60, 20, 60, 0.95) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  56% {
-    background: linear-gradient(
-      180deg,
-      rgba(120, 20, 60, 0.7) 0%,     /* Púrpura rojizo */
-      rgba(100, 20, 60, 0.6) 20%,
-      rgba(80, 20, 60, 0.7) 40%,
-      rgba(60, 20, 60, 0.8) 60%,
-      rgba(40, 20, 60, 0.9) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  60% {
-    background: linear-gradient(
-      180deg,
-      rgba(100, 20, 60, 0.65) 0%,    /* Púrpura profundo temprano */
-      rgba(80, 20, 60, 0.55) 20%,
-      rgba(60, 20, 60, 0.65) 40%,
-      rgba(40, 20, 60, 0.75) 60%,
-      rgba(20, 20, 60, 0.85) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  64% {
-    background: linear-gradient(
-      180deg,
-      rgba(80, 20, 60, 0.6) 0%,      /* Púrpura profundo */
-      rgba(60, 20, 60, 0.5) 20%,
-      rgba(40, 20, 60, 0.6) 40%,
-      rgba(20, 20, 60, 0.7) 60%,
-      rgba(10, 20, 60, 0.8) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  68% {
-    background: linear-gradient(
-      180deg,
-      rgba(60, 20, 60, 0.55) 0%,     /* Azul púrpura temprano */
-      rgba(40, 20, 60, 0.45) 20%,
-      rgba(20, 20, 60, 0.55) 40%,
-      rgba(10, 20, 60, 0.65) 60%,
-      rgba(5, 20, 60, 0.75) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  72% {
-    background: linear-gradient(
-      180deg,
-      rgba(40, 20, 60, 0.5) 0%,      /* Azul púrpura */
-      rgba(20, 20, 60, 0.4) 20%,
-      rgba(10, 20, 60, 0.5) 40%,
-      rgba(5, 20, 60, 0.6) 60%,
-      rgba(0, 20, 60, 0.7) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  76% {
-    background: linear-gradient(
-      180deg,
-      rgba(30, 20, 60, 0.45) 0%,     /* Azul noche temprano */
-      rgba(15, 20, 60, 0.35) 20%,
-      rgba(7, 20, 60, 0.45) 40%,
-      rgba(2, 20, 60, 0.55) 60%,
-      rgba(0, 15, 50, 0.65) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  80% {
-    background: linear-gradient(
-      180deg,
-      rgba(20, 20, 60, 0.4) 0%,      /* Azul noche temprano */
-      rgba(10, 20, 60, 0.3) 20%,
-      rgba(5, 20, 60, 0.4) 40%,
-      rgba(0, 20, 60, 0.5) 60%,
-      rgba(0, 10, 40, 0.6) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  84% {
-    background: linear-gradient(
-      180deg,
-      rgba(15, 20, 60, 0.35) 0%,     /* Azul noche profundo temprano */
-      rgba(7, 20, 60, 0.25) 20%,
-      rgba(2, 20, 60, 0.35) 40%,
-      rgba(0, 20, 60, 0.45) 60%,
-      rgba(0, 7, 30, 0.55) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  88% {
-    background: linear-gradient(
-      180deg,
-      rgba(10, 20, 60, 0.3) 0%,      /* Azul noche profundo */
-      rgba(5, 20, 60, 0.2) 20%,
-      rgba(0, 20, 60, 0.3) 40%,
-      rgba(0, 10, 40, 0.4) 60%,
-      rgba(0, 5, 20, 0.5) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  92% {
-    background: linear-gradient(
-      180deg,
-      rgba(7, 20, 60, 0.25) 0%,      /* Noche profunda temprano */
-      rgba(2, 20, 60, 0.15) 20%,
-      rgba(0, 20, 60, 0.25) 40%,
-      rgba(0, 7, 30, 0.35) 60%,
-      rgba(0, 3, 15, 0.45) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  96% {
-    background: linear-gradient(
-      180deg,
-      rgba(5, 20, 60, 0.2) 0%,       /* Noche profunda */
-      rgba(0, 20, 60, 0.1) 20%,
-      rgba(0, 10, 40, 0.2) 40%,
-      rgba(0, 5, 20, 0.3) 60%,
-      rgba(0, 2, 10, 0.4) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
-  100% {
-    background: linear-gradient(
-      180deg,
-      rgba(135, 206, 235, 0.8) 0%,   /* Vuelta al mediodía */
-      rgba(100, 149, 237, 0.7) 20%,
-      rgba(70, 130, 180, 0.8) 40%,
-      rgba(30, 144, 255, 0.9) 60%,
-      rgba(25, 25, 112, 0.9) 80%,
-      rgba(15, 23, 42, 1) 100%
-    );
-  }
+  0% { background: linear-gradient(180deg, rgba(135,206,235,0.8) 0%, rgba(100,149,237,0.7) 20%, rgba(70,130,180,0.8) 40%, rgba(30,144,255,0.9) 60%, rgba(25,25,112,0.9) 80%, rgba(15,23,42,1) 100%); }
+  2% { background: linear-gradient(180deg, rgba(144,208,233,0.78) 0%, rgba(108,159,236,0.68) 20%, rgba(77,135,185,0.78) 40%, rgba(40,135,241,0.88) 60%, rgba(26,25,107,0.88) 80%, rgba(15,23,42,1) 100%); }
+  4% { background: linear-gradient(180deg, rgba(154,211,232,0.75) 0%, rgba(117,169,236,0.65) 20%, rgba(85,140,190,0.75) 40%, rgba(50,127,227,0.85) 60%, rgba(27,25,102,0.85) 80%, rgba(15,23,42,1) 100%); }
+  6% { background: linear-gradient(180deg, rgba(163,214,231,0.73) 0%, rgba(126,179,235,0.63) 20%, rgba(92,145,195,0.73) 40%, rgba(60,119,233,0.83) 60%, rgba(28,25,97,0.83) 80%, rgba(15,23,42,1) 100%); }
+  8% { background: linear-gradient(180deg, rgba(173,216,230,0.7) 0%, rgba(135,206,235,0.6) 20%, rgba(100,149,237,0.7) 40%, rgba(70,130,180,0.8) 60%, rgba(30,144,255,0.9) 80%, rgba(15,23,42,1) 100%); }
+  10% { background: linear-gradient(180deg, rgba(182,218,229,0.68) 0%, rgba(144,203,234,0.58) 20%, rgba(107,154,238,0.68) 40%, rgba(80,121,183,0.78) 60%, rgba(31,144,255,0.88) 80%, rgba(15,23,42,0.98) 100%); }
+  12% { background: linear-gradient(180deg, rgba(191,221,229,0.65) 0%, rgba(152,189,234,0.55) 20%, rgba(115,159,237,0.65) 40%, rgba(90,130,180,0.75) 60%, rgba(32,144,255,0.85) 80%, rgba(15,23,42,0.95) 100%); }
+  14% { background: linear-gradient(180deg, rgba(200,223,228,0.63) 0%, rgba(161,196,233,0.53) 20%, rgba(122,164,236,0.63) 40%, rgba(100,131,183,0.73) 60%, rgba(33,144,255,0.83) 80%, rgba(15,23,42,0.93) 100%); }
+  16% { background: linear-gradient(180deg, rgba(255,218,185,0.6) 0%, rgba(255,192,203,0.5) 20%, rgba(255,182,193,0.6) 40%, rgba(255,160,122,0.7) 60%, rgba(255,140,0,0.8) 80%, rgba(15,23,42,0.9) 100%); }
+  18% { background: linear-gradient(180deg, rgba(255,204,163,0.63) 0%, rgba(255,187,198,0.53) 20%, rgba(255,176,189,0.63) 40%, rgba(255,155,117,0.73) 60%, rgba(255,135,0,0.83) 80%, rgba(15,23,42,0.9) 100%); }
+  20% { background: linear-gradient(180deg, rgba(255,191,142,0.65) 0%, rgba(255,182,193,0.55) 20%, rgba(255,171,185,0.65) 40%, rgba(255,150,112,0.75) 60%, rgba(255,130,0,0.85) 80%, rgba(15,23,42,0.9) 100%); }
+  22% { background: linear-gradient(180deg, rgba(255,178,121,0.68) 0%, rgba(255,177,188,0.58) 20%, rgba(255,166,181,0.68) 40%, rgba(255,145,107,0.78) 60%, rgba(255,125,0,0.88) 80%, rgba(15,23,42,0.9) 100%); }
+  24% { background: linear-gradient(180deg, rgba(255,165,0,0.7) 0%, rgba(255,172,183,0.6) 20%, rgba(255,161,177,0.7) 40%, rgba(255,140,102,0.8) 60%, rgba(255,120,0,0.9) 80%, rgba(15,23,42,0.9) 100%); }
+  26% { background: linear-gradient(180deg, rgba(255,146,0,0.73) 0%, rgba(255,167,178,0.63) 20%, rgba(255,156,173,0.73) 40%, rgba(255,135,97,0.83) 60%, rgba(255,115,0,0.93) 80%, rgba(15,23,42,0.9) 100%); }
+  28% { background: linear-gradient(180deg, rgba(255,127,0,0.75) 0%, rgba(255,162,173,0.65) 20%, rgba(255,151,169,0.75) 40%, rgba(255,130,92,0.85) 60%, rgba(255,110,0,0.95) 80%, rgba(15,23,42,0.9) 100%); }
+  30% { background: linear-gradient(180deg, rgba(255,108,0,0.78) 0%, rgba(255,157,168,0.68) 20%, rgba(255,146,165,0.78) 40%, rgba(255,125,87,0.88) 60%, rgba(255,105,0,0.98) 80%, rgba(15,23,42,0.9) 100%); }
+  32% { background: linear-gradient(180deg, rgba(255,69,0,0.8) 0%, rgba(255,152,163,0.7) 20%, rgba(255,141,161,0.8) 40%, rgba(255,120,82,0.9) 60%, rgba(220,20,60,0.9) 80%, rgba(15,23,42,0.9) 100%); }
+  34% { background: linear-gradient(180deg, rgba(248,50,0,0.83) 0%, rgba(242,147,158,0.73) 20%, rgba(236,136,157,0.83) 40%, rgba(230,115,77,0.93) 60%, rgba(210,20,60,0.93) 80%, rgba(15,23,42,0.93) 100%); }
+  36% { background: linear-gradient(180deg, rgba(237,44,30,0.85) 0%, rgba(230,142,153,0.75) 20%, rgba(222,131,153,0.85) 40%, rgba(215,110,72,0.95) 60%, rgba(200,20,60,0.95) 80%, rgba(15,23,42,0.95) 100%); }
+  38% { background: linear-gradient(180deg, rgba(228,37,30,0.88) 0%, rgba(218,137,148,0.78) 20%, rgba(208,126,149,0.88) 40%, rgba(200,105,67,0.98) 60%, rgba(190,20,60,0.98) 80%, rgba(15,23,42,0.98) 100%); }
+  40% { background: linear-gradient(180deg, rgba(220,20,60,0.9) 0%, rgba(200,20,60,0.8) 20%, rgba(180,20,60,0.9) 40%, rgba(160,20,60,1) 60%, rgba(140,20,60,1) 80%, rgba(15,23,42,1) 100%); }
+  42% { background: linear-gradient(180deg, rgba(210,20,60,0.88) 0%, rgba(190,20,60,0.78) 20%, rgba(170,20,60,0.88) 40%, rgba(150,20,60,0.98) 60%, rgba(130,20,60,1) 80%, rgba(15,23,42,1) 100%); }
+  44% { background: linear-gradient(180deg, rgba(200,20,60,0.85) 0%, rgba(180,20,60,0.75) 20%, rgba(160,20,60,0.85) 40%, rgba(140,20,60,0.95) 60%, rgba(120,20,60,1) 80%, rgba(15,23,42,1) 100%); }
+  46% { background: linear-gradient(180deg, rgba(190,20,60,0.83) 0%, rgba(170,20,60,0.73) 20%, rgba(150,20,60,0.83) 40%, rgba(130,20,60,0.93) 60%, rgba(110,20,60,1) 80%, rgba(15,23,42,1) 100%); }
+  48% { background: linear-gradient(180deg, rgba(160,20,60,0.8) 0%, rgba(140,20,60,0.7) 20%, rgba(120,20,60,0.8) 40%, rgba(100,20,60,0.9) 60%, rgba(80,20,60,1) 80%, rgba(15,23,42,1) 100%); }
+  50% { background: linear-gradient(180deg, rgba(150,20,60,0.78) 0%, rgba(130,20,60,0.68) 20%, rgba(110,20,60,0.78) 40%, rgba(90,20,60,0.88) 60%, rgba(70,20,60,0.98) 80%, rgba(15,23,42,1) 100%); }
+  52% { background: linear-gradient(180deg, rgba(140,20,60,0.75) 0%, rgba(120,20,60,0.65) 20%, rgba(100,20,60,0.75) 40%, rgba(80,20,60,0.85) 60%, rgba(60,20,60,0.95) 80%, rgba(15,23,42,1) 100%); }
+  54% { background: linear-gradient(180deg, rgba(130,20,60,0.73) 0%, rgba(110,20,60,0.63) 20%, rgba(90,20,60,0.73) 40%, rgba(70,20,60,0.83) 60%, rgba(50,20,60,0.93) 80%, rgba(15,23,42,1) 100%); }
+  56% { background: linear-gradient(180deg, rgba(120,20,60,0.7) 0%, rgba(100,20,60,0.6) 20%, rgba(80,20,60,0.7) 40%, rgba(60,20,60,0.8) 60%, rgba(40,20,60,0.9) 80%, rgba(15,23,42,1) 100%); }
+  58% { background: linear-gradient(180deg, rgba(110,20,60,0.68) 0%, rgba(90,20,60,0.58) 20%, rgba(70,20,60,0.68) 40%, rgba(50,20,60,0.78) 60%, rgba(30,20,60,0.88) 80%, rgba(15,23,42,1) 100%); }
+  60% { background: linear-gradient(180deg, rgba(100,20,60,0.65) 0%, rgba(80,20,60,0.55) 20%, rgba(60,20,60,0.65) 40%, rgba(40,20,60,0.75) 60%, rgba(20,20,60,0.85) 80%, rgba(15,23,42,1) 100%); }
+  62% { background: linear-gradient(180deg, rgba(90,20,60,0.63) 0%, rgba(70,20,60,0.53) 20%, rgba(50,20,60,0.63) 40%, rgba(30,20,60,0.73) 60%, rgba(10,20,60,0.83) 80%, rgba(15,23,42,1) 100%); }
+  64% { background: linear-gradient(180deg, rgba(80,20,60,0.6) 0%, rgba(60,20,60,0.5) 20%, rgba(40,20,60,0.6) 40%, rgba(20,20,60,0.7) 60%, rgba(10,20,60,0.8) 80%, rgba(15,23,42,1) 100%); }
+  66% { background: linear-gradient(180deg, rgba(70,20,60,0.58) 0%, rgba(50,20,60,0.48) 20%, rgba(30,20,60,0.58) 40%, rgba(15,20,60,0.68) 60%, rgba(7,20,60,0.78) 80%, rgba(15,23,42,1) 100%); }
+  68% { background: linear-gradient(180deg, rgba(60,20,60,0.55) 0%, rgba(40,20,60,0.45) 20%, rgba(20,20,60,0.55) 40%, rgba(10,20,60,0.65) 60%, rgba(5,20,60,0.75) 80%, rgba(15,23,42,1) 100%); }
+  70% { background: linear-gradient(180deg, rgba(50,20,60,0.53) 0%, rgba(30,20,60,0.43) 20%, rgba(15,20,60,0.53) 40%, rgba(7,20,60,0.63) 60%, rgba(2,20,60,0.73) 80%, rgba(15,23,42,1) 100%); }
+  72% { background: linear-gradient(180deg, rgba(40,20,60,0.5) 0%, rgba(20,20,60,0.4) 20%, rgba(10,20,60,0.5) 40%, rgba(5,20,60,0.6) 60%, rgba(0,20,60,0.7) 80%, rgba(15,23,42,1) 100%); }
+  74% { background: linear-gradient(180deg, rgba(35,20,60,0.48) 0%, rgba(15,20,60,0.38) 20%, rgba(7,20,60,0.48) 40%, rgba(2,20,60,0.58) 60%, rgba(0,17,55,0.68) 80%, rgba(15,23,42,1) 100%); }
+  76% { background: linear-gradient(180deg, rgba(30,20,60,0.45) 0%, rgba(15,20,60,0.35) 20%, rgba(7,20,60,0.45) 40%, rgba(2,20,60,0.55) 60%, rgba(0,15,50,0.65) 80%, rgba(15,23,42,1) 100%); }
+  78% { background: linear-gradient(180deg, rgba(25,20,60,0.43) 0%, rgba(12,20,60,0.33) 20%, rgba(5,20,60,0.43) 40%, rgba(1,20,60,0.53) 60%, rgba(0,12,45,0.63) 80%, rgba(15,23,42,1) 100%); }
+  80% { background: linear-gradient(180deg, rgba(20,20,60,0.4) 0%, rgba(10,20,60,0.3) 20%, rgba(5,20,60,0.4) 40%, rgba(0,20,60,0.5) 60%, rgba(0,10,40,0.6) 80%, rgba(15,23,42,1) 100%); }
+  82% { background: linear-gradient(180deg, rgba(17,20,60,0.38) 0%, rgba(8,20,60,0.28) 20%, rgba(3,20,60,0.38) 40%, rgba(0,18,55,0.48) 60%, rgba(0,8,35,0.58) 80%, rgba(15,23,42,1) 100%); }
+  84% { background: linear-gradient(180deg, rgba(15,20,60,0.35) 0%, rgba(7,20,60,0.25) 20%, rgba(2,20,60,0.35) 40%, rgba(0,20,60,0.45) 60%, rgba(0,7,30,0.55) 80%, rgba(15,23,42,1) 100%); }
+  86% { background: linear-gradient(180deg, rgba(12,20,60,0.33) 0%, rgba(5,20,60,0.23) 20%, rgba(1,20,60,0.33) 40%, rgba(0,18,55,0.43) 60%, rgba(0,6,25,0.53) 80%, rgba(15,23,42,1) 100%); }
+  88% { background: linear-gradient(180deg, rgba(10,20,60,0.3) 0%, rgba(5,20,60,0.2) 20%, rgba(0,20,60,0.3) 40%, rgba(0,10,40,0.4) 60%, rgba(0,5,20,0.5) 80%, rgba(15,23,42,1) 100%); }
+  90% { background: linear-gradient(180deg, rgba(8,20,60,0.28) 0%, rgba(3,20,60,0.18) 20%, rgba(0,18,55,0.28) 40%, rgba(0,8,35,0.38) 60%, rgba(0,4,18,0.48) 80%, rgba(15,23,42,1) 100%); }
+  92% { background: linear-gradient(180deg, rgba(7,20,60,0.25) 0%, rgba(2,20,60,0.15) 20%, rgba(0,20,60,0.25) 40%, rgba(0,7,30,0.35) 60%, rgba(0,3,15,0.45) 80%, rgba(15,23,42,1) 100%); }
+  94% { background: linear-gradient(180deg, rgba(6,20,60,0.23) 0%, rgba(1,20,60,0.13) 20%, rgba(0,18,55,0.23) 40%, rgba(0,6,25,0.33) 60%, rgba(0,2,12,0.43) 80%, rgba(15,23,42,1) 100%); }
+  96% { background: linear-gradient(180deg, rgba(5,20,60,0.2) 0%, rgba(0,20,60,0.1) 20%, rgba(0,10,40,0.2) 40%, rgba(0,5,20,0.3) 60%, rgba(0,2,10,0.4) 80%, rgba(15,23,42,1) 100%); }
+  98% { background: linear-gradient(180deg, rgba(3,20,60,0.18) 0%, rgba(0,18,55,0.08) 20%, rgba(0,8,35,0.18) 40%, rgba(0,3,18,0.28) 60%, rgba(0,1,8,0.38) 80%, rgba(15,23,42,1) 100%); }
+  100% { background: linear-gradient(180deg, rgba(135,206,235,0.8) 0%, rgba(100,149,237,0.7) 20%, rgba(70,130,180,0.8) 40%, rgba(30,144,255,0.9) 60%, rgba(25,25,112,0.9) 80%, rgba(15,23,42,1) 100%); }
 }
 
 /* Sol */
