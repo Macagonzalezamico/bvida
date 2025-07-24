@@ -78,7 +78,7 @@ const Contacto = () => {
             <div className="redes-sociales">
               <h3>Síguenos en redes sociales</h3>
               <div className="redes-icons">
-                <a href="https://www.facebook.com/BuenaVidaIIpesca" target="_blank" rel="noopener noreferrer" className="red-social">📘 Facebook</a>
+                <a href="https://www.facebook.com/PosadaBuenaVida" target="_blank" rel="noopener noreferrer" className="red-social">📘 Facebook</a>
                 <a href="https://www.instagram.com/posadabuenavidaa/" target="_blank" rel="noopener noreferrer" className="red-social">📷 Instagram</a>
               </div>
             </div>
