@@ -41,13 +41,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--bg-light);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: var(--glass-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-brand a {
