@@ -1,0 +1,39 @@
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var mongoose = require('mongoose');
+require('dotenv').config();
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var cabanasRouter = require('./routes/cabanas');
+var pescaRouter = require('./routes/pesca');
+var reservasRouter = require('./routes/reservas');
+var pagosRouter = require('./routes/pagos');
+
+var app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Conectado a MongoDB');
+}).catch((err) => {
+  console.error('Error al conectar a MongoDB:', err);
+});
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/cabanas', cabanasRouter);
+app.use('/pesca', pescaRouter);
+app.use('/reservas', reservasRouter);
+app.use('/pagos', pagosRouter);
+
+module.exports = app;
