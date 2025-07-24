@@ -13,10 +13,18 @@ const Home = () => {
           transition={{ duration: 1 }}
           className="hero"
         >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="hero-logo-container"
+          >
+            <img src="/logo.png" alt="Buena Vida Logo" className="hero-logo" />
+          </motion.div>
           <div className="hero-content">
-            <h1 className="hero-title">Cabañas & Pesca El Paraíso</h1>
+            <h1 className="hero-title">Buena Vida</h1>
             <p className="hero-subtitle">
-              Naturaleza, confort y la mejor pesca embarcada. Reservá tu experiencia única.
+              Cabañas & Pesca - Naturaleza, confort y la mejor pesca embarcada. Reservá tu experiencia única.
             </p>
             <div className="hero-buttons">
               <Link to="/cabanas">

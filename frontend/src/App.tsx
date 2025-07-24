@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-brand">
         <Link to="/" onClick={closeMobileMenu}>
-          <img src="/logo.png" alt="El Paraíso Logo" className="nav-logo" />
+          <img src="/logo.png" alt="Buena Vida Logo" className="nav-logo" />
         </Link>
       </div>
       <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
