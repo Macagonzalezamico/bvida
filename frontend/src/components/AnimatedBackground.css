@@ -9,9 +9,9 @@
   overflow: hidden;
   background: linear-gradient(
     180deg,
-    #ff7e5f 0%,    /* Naranja cálido */
-    #feb47b 15%,   /* Melocotón */
-    #ffd89b 30%,   /* Amarillo dorado */
+    #e67e22 0%,    /* Naranja cálido atenuado */
+    #f39c12 15%,   /* Melocotón atenuado */
+    #f1c40f 30%,   /* Amarillo dorado atenuado */
     #87ceeb 50%,   /* Azul cielo */
     #4682b4 70%,   /* Azul marino */
     #1e3a8a 85%,   /* Azul profundo */
@@ -25,9 +25,9 @@
   0% {
     background: linear-gradient(
       180deg,
-      #ff7e5f 0%,    /* Amanecer */
-      #feb47b 15%,
-      #ffd89b 30%,
+      #e67e22 0%,    /* Amanecer atenuado */
+      #f39c12 15%,
+      #f1c40f 30%,
       #87ceeb 50%,
       #4682b4 70%,
       #1e3a8a 85%,
@@ -37,21 +37,21 @@
   50% {
     background: linear-gradient(
       180deg,
-      #ff6b35 0%,    /* Atardecer intenso */
-      #f7931e 15%,
-      #ffd700 30%,
-      #ffa500 50%,
-      #ff6347 70%,
-      #dc143c 85%,
-      #8b0000 100%
+      #d35400 0%,    /* Atardecer intenso atenuado */
+      #e67e22 15%,
+      #f39c12 30%,
+      #f1c40f 50%,
+      #e74c3c 70%,
+      #c0392b 85%,
+      #7b241c 100%
     );
   }
   100% {
     background: linear-gradient(
       180deg,
-      #ff7e5f 0%,    /* Amanecer */
-      #feb47b 15%,
-      #ffd89b 30%,
+      #e67e22 0%,    /* Amanecer atenuado */
+      #f39c12 15%,
+      #f1c40f 30%,
       #87ceeb 50%,
       #4682b4 70%,
       #1e3a8a 85%,
@@ -344,9 +344,9 @@
   height: 5%;
   background: linear-gradient(
     180deg,
-    #f4d03f 0%,
+    #f7dc6f 0%,
     #f39c12 50%,
-    #e67e22 100%
+    #d35400 100%
   );
   z-index: 4;
   border-radius: 50% 50% 0 0 50% 50% 0 0;

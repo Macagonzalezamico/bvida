@@ -10,13 +10,7 @@ const AnimatedBackground: React.FC = () => {
         <div className="sun-rays"></div>
       </div>
       
-      {/* Nubes */}
-      <div className="clouds">
-        <div className="cloud cloud-1"></div>
-        <div className="cloud cloud-2"></div>
-        <div className="cloud cloud-3"></div>
-        <div className="cloud cloud-4"></div>
-      </div>
+
       
       {/* Mar */}
       <div className="ocean">
