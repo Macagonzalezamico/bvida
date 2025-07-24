@@ -25,58 +25,154 @@
   0% {
     background: linear-gradient(
       180deg,
-      rgba(230, 126, 34, 0.6) 0%,    /* Amanecer suave */
-      rgba(243, 156, 18, 0.5) 15%,
-      rgba(241, 196, 15, 0.4) 30%,
-      rgba(135, 206, 235, 0.7) 50%,
-      rgba(70, 130, 180, 0.8) 70%,
-      rgba(30, 58, 138, 0.9) 85%,
+      rgba(135, 206, 235, 0.8) 0%,   /* Cielo azul claro - mediodía */
+      rgba(100, 149, 237, 0.7) 20%,
+      rgba(70, 130, 180, 0.8) 40%,
+      rgba(30, 144, 255, 0.9) 60%,
+      rgba(25, 25, 112, 0.9) 80%,
       rgba(15, 23, 42, 1) 100%
     );
   }
-  25% {
+  8% {
     background: linear-gradient(
       180deg,
-      rgba(243, 156, 18, 0.5) 0%,    /* Sol alto suave */
-      rgba(241, 196, 15, 0.4) 20%,
-      rgba(135, 206, 235, 0.6) 40%,
-      rgba(70, 130, 180, 0.7) 60%,
-      rgba(30, 58, 138, 0.8) 80%,
+      rgba(173, 216, 230, 0.7) 0%,   /* Cielo azul suave - tarde temprana */
+      rgba(135, 206, 235, 0.6) 20%,
+      rgba(100, 149, 237, 0.7) 40%,
+      rgba(70, 130, 180, 0.8) 60%,
+      rgba(30, 144, 255, 0.9) 80%,
       rgba(15, 23, 42, 1) 100%
     );
   }
-  50% {
+  16% {
     background: linear-gradient(
       180deg,
-      rgba(211, 84, 0, 0.6) 0%,      /* Atardecer suave */
-      rgba(230, 126, 34, 0.5) 15%,
-      rgba(243, 156, 18, 0.4) 30%,
-      rgba(231, 76, 60, 0.5) 50%,
-      rgba(192, 57, 43, 0.6) 70%,
-      rgba(123, 36, 28, 0.7) 85%,
-      rgba(44, 24, 16, 0.9) 100%
+      rgba(255, 218, 185, 0.6) 0%,   /* Cielo melocotón suave */
+      rgba(255, 192, 203, 0.5) 20%,
+      rgba(255, 182, 193, 0.6) 40%,
+      rgba(255, 160, 122, 0.7) 60%,
+      rgba(255, 140, 0, 0.8) 80%,
+      rgba(15, 23, 42, 0.9) 100%
     );
   }
-  75% {
+  24% {
     background: linear-gradient(
       180deg,
-      rgba(139, 69, 19, 0.5) 0%,     /* Atardecer tardío suave */
-      rgba(210, 105, 30, 0.4) 20%,
-      rgba(205, 133, 63, 0.3) 40%,
-      rgba(218, 165, 32, 0.4) 60%,
-      rgba(184, 134, 11, 0.5) 80%,
-      rgba(44, 24, 16, 0.8) 100%
+      rgba(255, 165, 0, 0.7) 0%,     /* Naranja dorado temprano */
+      rgba(255, 140, 0, 0.6) 20%,
+      rgba(255, 120, 0, 0.7) 40%,
+      rgba(255, 100, 0, 0.8) 60%,
+      rgba(255, 69, 0, 0.9) 80%,
+      rgba(15, 23, 42, 0.9) 100%
+    );
+  }
+  32% {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 69, 0, 0.8) 0%,      /* Naranja rojizo intenso */
+      rgba(255, 50, 0, 0.7) 20%,
+      rgba(255, 30, 0, 0.8) 40%,
+      rgba(255, 10, 0, 0.9) 60%,
+      rgba(220, 20, 60, 0.9) 80%,
+      rgba(15, 23, 42, 0.9) 100%
+    );
+  }
+  40% {
+    background: linear-gradient(
+      180deg,
+      rgba(220, 20, 60, 0.9) 0%,     /* Rojo carmesí */
+      rgba(200, 20, 60, 0.8) 20%,
+      rgba(180, 20, 60, 0.9) 40%,
+      rgba(160, 20, 60, 1) 60%,
+      rgba(140, 20, 60, 1) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  48% {
+    background: linear-gradient(
+      180deg,
+      rgba(160, 20, 60, 0.8) 0%,     /* Rojo profundo */
+      rgba(140, 20, 60, 0.7) 20%,
+      rgba(120, 20, 60, 0.8) 40%,
+      rgba(100, 20, 60, 0.9) 60%,
+      rgba(80, 20, 60, 1) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  56% {
+    background: linear-gradient(
+      180deg,
+      rgba(120, 20, 60, 0.7) 0%,     /* Púrpura rojizo */
+      rgba(100, 20, 60, 0.6) 20%,
+      rgba(80, 20, 60, 0.7) 40%,
+      rgba(60, 20, 60, 0.8) 60%,
+      rgba(40, 20, 60, 0.9) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  64% {
+    background: linear-gradient(
+      180deg,
+      rgba(80, 20, 60, 0.6) 0%,      /* Púrpura profundo */
+      rgba(60, 20, 60, 0.5) 20%,
+      rgba(40, 20, 60, 0.6) 40%,
+      rgba(20, 20, 60, 0.7) 60%,
+      rgba(10, 20, 60, 0.8) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  72% {
+    background: linear-gradient(
+      180deg,
+      rgba(40, 20, 60, 0.5) 0%,      /* Azul púrpura */
+      rgba(20, 20, 60, 0.4) 20%,
+      rgba(10, 20, 60, 0.5) 40%,
+      rgba(5, 20, 60, 0.6) 60%,
+      rgba(0, 20, 60, 0.7) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  80% {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 20, 60, 0.4) 0%,      /* Azul noche temprano */
+      rgba(10, 20, 60, 0.3) 20%,
+      rgba(5, 20, 60, 0.4) 40%,
+      rgba(0, 20, 60, 0.5) 60%,
+      rgba(0, 10, 40, 0.6) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  88% {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 20, 60, 0.3) 0%,      /* Azul noche profundo */
+      rgba(5, 20, 60, 0.2) 20%,
+      rgba(0, 20, 60, 0.3) 40%,
+      rgba(0, 10, 40, 0.4) 60%,
+      rgba(0, 5, 20, 0.5) 80%,
+      rgba(15, 23, 42, 1) 100%
+    );
+  }
+  96% {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 20, 60, 0.2) 0%,       /* Noche profunda */
+      rgba(0, 20, 60, 0.1) 20%,
+      rgba(0, 10, 40, 0.2) 40%,
+      rgba(0, 5, 20, 0.3) 60%,
+      rgba(0, 2, 10, 0.4) 80%,
+      rgba(15, 23, 42, 1) 100%
     );
   }
   100% {
     background: linear-gradient(
       180deg,
-      rgba(230, 126, 34, 0.6) 0%,    /* Amanecer suave */
-      rgba(243, 156, 18, 0.5) 15%,
-      rgba(241, 196, 15, 0.4) 30%,
-      rgba(135, 206, 235, 0.7) 50%,
-      rgba(70, 130, 180, 0.8) 70%,
-      rgba(30, 58, 138, 0.9) 85%,
+      rgba(135, 206, 235, 0.8) 0%,   /* Vuelta al mediodía */
+      rgba(100, 149, 237, 0.7) 20%,
+      rgba(70, 130, 180, 0.8) 40%,
+      rgba(30, 144, 255, 0.9) 60%,
+      rgba(25, 25, 112, 0.9) 80%,
       rgba(15, 23, 42, 1) 100%
     );
   }
