@@ -1,170 +1,140 @@
-/* Fondo animado con temática de atardecer/amanecer y playa */
+/* Premium luxury background animation with elegant transitions */
+:root {
+  /* Paleta premium para animaciones */
+  --luxury-gold: rgba(212, 175, 55, 0.4);
+  --champagne: rgba(230, 200, 92, 0.35);
+  --warm-gold: rgba(184, 148, 31, 0.45);
+  --deep-gold: rgba(154, 123, 26, 0.5);
+  --ocean-blue: rgba(44, 95, 127, 0.4);
+  --steel-blue: rgba(74, 123, 167, 0.35);
+  --deep-blue: rgba(27, 74, 102, 0.45);
+  --night-blue: rgba(15, 58, 82, 0.5);
+  --earth-brown: rgba(139, 69, 19, 0.3);
+  --warm-coral: rgba(255, 127, 127, 0.25);
+  --cream: rgba(248, 246, 240, 0.8);
+  --pearl: rgba(242, 240, 230, 0.6);
+}
+
 .animated-background {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  animation: luxuryAtmosphere 60s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  overflow: hidden;
+  
+  /* Optimizaciones críticas de rendimiento */
+  contain: layout style paint size;
+  isolation: isolate;
+  pointer-events: none;
+  
+  /* Background estático optimizado */
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.15) 0%, 
+    rgba(44, 95, 127, 0.1) 50%, 
+    rgba(139, 69, 19, 0.08) 100%);
+}
+
+/* Overlay de atmósfera con opacidad animada - Mucho más eficiente */
+.animated-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    rgba(230, 126, 34, 0.6) 0%,    /* Naranja cálido suave */
-    rgba(243, 156, 18, 0.5) 15%,   /* Melocotón suave */
-    rgba(241, 196, 15, 0.4) 30%,   /* Amarillo dorado suave */
-    rgba(135, 206, 235, 0.7) 50%,  /* Azul cielo suave */
-    rgba(70, 130, 180, 0.8) 70%,   /* Azul marino suave */
-    rgba(30, 58, 138, 0.9) 85%,    /* Azul profundo suave */
-    rgba(15, 23, 42, 1) 100%       /* Azul noche */
-  );
-  animation: skyGradient 40s ease-in-out infinite;
+  background: radial-gradient(ellipse at 50% 50%, 
+    rgba(212, 175, 55, 0.2) 0%, 
+    rgba(44, 95, 127, 0.15) 40%, 
+    rgba(139, 69, 19, 0.1) 100%);
+  animation: atmosphereOverlay 60s ease-in-out infinite;
+  will-change: opacity;
+  pointer-events: none;
 }
 
-/* Animación del cielo */
-@keyframes skyGradient {
-  0% { background: linear-gradient(180deg, rgba(135,206,235,0.8) 0%, rgba(100,149,237,0.7) 20%, rgba(70,130,180,0.8) 40%, rgba(30,144,255,0.9) 60%, rgba(25,25,112,0.9) 80%, rgba(15,23,42,1) 100%); }
-  2% { background: linear-gradient(180deg, rgba(144,208,233,0.78) 0%, rgba(108,159,236,0.68) 20%, rgba(77,135,185,0.78) 40%, rgba(40,135,241,0.88) 60%, rgba(26,25,107,0.88) 80%, rgba(15,23,42,1) 100%); }
-  4% { background: linear-gradient(180deg, rgba(154,211,232,0.75) 0%, rgba(117,169,236,0.65) 20%, rgba(85,140,190,0.75) 40%, rgba(50,127,227,0.85) 60%, rgba(27,25,102,0.85) 80%, rgba(15,23,42,1) 100%); }
-  6% { background: linear-gradient(180deg, rgba(163,214,231,0.73) 0%, rgba(126,179,235,0.63) 20%, rgba(92,145,195,0.73) 40%, rgba(60,119,233,0.83) 60%, rgba(28,25,97,0.83) 80%, rgba(15,23,42,1) 100%); }
-  8% { background: linear-gradient(180deg, rgba(173,216,230,0.7) 0%, rgba(135,206,235,0.6) 20%, rgba(100,149,237,0.7) 40%, rgba(70,130,180,0.8) 60%, rgba(30,144,255,0.9) 80%, rgba(15,23,42,1) 100%); }
-  10% { background: linear-gradient(180deg, rgba(182,218,229,0.68) 0%, rgba(144,203,234,0.58) 20%, rgba(107,154,238,0.68) 40%, rgba(80,121,183,0.78) 60%, rgba(31,144,255,0.88) 80%, rgba(15,23,42,0.98) 100%); }
-  12% { background: linear-gradient(180deg, rgba(191,221,229,0.65) 0%, rgba(152,189,234,0.55) 20%, rgba(115,159,237,0.65) 40%, rgba(90,130,180,0.75) 60%, rgba(32,144,255,0.85) 80%, rgba(15,23,42,0.95) 100%); }
-  14% { background: linear-gradient(180deg, rgba(200,223,228,0.63) 0%, rgba(161,196,233,0.53) 20%, rgba(122,164,236,0.63) 40%, rgba(100,131,183,0.73) 60%, rgba(33,144,255,0.83) 80%, rgba(15,23,42,0.93) 100%); }
-  16% { background: linear-gradient(180deg, rgba(255,218,185,0.6) 0%, rgba(255,192,203,0.5) 20%, rgba(255,182,193,0.6) 40%, rgba(255,160,122,0.7) 60%, rgba(255,140,0,0.8) 80%, rgba(15,23,42,0.9) 100%); }
-  18% { background: linear-gradient(180deg, rgba(255,204,163,0.63) 0%, rgba(255,187,198,0.53) 20%, rgba(255,176,189,0.63) 40%, rgba(255,155,117,0.73) 60%, rgba(255,135,0,0.83) 80%, rgba(15,23,42,0.9) 100%); }
-  20% { background: linear-gradient(180deg, rgba(255,191,142,0.65) 0%, rgba(255,182,193,0.55) 20%, rgba(255,171,185,0.65) 40%, rgba(255,150,112,0.75) 60%, rgba(255,130,0,0.85) 80%, rgba(15,23,42,0.9) 100%); }
-  22% { background: linear-gradient(180deg, rgba(255,178,121,0.68) 0%, rgba(255,177,188,0.58) 20%, rgba(255,166,181,0.68) 40%, rgba(255,145,107,0.78) 60%, rgba(255,125,0,0.88) 80%, rgba(15,23,42,0.9) 100%); }
-  24% { background: linear-gradient(180deg, rgba(255,165,0,0.7) 0%, rgba(255,172,183,0.6) 20%, rgba(255,161,177,0.7) 40%, rgba(255,140,102,0.8) 60%, rgba(255,120,0,0.9) 80%, rgba(15,23,42,0.9) 100%); }
-  26% { background: linear-gradient(180deg, rgba(255,146,0,0.73) 0%, rgba(255,167,178,0.63) 20%, rgba(255,156,173,0.73) 40%, rgba(255,135,97,0.83) 60%, rgba(255,115,0,0.93) 80%, rgba(15,23,42,0.9) 100%); }
-  28% { background: linear-gradient(180deg, rgba(255,127,0,0.75) 0%, rgba(255,162,173,0.65) 20%, rgba(255,151,169,0.75) 40%, rgba(255,130,92,0.85) 60%, rgba(255,110,0,0.95) 80%, rgba(15,23,42,0.9) 100%); }
-  30% { background: linear-gradient(180deg, rgba(255,108,0,0.78) 0%, rgba(255,157,168,0.68) 20%, rgba(255,146,165,0.78) 40%, rgba(255,125,87,0.88) 60%, rgba(255,105,0,0.98) 80%, rgba(15,23,42,0.9) 100%); }
-  32% { background: linear-gradient(180deg, rgba(255,69,0,0.8) 0%, rgba(255,152,163,0.7) 20%, rgba(255,141,161,0.8) 40%, rgba(255,120,82,0.9) 60%, rgba(220,20,60,0.9) 80%, rgba(15,23,42,0.9) 100%); }
-  34% { background: linear-gradient(180deg, rgba(248,50,0,0.83) 0%, rgba(242,147,158,0.73) 20%, rgba(236,136,157,0.83) 40%, rgba(230,115,77,0.93) 60%, rgba(210,20,60,0.93) 80%, rgba(15,23,42,0.93) 100%); }
-  36% { background: linear-gradient(180deg, rgba(237,44,30,0.85) 0%, rgba(230,142,153,0.75) 20%, rgba(222,131,153,0.85) 40%, rgba(215,110,72,0.95) 60%, rgba(200,20,60,0.95) 80%, rgba(15,23,42,0.95) 100%); }
-  38% { background: linear-gradient(180deg, rgba(228,37,30,0.88) 0%, rgba(218,137,148,0.78) 20%, rgba(208,126,149,0.88) 40%, rgba(200,105,67,0.98) 60%, rgba(190,20,60,0.98) 80%, rgba(15,23,42,0.98) 100%); }
-  40% { background: linear-gradient(180deg, rgba(220,20,60,0.9) 0%, rgba(200,20,60,0.8) 20%, rgba(180,20,60,0.9) 40%, rgba(160,20,60,1) 60%, rgba(140,20,60,1) 80%, rgba(15,23,42,1) 100%); }
-  42% { background: linear-gradient(180deg, rgba(210,20,60,0.88) 0%, rgba(190,20,60,0.78) 20%, rgba(170,20,60,0.88) 40%, rgba(150,20,60,0.98) 60%, rgba(130,20,60,1) 80%, rgba(15,23,42,1) 100%); }
-  44% { background: linear-gradient(180deg, rgba(200,20,60,0.85) 0%, rgba(180,20,60,0.75) 20%, rgba(160,20,60,0.85) 40%, rgba(140,20,60,0.95) 60%, rgba(120,20,60,1) 80%, rgba(15,23,42,1) 100%); }
-  46% { background: linear-gradient(180deg, rgba(190,20,60,0.83) 0%, rgba(170,20,60,0.73) 20%, rgba(150,20,60,0.83) 40%, rgba(130,20,60,0.93) 60%, rgba(110,20,60,1) 80%, rgba(15,23,42,1) 100%); }
-  48% { background: linear-gradient(180deg, rgba(160,20,60,0.8) 0%, rgba(140,20,60,0.7) 20%, rgba(120,20,60,0.8) 40%, rgba(100,20,60,0.9) 60%, rgba(80,20,60,1) 80%, rgba(15,23,42,1) 100%); }
-  50% { background: linear-gradient(180deg, rgba(150,20,60,0.78) 0%, rgba(130,20,60,0.68) 20%, rgba(110,20,60,0.78) 40%, rgba(90,20,60,0.88) 60%, rgba(70,20,60,0.98) 80%, rgba(15,23,42,1) 100%); }
-  52% { background: linear-gradient(180deg, rgba(140,20,60,0.75) 0%, rgba(120,20,60,0.65) 20%, rgba(100,20,60,0.75) 40%, rgba(80,20,60,0.85) 60%, rgba(60,20,60,0.95) 80%, rgba(15,23,42,1) 100%); }
-  54% { background: linear-gradient(180deg, rgba(130,20,60,0.73) 0%, rgba(110,20,60,0.63) 20%, rgba(90,20,60,0.73) 40%, rgba(70,20,60,0.83) 60%, rgba(50,20,60,0.93) 80%, rgba(15,23,42,1) 100%); }
-  56% { background: linear-gradient(180deg, rgba(120,20,60,0.7) 0%, rgba(100,20,60,0.6) 20%, rgba(80,20,60,0.7) 40%, rgba(60,20,60,0.8) 60%, rgba(40,20,60,0.9) 80%, rgba(15,23,42,1) 100%); }
-  58% { background: linear-gradient(180deg, rgba(110,20,60,0.68) 0%, rgba(90,20,60,0.58) 20%, rgba(70,20,60,0.68) 40%, rgba(50,20,60,0.78) 60%, rgba(30,20,60,0.88) 80%, rgba(15,23,42,1) 100%); }
-  60% { background: linear-gradient(180deg, rgba(100,20,60,0.65) 0%, rgba(80,20,60,0.55) 20%, rgba(60,20,60,0.65) 40%, rgba(40,20,60,0.75) 60%, rgba(20,20,60,0.85) 80%, rgba(15,23,42,1) 100%); }
-  62% { background: linear-gradient(180deg, rgba(90,20,60,0.63) 0%, rgba(70,20,60,0.53) 20%, rgba(50,20,60,0.63) 40%, rgba(30,20,60,0.73) 60%, rgba(10,20,60,0.83) 80%, rgba(15,23,42,1) 100%); }
-  64% { background: linear-gradient(180deg, rgba(80,20,60,0.6) 0%, rgba(60,20,60,0.5) 20%, rgba(40,20,60,0.6) 40%, rgba(20,20,60,0.7) 60%, rgba(10,20,60,0.8) 80%, rgba(15,23,42,1) 100%); }
-  66% { background: linear-gradient(180deg, rgba(70,20,60,0.58) 0%, rgba(50,20,60,0.48) 20%, rgba(30,20,60,0.58) 40%, rgba(15,20,60,0.68) 60%, rgba(7,20,60,0.78) 80%, rgba(15,23,42,1) 100%); }
-  68% { background: linear-gradient(180deg, rgba(60,20,60,0.55) 0%, rgba(40,20,60,0.45) 20%, rgba(20,20,60,0.55) 40%, rgba(10,20,60,0.65) 60%, rgba(5,20,60,0.75) 80%, rgba(15,23,42,1) 100%); }
-  70% { background: linear-gradient(180deg, rgba(50,20,60,0.53) 0%, rgba(30,20,60,0.43) 20%, rgba(15,20,60,0.53) 40%, rgba(7,20,60,0.63) 60%, rgba(2,20,60,0.73) 80%, rgba(15,23,42,1) 100%); }
-  72% { background: linear-gradient(180deg, rgba(40,20,60,0.5) 0%, rgba(20,20,60,0.4) 20%, rgba(10,20,60,0.5) 40%, rgba(5,20,60,0.6) 60%, rgba(0,20,60,0.7) 80%, rgba(15,23,42,1) 100%); }
-  74% { background: linear-gradient(180deg, rgba(35,20,60,0.48) 0%, rgba(15,20,60,0.38) 20%, rgba(7,20,60,0.48) 40%, rgba(2,20,60,0.58) 60%, rgba(0,17,55,0.68) 80%, rgba(15,23,42,1) 100%); }
-  76% { background: linear-gradient(180deg, rgba(30,20,60,0.45) 0%, rgba(15,20,60,0.35) 20%, rgba(7,20,60,0.45) 40%, rgba(2,20,60,0.55) 60%, rgba(0,15,50,0.65) 80%, rgba(15,23,42,1) 100%); }
-  78% { background: linear-gradient(180deg, rgba(25,20,60,0.43) 0%, rgba(12,20,60,0.33) 20%, rgba(5,20,60,0.43) 40%, rgba(1,20,60,0.53) 60%, rgba(0,12,45,0.63) 80%, rgba(15,23,42,1) 100%); }
-  80% { background: linear-gradient(180deg, rgba(20,20,60,0.4) 0%, rgba(10,20,60,0.3) 20%, rgba(5,20,60,0.4) 40%, rgba(0,20,60,0.5) 60%, rgba(0,10,40,0.6) 80%, rgba(15,23,42,1) 100%); }
-  82% { background: linear-gradient(180deg, rgba(17,20,60,0.38) 0%, rgba(8,20,60,0.28) 20%, rgba(3,20,60,0.38) 40%, rgba(0,18,55,0.48) 60%, rgba(0,8,35,0.58) 80%, rgba(15,23,42,1) 100%); }
-  84% { background: linear-gradient(180deg, rgba(15,20,60,0.35) 0%, rgba(7,20,60,0.25) 20%, rgba(2,20,60,0.35) 40%, rgba(0,20,60,0.45) 60%, rgba(0,7,30,0.55) 80%, rgba(15,23,42,1) 100%); }
-  86% { background: linear-gradient(180deg, rgba(12,20,60,0.33) 0%, rgba(5,20,60,0.23) 20%, rgba(1,20,60,0.33) 40%, rgba(0,18,55,0.43) 60%, rgba(0,6,25,0.53) 80%, rgba(15,23,42,1) 100%); }
-  88% { background: linear-gradient(180deg, rgba(10,20,60,0.3) 0%, rgba(5,20,60,0.2) 20%, rgba(0,20,60,0.3) 40%, rgba(0,10,40,0.4) 60%, rgba(0,5,20,0.5) 80%, rgba(15,23,42,1) 100%); }
-  90% { background: linear-gradient(180deg, rgba(8,20,60,0.28) 0%, rgba(3,20,60,0.18) 20%, rgba(0,18,55,0.28) 40%, rgba(0,8,35,0.38) 60%, rgba(0,4,18,0.48) 80%, rgba(15,23,42,1) 100%); }
-  92% { background: linear-gradient(180deg, rgba(7,20,60,0.25) 0%, rgba(2,20,60,0.15) 20%, rgba(0,20,60,0.25) 40%, rgba(0,7,30,0.35) 60%, rgba(0,3,15,0.45) 80%, rgba(15,23,42,1) 100%); }
-  94% { background: linear-gradient(180deg, rgba(6,20,60,0.23) 0%, rgba(1,20,60,0.13) 20%, rgba(0,18,55,0.23) 40%, rgba(0,6,25,0.33) 60%, rgba(0,2,12,0.43) 80%, rgba(15,23,42,1) 100%); }
-  96% { background: linear-gradient(180deg, rgba(5,20,60,0.2) 0%, rgba(0,20,60,0.1) 20%, rgba(0,10,40,0.2) 40%, rgba(0,5,20,0.3) 60%, rgba(0,2,10,0.4) 80%, rgba(15,23,42,1) 100%); }
-  98% { background: linear-gradient(180deg, rgba(3,20,60,0.18) 0%, rgba(0,18,55,0.08) 20%, rgba(0,8,35,0.18) 40%, rgba(0,3,18,0.28) 60%, rgba(0,1,8,0.38) 80%, rgba(15,23,42,1) 100%); }
-  100% { background: linear-gradient(180deg, rgba(135,206,235,0.8) 0%, rgba(100,149,237,0.7) 20%, rgba(70,130,180,0.8) 40%, rgba(30,144,255,0.9) 60%, rgba(25,25,112,0.9) 80%, rgba(15,23,42,1) 100%); }
+@keyframes luxuryAtmosphere {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
 }
 
-/* Sol */
+@keyframes atmosphereOverlay {
+  0%, 100% { opacity: 0.3; }
+  25% { opacity: 0.5; }
+  50% { opacity: 0.7; }
+  75% { opacity: 0.4; }
+}
+
+/* Sol optimizado para performance */
 .sun {
   position: absolute;
-  top: 15%;
+  top: 20%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translate3d(0, 0, 0);
   z-index: 10;
-  animation: sunSetting 40s ease-in-out infinite;
+  animation: optimizedSunFloat 8s ease-in-out infinite;
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .sun-core {
   width: 80px;
   height: 80px;
   background: radial-gradient(circle, 
-    rgba(255, 255, 255, 0.4) 0%, 
-    rgba(255, 248, 220, 0.3) 15%, 
-    rgba(255, 235, 205, 0.25) 30%, 
-    rgba(255, 218, 185, 0.2) 50%, 
-    rgba(255, 200, 150, 0.15) 70%, 
-    rgba(255, 180, 120, 0.1) 85%, 
+    rgba(212, 175, 55, 0.8) 0%,
+    rgba(230, 200, 92, 0.6) 50%, 
     transparent 100%);
   border-radius: 50%;
-  box-shadow: 
-    0 0 80px rgba(255, 255, 255, 0.15),
-    0 0 160px rgba(255, 248, 220, 0.1),
-    0 0 240px rgba(255, 235, 205, 0.08),
-    0 0 320px rgba(255, 218, 185, 0.05);
-  animation: sunPulse 8s ease-in-out infinite;
-  filter: blur(2px);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+  animation: optimizedSunPulse 6s ease-in-out infinite;
+  will-change: transform;
   opacity: 0.8;
 }
 
 .sun-rays {
   position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 120px;
-  height: 120px;
+  top: -10px;
+  left: -10px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    rgba(255, 255, 255, 0.08) 15deg,
-    transparent 30deg,
-    rgba(255, 248, 220, 0.06) 45deg,
-    transparent 60deg,
-    rgba(255, 235, 205, 0.08) 75deg,
+    rgba(212, 175, 55, 0.3) 45deg,
     transparent 90deg,
-    rgba(255, 218, 185, 0.06) 105deg,
-    transparent 120deg,
-    rgba(255, 200, 150, 0.08) 135deg,
-    transparent 150deg,
-    rgba(255, 180, 120, 0.06) 165deg,
+    rgba(212, 175, 55, 0.3) 135deg,
     transparent 180deg,
-    rgba(255, 200, 150, 0.08) 195deg,
-    transparent 210deg,
-    rgba(255, 218, 185, 0.06) 225deg,
-    transparent 240deg,
-    rgba(255, 235, 205, 0.08) 255deg,
+    rgba(212, 175, 55, 0.3) 225deg,
     transparent 270deg,
-    rgba(255, 248, 220, 0.06) 285deg,
-    transparent 300deg,
-    rgba(255, 255, 255, 0.08) 315deg,
-    transparent 330deg,
-    rgba(255, 248, 220, 0.06) 345deg,
+    rgba(212, 175, 55, 0.3) 315deg,
     transparent 360deg
   );
-  animation: sunRotate 30s linear infinite;
-  filter: blur(1px);
-  opacity: 0.6;
+  animation: optimizedSunRotate 20s linear infinite;
+  opacity: 0.5;
+  will-change: transform;
 }
 
-@keyframes sunPulse {
+@keyframes optimizedSunPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 
-      0 0 60px #ffd700,
-      0 0 120px rgba(255, 215, 0, 0.5),
-      0 0 180px rgba(255, 215, 0, 0.3);
+    opacity: 0.8;
   }
   50% {
     transform: scale(1.1);
-    box-shadow: 
-      0 0 80px #ffd700,
-      0 0 160px rgba(255, 215, 0, 0.6),
-      0 0 240px rgba(255, 215, 0, 0.4);
+    opacity: 0.9;
   }
 }
 
-@keyframes sunRotate {
+@keyframes optimizedSunRotate {
   from {
     transform: rotate(0deg);
   }
@@ -173,77 +143,18 @@
   }
 }
 
-@keyframes sunSetting {
-  0% {
-    top: 15%;
-    transform: translateX(-50%) scale(1);
-  }
-  25% {
-    top: 25%;
-    transform: translateX(-50%) scale(1.1);
+@keyframes optimizedSunFloat {
+  0%, 100% {
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
   }
   50% {
-    top: 40%;
-    transform: translateX(-50%) scale(1.2);
-  }
-  75% {
-    top: 60%;
-    transform: translateX(-50%) scale(1.1);
-  }
-  100% {
-    top: 80%;
-    transform: translateX(-50%) scale(0.8);
+    transform: translateX(-50%) translate3d(0, -10px, 0) scale(1.05);
   }
 }
 
-.sun-reflection {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 50px;
-  background: radial-gradient(ellipse, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 248, 220, 0.08) 20%, 
-    rgba(255, 235, 205, 0.06) 40%, 
-    rgba(255, 218, 185, 0.04) 60%, 
-    transparent 80%);
-  border-radius: 50%;
-  animation: reflectionMove 40s ease-in-out infinite;
-  filter: blur(3px);
-  opacity: 0.4;
-}
+/* Eliminamos reflejo del sol para mejor performance */
 
-@keyframes reflectionMove {
-  0% {
-    top: 100%;
-    opacity: 0.3;
-    transform: translateX(-50%) scale(1);
-  }
-  25% {
-    top: 120%;
-    opacity: 0.4;
-    transform: translateX(-50%) scale(1.1);
-  }
-  50% {
-    top: 140%;
-    opacity: 0.5;
-    transform: translateX(-50%) scale(1.2);
-  }
-  75% {
-    top: 160%;
-    opacity: 0.4;
-    transform: translateX(-50%) scale(1.1);
-  }
-  100% {
-    top: 180%;
-    opacity: 0.2;
-    transform: translateX(-50%) scale(0.8);
-  }
-}
-
-/* Nubes */
+/* Nubes optimizadas */
 .clouds {
   position: absolute;
   top: 0;
@@ -251,22 +162,26 @@
   width: 100%;
   height: 100%;
   z-index: 5;
+  will-change: transform;
+  contain: layout style paint;
+  pointer-events: none;
 }
 
 .cloud {
   position: absolute;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50px;
-  opacity: 0.7;
-  animation: cloudFloat 15s linear infinite;
+  background: rgba(248, 246, 240, 0.6);
+  border-radius: 40px;
+  opacity: 0.5;
+  animation: optimizedCloudFloat 15s linear infinite;
+  will-change: transform;
 }
 
 .cloud::before,
 .cloud::after {
   content: '';
   position: absolute;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50px;
+  background: rgba(248, 246, 240, 0.6);
+  border-radius: 40px;
 }
 
 .cloud-1 {
@@ -357,31 +272,31 @@
   right: 12px;
 }
 
-@keyframes cloudFloat {
+@keyframes optimizedCloudFloat {
   0% {
-    transform: translateX(-100px);
+    transform: translate3d(-100px, 0, 0);
     opacity: 0;
   }
-  10% {
-    opacity: 0.7;
-  }
-  90% {
-    opacity: 0.7;
+  10%, 90% {
+    opacity: 0.5;
   }
   100% {
-    transform: translateX(calc(100vw + 100px));
+    transform: translate3d(calc(100vw + 100px), 0, 0);
     opacity: 0;
   }
 }
 
-/* Mar */
+/* Océano optimizado */
 .ocean {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 40%;
+  height: 30%;
   z-index: 3;
+  overflow: hidden;
+  contain: layout style paint;
+  pointer-events: none;
 }
 
 .wave {
@@ -392,111 +307,72 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(30, 144, 255, 0.4) 0%,
-    rgba(0, 191, 255, 0.3) 50%,
-    rgba(25, 25, 112, 0.4) 100%
+    rgba(44, 95, 127, 0.3) 0%,
+    rgba(27, 74, 102, 0.35) 50%,
+    rgba(15, 58, 82, 0.4) 100%
   );
   border-radius: 50% 50% 0 0;
-  animation: waveMove 12s ease-in-out infinite;
+  animation: optimizedWaveMove 12s ease-in-out infinite;
+  will-change: transform;
 }
 
 .wave-1 {
   animation-delay: 0s;
   opacity: 0.6;
   height: 80%;
-  background: linear-gradient(
-    180deg,
-    rgba(30, 144, 255, 0.5) 0%,
-    rgba(0, 191, 255, 0.4) 50%,
-    rgba(25, 25, 112, 0.5) 100%
-  );
 }
 
 .wave-2 {
   animation-delay: 1s;
   opacity: 0.4;
-  height: 85%;
-  background: linear-gradient(
-    180deg,
-    rgba(30, 144, 255, 0.4) 0%,
-    rgba(0, 191, 255, 0.3) 50%,
-    rgba(25, 25, 112, 0.4) 100%
-  );
+  height: 90%;
 }
 
 .wave-3 {
   animation-delay: 2s;
   opacity: 0.3;
-  height: 90%;
-  background: linear-gradient(
-    180deg,
-    rgba(30, 144, 255, 0.3) 0%,
-    rgba(0, 191, 255, 0.2) 50%,
-    rgba(25, 25, 112, 0.3) 100%
-  );
+  height: 95%;
 }
 
 .wave-4 {
   animation-delay: 3s;
   opacity: 0.2;
-  height: 95%;
-  background: linear-gradient(
-    180deg,
-    rgba(30, 144, 255, 0.2) 0%,
-    rgba(0, 191, 255, 0.1) 50%,
-    rgba(25, 25, 112, 0.2) 100%
-  );
-}
-
-.wave-5 {
-  animation-delay: 4s;
-  opacity: 0.1;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(30, 144, 255, 0.1) 0%,
-    rgba(0, 191, 255, 0.05) 50%,
-    rgba(25, 25, 112, 0.1) 100%
-  );
 }
 
+/* Eliminamos wave-5 para mejor performance */
 
 
-@keyframes waveMove {
+
+@keyframes optimizedWaveMove {
   0%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  25% {
-    transform: translateX(-50%) translateY(-10px);
+    transform: translate3d(-50%, 0, 0);
   }
   50% {
-    transform: translateX(-50%) translateY(0);
-  }
-  75% {
-    transform: translateX(-50%) translateY(10px);
+    transform: translate3d(-50%, -8px, 0);
   }
 }
 
-/* Arena */
+/* Arena optimizada */
 .sand {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 5%;
+  height: 4%;
   background: linear-gradient(
     180deg,
-    rgba(247, 220, 111, 0.4) 0%,
-    rgba(243, 156, 18, 0.3) 50%,
-    rgba(211, 84, 0, 0.4) 100%
+    rgba(212, 175, 55, 0.3) 0%,
+    rgba(139, 69, 19, 0.4) 100%
   );
   z-index: 4;
-  border-radius: 50% 50% 0 0 50% 50% 0 0;
-  transform: scaleX(1.2);
+  border-radius: 50% 50% 0 0;
   opacity: 0.5;
+  pointer-events: none;
+  contain: layout style paint;
 }
 
-/* Partículas de luz */
+/* Partículas optimizadas */
 .light-particles {
   position: absolute;
   top: 0;
@@ -504,80 +380,174 @@
   width: 100%;
   height: 100%;
   z-index: 2;
+  pointer-events: none;
+  contain: layout style paint;
 }
 
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.8);
+  width: 2px;
+  height: 2px;
+  background: rgba(212, 175, 55, 0.6);
   border-radius: 50%;
-  animation: particleFloat 3s ease-in-out infinite;
+  animation: optimizedParticleFloat 4s linear infinite;
+  will-change: transform;
 }
 
-@keyframes particleFloat {
+@keyframes optimizedParticleFloat {
   0% {
-    transform: translateY(100vh) scale(0);
+    transform: translate3d(0, 100vh, 0);
     opacity: 0;
   }
-  50% {
-    opacity: 1;
+  10%, 90% {
+    opacity: 0.6;
   }
   100% {
-    transform: translateY(-100px) scale(1);
+    transform: translate3d(0, -50px, 0);
     opacity: 0;
   }
 }
 
-/* Responsive */
+/* Estados estáticos para dispositivos de bajo rendimiento */
+.animated-background.reduced-effects {
+  animation: none;
+}
+
+.sun.static {
+  animation: none;
+}
+
+.sun.static .sun-core {
+  animation: none;
+}
+
+.sun.static .sun-rays {
+  animation: none;
+}
+
+.ocean.static .wave {
+  animation: none;
+}
+
+/* Optimizaciones responsive para mejor performance */
 @media (max-width: 768px) {
+  .animated-background {
+    animation-duration: 45s;
+  }
   .sun-core {
     width: 60px;
     height: 60px;
   }
-  
   .sun-rays {
-    width: 90px;
-    height: 90px;
-    top: -15px;
-    left: -15px;
+    width: 80px;
+    height: 80px;
+    top: -10px;
+    left: -10px;
   }
-  
   .cloud {
-    transform: scale(0.8);
+    transform: scale(0.7);
   }
-  
   .ocean {
-    height: 35%;
+    height: 25%;
   }
-  
   .sand {
-    height: 8%;
+    height: 3%;
+  }
+  /* Reducir partículas en mobile */
+  .particle:nth-child(n+6) {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .sun-core {
-    width: 50px;
-    height: 50px;
+  .animated-background {
+    animation-duration: 30s;
   }
-  
-  .sun-rays {
-    width: 70px;
-    height: 70px;
-    top: -10px;
-    left: -10px;
+  .sun {
+    display: none; /* Ocultar sol en pantallas muy pequeñas */
   }
-  
   .cloud {
-    transform: scale(0.6);
+    transform: scale(0.5);
   }
-  
   .ocean {
-    height: 30%;
+    height: 20%;
   }
-  
   .sand {
-    height: 10%;
+    height: 2%;
   }
+  /* Solo 2 partículas en mobile pequeño */
+  .particle:nth-child(n+3) {
+    display: none;
+  }
+  /* Solo 2 olas en mobile pequeño */
+  .wave-3, .wave-4 {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-background {
+    animation: none;
+  }
+  .sun, .clouds, .light-particles {
+    animation: none;
+  }
+  .wave {
+    animation: none;
+  }
+}
+
+/* Optimización para pantallas de alta densidad */
+@media (min-resolution: 120dpi) {
+  .animated-background {
+    transform: translate3d(0,0,0);
+  }
+  /* Reducir calidad en pantallas de alta densidad para mejor performance */
+  .sun-rays {
+    opacity: 0.3;
+  }
+  .particle:nth-child(odd) {
+    display: none;
+  }
+}
+
+/* Optimizaciones para dispositivos de baja potencia */
+@media (prefers-reduced-data: reduce) {
+  .animated-background::before {
+    display: none;
+  }
+  .sun-rays {
+    display: none;
+  }
+  .particle {
+    display: none;
+  }
+}
+
+/* Optimizaciones de performance críticas */
+.animated-background * {
+  will-change: auto;
+}
+
+.animated-background.reduced-effects * {
+  animation-play-state: paused;
+  will-change: auto;
+}
+
+/* Optimización GPU */
+.sun,
+.wave,
+.particle {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Lazy loading de efectos costosos */
+.animated-background:not(.in-view) {
+  animation-play-state: paused;
+}
+
+.animated-background:not(.in-view) * {
+  animation-play-state: paused;
 } 

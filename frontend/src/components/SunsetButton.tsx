@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './SunsetButton.css';
 
 interface SunsetButtonProps {
@@ -11,7 +11,7 @@ interface SunsetButtonProps {
   type?: 'button' | 'submit' | 'reset';
 }
 
-const SunsetButton: React.FC<SunsetButtonProps> = ({
+const SunsetButton: React.FC<SunsetButtonProps> = memo(({
   children,
   variant = 'primary',
   size = 'md',
@@ -33,6 +33,8 @@ const SunsetButton: React.FC<SunsetButtonProps> = ({
       <div className="sunset-btn-glow"></div>
     </button>
   );
-};
+});
+
+SunsetButton.displayName = 'SunsetButton';
 
 export default SunsetButton; 

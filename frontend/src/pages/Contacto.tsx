@@ -48,8 +48,8 @@ const Contacto = () => {
               <div className="contacto-card">
                 <div className="contacto-icon">📞</div>
                 <h3>Teléfono</h3>
-                <p>+54 9 11 1234-5678</p>
-                <p>+54 9 11 8765-4321</p>
+                <p style={{ color: '#111' }}>+54 2920-474498</p>
+                <p style={{ color: '#111' }}>+54 2920 252023</p>
               </div>
               
               <div className="contacto-card">
@@ -62,27 +62,25 @@ const Contacto = () => {
               <div className="contacto-card">
                 <div className="contacto-icon">📍</div>
                 <h3>Ubicación</h3>
-                <p>Ruta Provincial 123</p>
-                <p>Villa del Lago, Córdoba</p>
-                <p>Argentina</p>
+                <p style={{ color: '#111' }}>Balneario Los Pocitos</p>
+                <p style={{ color: '#111' }}>Provincia de Buenos Aires</p>
+                <p style={{ color: '#111' }}>Argentina</p>
               </div>
               
               <div className="contacto-card">
-                <div className="contacto-icon">🕒</div>
+                <div className="contacto-icon">⏰</div>
                 <h3>Horarios</h3>
-                <p>Lunes a Domingo</p>
-                <p>8:00 AM - 8:00 PM</p>
-                <p>Atención 24/7 para emergencias</p>
+                <p style={{ color: '#111' }}>Lunes a Domingo</p>
+                <p style={{ color: '#111' }}>8:00 AM - 8:00 PM</p>
+                <p style={{ color: '#111' }}>Atención 24/7 para emergencias</p>
               </div>
             </div>
 
             <div className="redes-sociales">
               <h3>Síguenos en redes sociales</h3>
               <div className="redes-icons">
-                <a href="#" className="red-social">📘 Facebook</a>
-                <a href="#" className="red-social">📷 Instagram</a>
-                <a href="#" className="red-social">🐦 Twitter</a>
-                <a href="#" className="red-social">📺 YouTube</a>
+                <a href="https://www.facebook.com/BuenaVidaIIpesca" target="_blank" rel="noopener noreferrer" className="red-social">📘 Facebook</a>
+                <a href="https://www.instagram.com/posadabuenavidaa/" target="_blank" rel="noopener noreferrer" className="red-social">📷 Instagram</a>
               </div>
             </div>
           </motion.div>
@@ -160,16 +158,22 @@ const Contacto = () => {
           <h2>Ubicación</h2>
           <div className="mapa-container">
             <div className="mapa-placeholder">
-              <div className="mapa-content">
-                <h3>📍 El Paraíso</h3>
-                <p>Ruta Provincial 123, Villa del Lago</p>
-                <p>Córdoba, Argentina</p>
+              <div className="mapa-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <h3 style={{ color: '#111', fontSize: '2rem', fontWeight: 'bold' }}>📍 BuenaVida</h3>
+                <p style={{ color: '#111', marginBottom: 0 }}><span style={{ fontWeight: 'bold' }}>Acceso desde:</span> Ruta Nacional Nº 3 Km 918</p>
+                <p style={{ color: '#111', marginTop: 0, marginBottom: '0.5rem' }}>Buenos Aires, Argentina</p>
                 <div className="mapa-info">
-                  <p><strong>Coordenadas:</strong> -31.4167° S, -64.1833° W</p>
-                  <p><strong>Distancia desde Córdoba:</strong> 45 km</p>
-                  <p><strong>Tiempo de viaje:</strong> 1 hora en auto</p>
+                  <p style={{ margin: 0 }}><span style={{ color: '#111', fontWeight: 'bold' }}>Coordenadas:</span><span style={{ color: '#111' }}> -40.436567, -62.422773</span></p>
+                  <p style={{ margin: 0 }}><span style={{ color: '#111', fontWeight: 'bold' }}>Distancia desde Ruta Nacional Nº 3:</span><span style={{ color: '#111' }}> 40km</span></p>
                 </div>
-                <button className="btn btn-secondary">Ver en Google Maps</button>
+                <a
+                  href="https://www.google.com/maps?q=-40.436567,-62.422773"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  Ver en Google Maps
+                </a>
               </div>
             </div>
           </div>

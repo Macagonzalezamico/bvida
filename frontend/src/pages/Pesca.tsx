@@ -89,7 +89,7 @@ const Pesca = () => {
             </div>
             <div className="info-item">
               <h3>👥 Capacidad</h3>
-              <p>Máximo 4 personas por embarcación</p>
+              <p className="pesca-capacidad">👥 Capacidad: Mínimo 4 pescadores, máximo 10.</p>
             </div>
             <div className="info-item">
               <h3>🌤️ Clima</h3>

@@ -1,18 +1,20 @@
 .sunset-btn {
   position: relative;
   border: none;
-  border-radius: 50px;
+  border-radius: 24px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  backdrop-filter: blur(10px);
+  -webkit-font-smoothing: antialiased;
 }
 
 .sunset-btn:disabled {
@@ -34,69 +36,86 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(248, 246, 240, 0.4),
+    rgba(212, 175, 55, 0.2),
+    rgba(248, 246, 240, 0.4),
     transparent
   );
-  transition: left 0.5s ease;
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: blur(1px);
 }
 
 .sunset-btn:hover .sunset-btn-glow {
   left: 100%;
 }
 
-/* Variantes */
+/* Variantes premium */
 .sunset-btn-primary {
-  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  background: linear-gradient(135deg, #D4AF37 0%, #E6C85C 50%, #B8941F 100%);
   color: white;
-  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .sunset-btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
-  background: linear-gradient(135deg, #ff8c42, #ff6b35);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, #E6C85C 0%, #D4AF37 50%, #B8941F 100%);
+  border-color: rgba(212, 175, 55, 0.4);
 }
 
 .sunset-btn-secondary {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #2C5F7F 0%, #4A7BA7 50%, #1B4A66 100%);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(44, 95, 127, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 16px rgba(44, 95, 127, 0.3);
 }
 
 .sunset-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.8);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #4A7BA7 0%, #2C5F7F 50%, #1B4A66 100%);
+  border-color: rgba(44, 95, 127, 0.5);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(44, 95, 127, 0.4), 0 0 20px rgba(44, 95, 127, 0.2);
 }
 
 .sunset-btn-accent {
-  background: linear-gradient(135deg, #ffd700, #f4d03f);
-  color: #2c3e50;
-  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #654321 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(139, 69, 19, 0.3);
+  border: 1px solid rgba(139, 69, 19, 0.2);
 }
 
 .sunset-btn-accent:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4);
-  background: linear-gradient(135deg, #f4d03f, #ffd700);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(139, 69, 19, 0.4), 0 0 20px rgba(139, 69, 19, 0.2);
+  background: linear-gradient(135deg, #A0522D 0%, #8B4513 50%, #654321 100%);
+  border-color: rgba(139, 69, 19, 0.4);
 }
 
-/* Tamaños */
+/* Tamaños premium */
 .sunset-btn-sm {
-  padding: 0.5rem 1rem;
+  padding: 0.625rem 1.25rem;
   font-size: 0.875rem;
+  border-radius: 20px;
 }
 
 .sunset-btn-md {
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.75rem;
   font-size: 1rem;
+  border-radius: 24px;
 }
 
 .sunset-btn-lg {
-  padding: 1rem 2rem;
+  padding: 1.125rem 2.25rem;
   font-size: 1.125rem;
+  border-radius: 28px;
+}
+
+.sunset-btn-xl {
+  padding: 1.375rem 2.75rem;
+  font-size: 1.25rem;
+  border-radius: 32px;
 }
 
 /* Efectos adicionales */
@@ -106,36 +125,73 @@
 
 .sunset-btn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
 }
 
-/* Animación de pulso para botones importantes */
-.sunset-btn.pulse {
-  animation: buttonPulse 2s ease-in-out infinite;
+.sunset-btn:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
 }
 
-@keyframes buttonPulse {
+/* Animación premium de pulso */
+.sunset-btn.luxury-pulse {
+  animation: luxuryButtonPulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes luxuryButtonPulse {
   0%, 100% {
     transform: scale(1);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5), 0 0 25px rgba(212, 175, 55, 0.3);
   }
 }
 
-/* Efecto de neón */
-.sunset-btn.neon {
-  box-shadow: 
-    0 0 5px rgba(255, 107, 53, 0.5),
-    0 0 10px rgba(255, 107, 53, 0.3),
-    0 0 15px rgba(255, 107, 53, 0.1);
+/* Variante elegante con efecto especial */
+.sunset-btn.elegant {
+  background: rgba(248, 246, 240, 0.15);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #1A1A1A;
 }
 
-.sunset-btn.neon:hover {
+.sunset-btn.elegant:hover {
+  background: rgba(212, 175, 55, 0.9);
+  color: white;
+  backdrop-filter: blur(25px) saturate(160%);
+}
+
+/* Efecto de resplandor premium */
+.sunset-btn.luxury-glow {
   box-shadow: 
-    0 0 10px rgba(255, 107, 53, 0.8),
-    0 0 20px rgba(255, 107, 53, 0.5),
-    0 0 30px rgba(255, 107, 53, 0.3);
+    0 0 8px rgba(212, 175, 55, 0.5),
+    0 0 16px rgba(212, 175, 55, 0.3),
+    0 0 24px rgba(212, 175, 55, 0.1),
+    0 4px 16px rgba(212, 175, 55, 0.2);
+}
+
+.sunset-btn.luxury-glow:hover {
+  box-shadow: 
+    0 0 12px rgba(212, 175, 55, 0.8),
+    0 0 24px rgba(212, 175, 55, 0.5),
+    0 0 36px rgba(212, 175, 55, 0.3),
+    0 8px 32px rgba(212, 175, 55, 0.4);
+}
+
+/* Variante minimalista */
+.sunset-btn.minimal {
+  background: transparent;
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  color: #D4AF37;
+  backdrop-filter: none;
+}
+
+.sunset-btn.minimal:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #D4AF37;
+  color: #B8941F;
 }
 
 /* Responsive */

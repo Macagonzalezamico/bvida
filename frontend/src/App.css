@@ -1,25 +1,73 @@
 /* Importar animaciones adicionales */
 @import url('./styles/animations.css');
 
-/* Variables CSS para el branding - Temática Atardecer/Amanecer y Playa */
+/* Variables CSS premium para El Paraíso - Experiencia hotelera de lujo */
 :root {
-  --primary-color: #e67e22;      /* Naranja atardecer atenuado */
-  --primary-light: #f39c12;      /* Naranja claro atenuado */
-  --secondary-color: #1e90ff;    /* Azul mar */
-  --secondary-light: #87ceeb;    /* Azul cielo */
-  --accent-color: #f1c40f;       /* Dorado sol atenuado */
-  --accent-light: #f7dc6f;       /* Amarillo arena atenuado */
-  --text-dark: #2c3e50;          /* Azul oscuro */
-  --text-light: #7f8c8d;         /* Gris azulado */
-  --bg-light: rgba(255, 255, 255, 0.95);  /* Blanco con transparencia */
-  --bg-glass: rgba(255, 255, 255, 0.1);   /* Vidrio esmerilado */
-  --bg-gradient: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(30, 144, 255, 0.1) 100%);
-  --shadow-sm: 0 2px 8px rgba(230, 126, 34, 0.2);
-  --shadow-md: 0 4px 16px rgba(230, 126, 34, 0.25);
-  --shadow-lg: 0 8px 32px rgba(230, 126, 34, 0.3);
-  --border-radius: 12px;
-  --border-radius-lg: 20px;
-  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Paleta de colores premium */
+  --primary-color: #D4AF37;      /* Oro elegante */
+  --primary-light: #E6C85C;      /* Oro champagne */
+  --primary-dark: #B8941F;       /* Oro viejo */
+  --secondary-color: #2C5F7F;    /* Azul marina sofisticado */
+  --secondary-light: #4A7BA7;    /* Azul acero */
+  --secondary-dark: #1B4A66;     /* Azul profundo */
+  --accent-color: #8B4513;       /* Marrón tierra elegante */
+  --accent-light: #A0522D;       /* Marrón cálido */
+  --accent-coral: #FF7F7F;       /* Coral suave */
+  
+  /* Colores neutros premium */
+  --white: #FFFFFF;
+  --cream: #F8F6F0;
+  --beige: #F5F2E9;
+  --pearl: #F2F0E6;
+  --stone: #E8E4D9;
+  --charcoal: #2F2F2F;
+  
+  /* Colores de texto premium */
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-tertiary: #6B6B6B;
+  --text-light: #FFFFFF;
+  --text-gold: #D4AF37;
+  
+  /* Fondos premium */
+  --bg-primary: rgba(248, 246, 240, 0.98);
+  --bg-glass: rgba(255, 255, 255, 0.15);
+  --bg-glass-strong: rgba(255, 255, 255, 0.25);
+  --bg-dark: rgba(26, 26, 26, 0.85);
+  --bg-overlay: rgba(212, 175, 55, 0.05);
+  
+  /* Gradientes premium */
+  --gradient-luxury: linear-gradient(135deg, #D4AF37 0%, #E6C85C 25%, #FF7F7F 50%, #2C5F7F 75%, #4A7BA7 100%);
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #E6C85C 50%, #B8941F 100%);
+  --gradient-ocean: linear-gradient(135deg, #2C5F7F 0%, #4A7BA7 50%, #1B4A66 100%);
+  
+  /* Sombras premium */
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 8px rgba(212, 175, 55, 0.15);
+  --shadow-md: 0 4px 16px rgba(44, 95, 127, 0.20);
+  --shadow-lg: 0 8px 32px rgba(26, 26, 26, 0.25);
+  --shadow-luxury: 0 8px 32px rgba(212, 175, 55, 0.25), 0 2px 16px rgba(44, 95, 127, 0.15);
+  --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.2);
+  
+  /* Bordes premium */
+  --border-subtle: 1px solid rgba(212, 175, 55, 0.20);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.25);
+  --border-luxury: 1px solid rgba(212, 175, 55, 0.40);
+  
+  /* Radio de bordes premium */
+  --radius-sm: 4px;
+  --radius-base: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  
+  /* Transiciones premium */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* Reset y configuración base */
@@ -31,23 +79,71 @@
 
 .app {
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
   position: relative;
+  background: var(--cream);
+  color: var(--text-primary);
+  overflow-x: hidden;
 }
 
-/* Navegación */
+/* Loader optimizado para lazy loading */
+.page-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.loader-content {
+  text-align: center;
+  background: rgba(248, 246, 240, 0.2);
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 175, 55, 0.2);
+  border-top: 3px solid #D4AF37;
+  border-radius: 50%;
+  animation: loaderSpin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes loaderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-content p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Navegación optimizada */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(25px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 3rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: var(--border-glass);
+  transition: all var(--transition-normal);
+  will-change: background;
+}
+
+.navbar:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .nav-brand a {
@@ -59,11 +155,12 @@
 }
 
 .nav-logo {
-  height: 80px;
+  height: 90px;
   width: auto;
-  border-radius: 16px;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 16px rgba(230, 126, 34, 0.2);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.15));
 }
 
 .nav-brand a:hover .nav-logo {
@@ -78,21 +175,39 @@
 
 .nav-link {
   text-decoration: none;
-  padding: 0.75rem 1.25rem;
-  color: var(--text-dark);
+  padding: 0.875rem 1.5rem;
+  color: var(--text-primary);
   font-weight: 500;
-  transition: all 0.3s ease;
-  border-radius: var(--border-radius);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.025em;
+  transition: all var(--transition-normal);
+  border-radius: var(--radius-xl);
   position: relative;
   overflow: hidden;
 }
 
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-gold);
+  transition: left var(--transition-smooth);
+  z-index: -1;
+}
+
 .nav-link:hover,
 .nav-link.active {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  color: white;
+  color: var(--white);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+  left: 0;
 }
 
 .nav-mobile-toggle {
@@ -168,26 +283,21 @@
   margin: 0 auto;
 }
 
-/* Hero Section */
+/* Hero Section Optimizado */
 .hero {
-  background: linear-gradient(135deg, 
-    rgba(230, 126, 34, 0.4) 0%, 
-    rgba(243, 156, 18, 0.3) 25%, 
-    rgba(241, 196, 15, 0.2) 50%, 
-    rgba(30, 144, 255, 0.3) 75%, 
-    rgba(135, 206, 235, 0.4) 100%);
+  background: var(--gradient-luxury);
   min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius-lg);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
   margin: 2rem 0;
   position: relative;
   overflow: hidden;
   width: 100%;
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: var(--border-glass);
 }
 
 .hero::before {
@@ -219,14 +329,13 @@
 }
 
 .hero-logo {
-  width: 400px;
-  height: 400px;
-  border-radius: 40px;
-  box-shadow: 
-    0 0 60px rgba(255, 215, 0, 0.3),
-    0 0 120px rgba(255, 107, 53, 0.2);
-  transition: all 0.3s ease;
-  animation: logoFloat 6s ease-in-out infinite;
+  width: 450px;
+  height: 450px;
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-glow);
+  transition: all var(--transition-slow);
+  animation: premiumLogoFloat 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: drop-shadow(0 8px 24px rgba(212, 175, 55, 0.25));
 }
 
 .hero-logo:hover {
@@ -236,30 +345,45 @@
     0 0 160px rgba(255, 107, 53, 0.3);
 }
 
-@keyframes logoFloat {
+@keyframes premiumLogoFloat {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.02) rotate(1deg);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(1.05) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) scale(1.02) rotate(-1deg);
   }
 }
 
 .hero-title {
-  font-size: 4.5rem;
-  font-weight: 900;
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  animation: titleGlow 3s ease-in-out infinite alternate;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 2rem;
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+  animation: premiumTitleGlow 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-@keyframes titleGlow {
+@keyframes premiumTitleGlow {
   0% {
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)) drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(230, 200, 92, 0.8)) drop-shadow(0 0 50px rgba(230, 200, 92, 0.4));
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3), 0 0 30px rgba(230, 200, 92, 0.6);
   }
   100% {
-    filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.8));
+    filter: drop-shadow(0 0 20px rgba(44, 95, 127, 0.7)) drop-shadow(0 0 40px rgba(44, 95, 127, 0.3));
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3), 0 0 25px rgba(44, 95, 127, 0.5);
   }
 }
 

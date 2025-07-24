@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './GlassCard.css';
 
 interface GlassCardProps {
@@ -7,7 +7,7 @@ interface GlassCardProps {
   onClick?: () => void;
 }
 
-const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', onClick }) => {
+const GlassCard: React.FC<GlassCardProps> = memo(({ children, className = '', onClick }) => {
   return (
     <div 
       className={`glass-card ${className}`}
@@ -16,6 +16,8 @@ const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', onClick
       {children}
     </div>
   );
-};
+});
+
+GlassCard.displayName = 'GlassCard';
 
 export default GlassCard; 

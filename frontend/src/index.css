@@ -1,4 +1,9 @@
-/* Base reset and configuration */
+/* Importar fuentes premium */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+
+/* Base reset y configuración premium */
 * {
   margin: 0;
   padding: 0;
@@ -9,15 +14,21 @@ html {
   width: 100%;
   height: 100%;
   scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2c3e50;
+  font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  color: #1A1A1A;
   line-height: 1.6;
   overflow-x: hidden;
+  background-color: #F8F6F0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 #root {
@@ -25,57 +36,109 @@ body {
   min-height: 100vh;
 }
 
-/* Remove default link styles */
+/* Enlaces premium */
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Remove button defaults */
+a:hover {
+  color: #D4AF37;
+}
+
+/* Botones premium */
 button {
   border: none;
   background: none;
   font-family: inherit;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+/* Tipografía premium */
+h1, h2, h3 {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  font-weight: 700;
   line-height: 1.2;
   margin-bottom: 0.5em;
+  color: #1A1A1A;
+  letter-spacing: -0.02em;
+}
+
+h4, h5, h6 {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+  color: #1A1A1A;
 }
 
 p {
   margin-bottom: 1em;
+  line-height: 1.6;
+  color: #4A4A4A;
 }
 
-/* Focus styles for accessibility */
+/* Elementos de texto especializados */
+.luxury-text {
+  font-family: 'Crimson Text', 'Georgia', serif;
+  font-style: italic;
+  color: #D4AF37;
+}
+
+/* Estilos de foco premium para accesibilidad */
 *:focus {
-  outline: 2px solid #ff6b35;
+  outline: 2px solid #D4AF37;
   outline-offset: 2px;
-}
-
-/* Selection styles */
-::selection {
-  background-color: #ff6b35;
-  color: white;
-}
-
-/* Scrollbar personalizada */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #ff6b35, #ffd700);
   border-radius: 4px;
 }
 
+*:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+}
+
+/* Estilos de selección premium */
+::selection {
+  background-color: rgba(212, 175, 55, 0.2);
+  color: #1A1A1A;
+}
+
+::-moz-selection {
+  background-color: rgba(212, 175, 55, 0.2);
+  color: #1A1A1A;
+}
+
+/* Scrollbar premium personalizada */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(248, 246, 240, 0.5);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  border-radius: 6px;
+  border: 2px solid rgba(248, 246, 240, 0.3);
+  transition: background 0.3s ease;
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #ff8c42, #f4d03f);
+  background: linear-gradient(135deg, #E6C85C 0%, #D4AF37 100%);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(248, 246, 240, 0.5);
+}
+
+/* Para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 rgba(248, 246, 240, 0.5);
 }

@@ -1,14 +1,26 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, Suspense, lazy, memo } from 'react';
 import './App.css';
-import Home from './pages/Home';
-import Cabanas from './pages/Cabanas';
-import Pesca from './pages/Pesca';
-import Reservas from './pages/Reservas';
-import Contacto from './pages/Contacto';
 import AnimatedBackground from './components/AnimatedBackground';
 
-const Navbar = () => {
+// Lazy loading de páginas para mejor performance
+const Home = lazy(() => import('./pages/Home'));
+const Cabanas = lazy(() => import('./pages/Cabanas'));
+const Pesca = lazy(() => import('./pages/Pesca'));
+const Reservas = lazy(() => import('./pages/Reservas'));
+const Contacto = lazy(() => import('./pages/Contacto'));
+
+// Componente de loading optimizado
+const PageLoader = () => (
+  <div className="page-loader">
+    <div className="loader-content">
+      <div className="loader-spinner"></div>
+      <p>Cargando...</p>
+    </div>
+  </div>
+);
+
+const Navbar = memo(() => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
@@ -28,7 +40,13 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-brand">
         <Link to="/" onClick={closeMobileMenu}>
-          <img src="/logo.png" alt="Buena Vida Logo" className="nav-logo" />
+          <img 
+            src="/logo.png" 
+            alt="BuenaVida Logo" 
+            className="nav-logo" 
+            loading="lazy"
+            decoding="async"
+          />
         </Link>
       </div>
       <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
@@ -55,7 +73,7 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+});
 
 const App = () => {
   return (
@@ -64,13 +82,15 @@ const App = () => {
         <AnimatedBackground />
         <Navbar />
         <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cabanas" element={<Cabanas />} />
-            <Route path="/pesca" element={<Pesca />} />
-            <Route path="/reservas" element={<Reservas />} />
-            <Route path="/contacto" element={<Contacto />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cabanas" element={<Cabanas />} />
+              <Route path="/pesca" element={<Pesca />} />
+              <Route path="/reservas" element={<Reservas />} />
+              <Route path="/contacto" element={<Contacto />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
     </Router>

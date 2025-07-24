@@ -22,7 +22,7 @@ const Home = () => {
             <img src="/logo.png" alt="Buena Vida Logo" className="hero-logo" />
           </motion.div>
           <div className="hero-content">
-            <h1 className="hero-title">Buena Vida</h1>
+            <h1 className="hero-title">BuenaVida</h1>
             <p className="hero-subtitle">
               Cabañas & Pesca - Naturaleza, confort y la mejor pesca embarcada. Reservá tu experiencia única.
             </p>
