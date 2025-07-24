@@ -34,8 +34,7 @@ const Reservas = () => {
         transition={{ duration: 0.8 }}
         className="page-header"
       >
-        <h1 className="page-title">Reservas</h1>
-        <p className="page-subtitle">Reserva tu experiencia en El Paraíso</p>
+        <h1 className="page-title">Reserva tu experiencia en BuenaVida</h1>
       </motion.div>
 
       <div className="container">

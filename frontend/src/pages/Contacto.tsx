@@ -55,8 +55,7 @@ const Contacto = () => {
               <div className="contacto-card">
                 <div className="contacto-icon">📧</div>
                 <h3>Email</h3>
-                <p>info@elparaiso.com</p>
-                <p>reservas@elparaiso.com</p>
+                <p style={{ color: '#111' }}>aldogonzzalezz@yahoo.com.ar</p>
               </div>
               
               <div className="contacto-card">
