@@ -8,6 +8,7 @@ const AnimatedBackground: React.FC = () => {
       <div className="sun">
         <div className="sun-core"></div>
         <div className="sun-rays"></div>
+        <div className="sun-reflection"></div>
       </div>
       
 

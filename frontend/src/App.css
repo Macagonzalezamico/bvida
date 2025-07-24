@@ -59,10 +59,11 @@
 }
 
 .nav-logo {
-  height: 60px;
+  height: 80px;
   width: auto;
-  border-radius: 12px;
+  border-radius: 16px;
   transition: transform 0.3s ease;
+  box-shadow: 0 4px 16px rgba(230, 126, 34, 0.2);
 }
 
 .nav-brand a:hover .nav-logo {
@@ -903,7 +904,7 @@
   }
   
   .nav-logo {
-    height: 50px;
+    height: 65px;
   }
   
   .nav-links {
@@ -991,7 +992,7 @@
   }
   
   .nav-logo {
-    height: 45px;
+    height: 55px;
   }
   
   .nav-brand a {

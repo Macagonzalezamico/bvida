@@ -34,16 +34,38 @@
       #0f172a 100%
     );
   }
+  25% {
+    background: linear-gradient(
+      180deg,
+      #f39c12 0%,    /* Sol alto */
+      #f1c40f 20%,
+      #87ceeb 40%,
+      #4682b4 60%,
+      #1e3a8a 80%,
+      #0f172a 100%
+    );
+  }
   50% {
     background: linear-gradient(
       180deg,
-      #d35400 0%,    /* Atardecer intenso atenuado */
+      #d35400 0%,    /* Atardecer intenso */
       #e67e22 15%,
       #f39c12 30%,
-      #f1c40f 50%,
-      #e74c3c 70%,
-      #c0392b 85%,
-      #7b241c 100%
+      #e74c3c 50%,
+      #c0392b 70%,
+      #7b241c 85%,
+      #2c1810 100%
+    );
+  }
+  75% {
+    background: linear-gradient(
+      180deg,
+      #8b4513 0%,    /* Atardecer tardío */
+      #d2691e 20%,
+      #cd853f 40%,
+      #daa520 60%,
+      #b8860b 80%,
+      #2c1810 100%
     );
   }
   100% {
@@ -67,6 +89,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  animation: sunSetting 20s ease-in-out infinite;
 }
 
 .sun-core {
@@ -130,6 +153,69 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes sunSetting {
+  0% {
+    top: 15%;
+    transform: translateX(-50%) scale(1);
+  }
+  25% {
+    top: 25%;
+    transform: translateX(-50%) scale(1.1);
+  }
+  50% {
+    top: 40%;
+    transform: translateX(-50%) scale(1.2);
+  }
+  75% {
+    top: 60%;
+    transform: translateX(-50%) scale(1.1);
+  }
+  100% {
+    top: 80%;
+    transform: translateX(-50%) scale(0.8);
+  }
+}
+
+.sun-reflection {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 40px;
+  background: radial-gradient(ellipse, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: reflectionMove 20s ease-in-out infinite;
+}
+
+@keyframes reflectionMove {
+  0% {
+    top: 100%;
+    opacity: 0.3;
+    transform: translateX(-50%) scale(1);
+  }
+  25% {
+    top: 120%;
+    opacity: 0.4;
+    transform: translateX(-50%) scale(1.1);
+  }
+  50% {
+    top: 140%;
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1.2);
+  }
+  75% {
+    top: 160%;
+    opacity: 0.4;
+    transform: translateX(-50%) scale(1.1);
+  }
+  100% {
+    top: 180%;
+    opacity: 0.2;
+    transform: translateX(-50%) scale(0.8);
   }
 }
 
@@ -294,31 +380,63 @@
   animation-delay: 0s;
   opacity: 0.8;
   height: 80%;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 144, 255, 0.9) 0%,
+    rgba(0, 191, 255, 0.7) 50%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
 }
 
 .wave-2 {
   animation-delay: 1s;
   opacity: 0.6;
   height: 85%;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 144, 255, 0.7) 0%,
+    rgba(0, 191, 255, 0.5) 50%,
+    rgba(25, 25, 112, 0.7) 100%
+  );
 }
 
 .wave-3 {
   animation-delay: 2s;
   opacity: 0.4;
   height: 90%;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 144, 255, 0.5) 0%,
+    rgba(0, 191, 255, 0.3) 50%,
+    rgba(25, 25, 112, 0.5) 100%
+  );
 }
 
 .wave-4 {
   animation-delay: 3s;
   opacity: 0.3;
   height: 95%;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 144, 255, 0.3) 0%,
+    rgba(0, 191, 255, 0.2) 50%,
+    rgba(25, 25, 112, 0.3) 100%
+  );
 }
 
 .wave-5 {
   animation-delay: 4s;
   opacity: 0.2;
   height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 144, 255, 0.2) 0%,
+    rgba(0, 191, 255, 0.1) 50%,
+    rgba(25, 25, 112, 0.2) 100%
+  );
 }
+
+
 
 @keyframes waveMove {
   0%, 100% {
