@@ -54,7 +54,7 @@ const Navbar = memo(() => {
           Inicio
         </Link>
         <Link to="/cabanas" className={`nav-link ${isActive('/cabanas') ? 'active' : ''}`} onClick={closeMobileMenu}>
-          Cabañas
+                      Alojamientos
         </Link>
         <Link to="/pesca" className={`nav-link ${isActive('/pesca') ? 'active' : ''}`} onClick={closeMobileMenu}>
           Pesca

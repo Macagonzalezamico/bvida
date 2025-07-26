@@ -24,13 +24,13 @@ const Home = () => {
           <div className="hero-content">
             <h1 className="hero-title">BuenaVida</h1>
             <p className="hero-subtitle">
-              Cabañas & Pesca - Naturaleza, confort y la mejor pesca embarcada. Reservá tu experiencia única.
+              Alojamientos & Pesca - Naturaleza, confort y la mejor pesca embarcada. Reservá tu experiencia única.
             </p>
             <div className="hero-buttons">
               <Link to="/cabanas">
                 <SunsetButton variant="primary" size="lg" className="pulse">
                   <span>🏡</span>
-                  Ver Cabañas
+                  Ver Alojamientos
                 </SunsetButton>
               </Link>
               <Link to="/pesca">
@@ -53,7 +53,7 @@ const Home = () => {
             >
               <GlassCard className="feature-card">
                 <div className="feature-icon">🏡</div>
-                <h3>Cabañas Cómodas</h3>
+                <h3>Alojamientos Cómodos</h3>
                 <p>Alojamiento confortable con todas las comodidades para tu descanso.</p>
               </GlassCard>
             </motion.div>

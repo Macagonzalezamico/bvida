@@ -6,7 +6,7 @@ const Reservas = () => {
     nombre: '',
     email: '',
     telefono: '',
-    tipoServicio: 'cabaña',
+            tipoServicio: 'alojamiento',
     fechaLlegada: '',
     fechaSalida: '',
     personas: 1,
@@ -126,9 +126,9 @@ const Reservas = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="cabaña">Cabaña</option>
+                  <option value="alojamiento">Alojamiento</option>
                   <option value="pesca">Pesca Embarcada</option>
-                  <option value="combo">Cabaña + Pesca</option>
+                                      <option value="combo">Alojamiento + Pesca</option>
                 </select>
               </div>
               

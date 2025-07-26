@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Pesca = () => {
+  const navigate = useNavigate();
   const serviciosPesca = [
     {
       id: 1,
@@ -88,7 +90,12 @@ const Pesca = () => {
                   <span className="por-persona">por persona</span>
                 </div>
                 <p style={{ color: '#111', fontWeight: 'bold', marginTop: '0.5rem' }}>Equipo de pesca con costo adicional.</p>
-                <button className="btn btn-primary">Reservar</button>
+                <button 
+                  className="btn btn-primary" 
+                  onClick={() => navigate('/reservas')}
+                >
+                  Reservar
+                </button>
               </div>
             </motion.div>
           ))}
@@ -116,7 +123,7 @@ const Pesca = () => {
             </div>
             <div className="info-item">
               <h3>📞 Reservas</h3>
-              <p>Reserva con 24 horas de anticipación</p>
+              <p>Reserva con anticipación</p>
             </div>
           </div>
         </motion.div>
