@@ -9,21 +9,24 @@ const Pesca = () => {
       nombre: "Pesca de Medio Día",
       duracion: "4 horas",
       precio: "$8,000",
-      descripcion: "Disfruta de una jornada ideal para principiantes o quienes buscan una experiencia relajada en el agua."
+      descripcion: "Disfruta de una jornada ideal para principiantes o quienes buscan una experiencia relajada en el agua.",
+      imagen: "/corvina.jpg"
     },
     {
       id: 2,
       nombre: "Pesca Completa",
       duracion: "8 horas",
       precio: "$15,000",
-      descripcion: "Vive la experiencia completa de pesca, explorando los mejores puntos y técnicas durante todo el día."
+      descripcion: "Vive la experiencia completa de pesca, explorando los mejores puntos y técnicas durante todo el día.",
+      imagen: "/corvinas2.jpg"
     },
     {
       id: 3,
       nombre: "Culebra",
       duracion: "6 horas",
       precio: "$12,000",
-      descripcion: "Disfruta de la pesca de culebra, una experiencia única y desafiante en la región."
+      descripcion: "Disfruta de la pesca de culebra, una experiencia única y desafiante en la región.",
+      imagen: "/chucho.jpg"
     }
   ];
 
@@ -51,8 +54,8 @@ const Pesca = () => {
           textAlign: 'center',
           gap: '0',
         }}>
-          <div style={{ width: '100%', height: '260px', background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--secondary-color))', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-            <img src="/embarcacion.jpg" alt="Embarcación BuenaVida" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 80%', borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }} />
+          <div style={{ width: '100%', height: '450px', background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--secondary-color))', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+            <img src="/embarcacion.jpg" alt="Embarcación BuenaVida" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 60%', borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }} />
           </div>
           <div style={{ padding: '2.5rem 2.5rem 2.5rem 2.5rem', width: '100%' }}>
             <div style={{ fontWeight: 900, fontSize: '2.5rem', color: 'var(--primary-dark)', letterSpacing: '0.01em', marginBottom: '0.5em', background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color), var(--secondary-color))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -79,7 +82,21 @@ const Pesca = () => {
               transition={{ delay: index * 0.2 }}
             >
               <div className="pesca-image">
-                <div className="image-placeholder">🎣</div>
+                <img 
+                  src={servicio.imagen} 
+                  alt={servicio.nombre}
+                  onError={(e) => {
+                    // Fallback si la imagen no se encuentra
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                    if (fallback) {
+                      fallback.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="image-placeholder">
+                  🎣
+                </div>
               </div>
               <div className="pesca-content">
                 <h3 className="pesca-nombre">{servicio.nombre}</h3>

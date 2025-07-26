@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Cabanas = () => {
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(0);
   
   const alojamiento = {
     id: 1,
@@ -19,23 +21,32 @@ const Cabanas = () => {
     destacado: "2 Departamentos"
   };
 
-  const serviciosIncluidos = [
-    "Ropa de cama y toallas",
-    "Implementos de cocina completos",
-    "WiFi de alta velocidad",
-    "TV satelital",
-    "Estacionamiento privado",
-    "Acceso a pileta",
-    "Quincho compartido",
-    "Cámaras de seguridad 24/7",
-    "Check-in flexible",
-    "Atención personalizada"
+  const imagenesCabanas = [
+    "/Cabaña1.jpg",
+    "/Cabaña2.jpg", 
+    "/Cabaña3.jpg",
+    "/Cabaña4.jpg",
+    "/Cabaña5.jpg"
+  ];
+
+  const caracteristicasCabanas = [
+    { icon: '🛏️', text: '2 habitaciones amplias con vista al mar' },
+    { icon: '🚿', text: 'Baño completo + ante baño' },
+    { icon: '🍳', text: 'Cocina completa equipada' },
+    { icon: '🏊', text: 'Pileta climatizada' },
+    { icon: '📶', text: 'WiFi de alta velocidad' },
+    { icon: '📺', text: 'TV satelital con Netflix' },
+    { icon: '🚗', text: 'Estacionamiento privado' },
+    { icon: '📹', text: 'Cámaras de seguridad 24/7' },
+    { icon: '🏖️', text: 'Quincho compartido equipado' },
+    { icon: '🛏️', text: 'Ropa de cama y toallas premium' },
+    { icon: '🍽️', text: 'Implementos de cocina completos' },
+    { icon: '⏰', text: 'Check-in flexible (15:00hs)' },
+    { icon: '👥', text: 'Atención personalizada' }
   ];
 
   return (
     <div className="cabanas-page">
-
-
       <div className="container">
         {/* Tarjeta única de alojamiento */}
         <div style={{
@@ -84,7 +95,7 @@ const Cabanas = () => {
               }}
             >
               <img 
-                src="/Cabaña1.jpg" 
+                src={imagenesCabanas[selectedImage]} 
                 alt="Departamento BuenaVida" 
                 style={{
                   width: '100%',
@@ -281,6 +292,122 @@ const Cabanas = () => {
           </motion.div>
         </div>
 
+        {/* Galería de imágenes */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          style={{
+            background: 'var(--white)',
+            border: '1.5px solid var(--primary-color)',
+            borderRadius: '24px',
+            boxShadow: '0 4px 24px rgba(212, 175, 55, 0.10)',
+            padding: '2.5rem',
+            margin: '2rem auto 3rem auto',
+            width: '95%',
+            maxWidth: 'none'
+          }}
+        >
+          <motion.h3
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            style={{
+              fontSize: '2rem',
+              fontWeight: 700,
+              color: 'var(--primary-dark)',
+              marginBottom: '2rem',
+              textAlign: 'center',
+              background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
+          >
+            📸 Galería de Nuestras Cabañas
+          </motion.h3>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '1rem',
+            marginBottom: '2rem'
+          }}>
+            {imagenesCabanas.map((imagen, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8 + index * 0.1 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.2 }
+                }}
+                style={{
+                  cursor: 'pointer',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: selectedImage === index ? '3px solid var(--primary-color)' : '2px solid rgba(212, 175, 55, 0.2)',
+                  transition: 'all 0.3s ease',
+                  boxShadow: selectedImage === index ? '0 8px 24px rgba(212, 175, 55, 0.3)' : '0 4px 16px rgba(212, 175, 55, 0.1)'
+                }}
+                onClick={() => setSelectedImage(index)}
+              >
+                <img 
+                  src={imagen}
+                  alt={`Cabaña ${index + 1}`}
+                  style={{
+                    width: '100%',
+                    height: '150px',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                      width: 100%;
+                      height: 150px;
+                      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 2rem;
+                      color: white;
+                    `;
+                    fallback.textContent = '🏠';
+                    e.currentTarget.parentNode?.appendChild(fallback);
+                  }}
+                />
+                <div style={{
+                  padding: '0.75rem',
+                  background: 'rgba(212, 175, 55, 0.05)',
+                  textAlign: 'center',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  color: 'var(--primary-color)'
+                }}>
+                  Vista {index + 1}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            style={{
+              textAlign: 'center',
+              fontSize: '0.9rem',
+              color: 'var(--text-secondary)',
+              fontStyle: 'italic'
+            }}
+          >
+            💡 Haz clic en cualquier imagen para verla en la vista principal
+          </motion.div>
+        </motion.div>
+
         {/* Card principal de información general */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -350,28 +477,18 @@ const Cabanas = () => {
                 fontSize: '1.1rem',
                 fontWeight: 600,
                 color: 'var(--primary-color)',
-                marginBottom: '1rem',
+                marginBottom: '1.5rem',
                 textAlign: 'center'
               }}
             >
-              Todas nuestras casas incluyen:
+              ✨ Todas las Características Incluidas
             </motion.div>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '0.75rem'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1rem'
             }}>
-              {[
-                { icon: '🏠', text: '2 habitaciones amplias' },
-                { icon: '🚿', text: 'Baño completo + ante baño' },
-                { icon: '🏊', text: 'Pileta de natación' },
-                { icon: '📶', text: 'WiFi de alta velocidad' },
-                { icon: '📺', text: 'TV satelital' },
-                { icon: '🛏️', text: 'Ropa de cama incluida' },
-                { icon: '🚗', text: 'Estacionamiento privado' },
-                { icon: '🍳', text: 'Cocina completa' },
-                { icon: '📹', text: 'Cámaras de seguridad' }
-              ].map((item, index) => (
+              {caracteristicasCabanas.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
@@ -390,21 +507,31 @@ const Cabanas = () => {
                   style={{ 
                     display: 'flex', 
                     alignItems: 'center', 
-                    gap: '0.5rem',
+                    gap: '0.75rem',
                     cursor: 'pointer',
-                    padding: '0.5rem',
-                    borderRadius: '8px',
-                    transition: 'background-color 0.2s'
+                    padding: '0.75rem',
+                    borderRadius: '12px',
+                    background: 'rgba(255, 255, 255, 0.7)',
+                    border: '1px solid rgba(212, 175, 55, 0.2)',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 2px 8px rgba(212, 175, 55, 0.1)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.2)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(212, 175, 55, 0.1)';
                   }}
                 >
                   <motion.span 
-                    style={{ color: 'var(--primary-color)' }}
+                    style={{ 
+                      color: 'var(--primary-color)',
+                      fontSize: '1.2rem'
+                    }}
                     animate={{ 
                       rotate: [0, 5, -5, 0],
                       scale: [1, 1.1, 1]
@@ -418,56 +545,19 @@ const Cabanas = () => {
                   >
                     {item.icon}
                   </motion.span>
-                  <span>{item.text}</span>
+                  <span style={{ 
+                    fontWeight: 500,
+                    color: 'var(--text-primary)',
+                    fontSize: '0.95rem'
+                  }}>
+                    {item.text}
+                  </span>
                 </motion.div>
               ))}
             </div>
           </motion.div>
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1.5rem',
-            marginTop: '2rem'
-          }}>
-            {serviciosIncluidos.map((servicio, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.4 + index * 0.1,
-                  duration: 0.6,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  y: -5,
-                  transition: { duration: 0.2 }
-                }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  padding: '0.75rem',
-                  background: 'rgba(212, 175, 55, 0.05)',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(212, 175, 55, 0.1)',
-                  cursor: 'pointer'
-                }}
-              >
-                <motion.span 
-                  style={{ fontSize: '1.2rem' }}
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                >
-                  ✓
-                </motion.span>
-                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{servicio}</span>
-              </motion.div>
-            ))}
-          </div>
+
         </motion.div>
 
         {/* Información adicional */}
