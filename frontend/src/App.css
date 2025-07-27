@@ -81,7 +81,6 @@
   min-height: 100vh;
   font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
   position: relative;
-  background: var(--cream);
   color: var(--text-primary);
   overflow-x: hidden;
 }
@@ -131,11 +130,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  box-shadow: var(--shadow-md);
-  position: sticky;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   border-bottom: var(--border-glass);
   transition: all var(--transition-normal);
@@ -143,7 +144,7 @@
 }
 
 .navbar:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .nav-brand a {
@@ -228,7 +229,7 @@
 .main-content {
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding-top: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -522,7 +523,7 @@
 }
 
 .cabana-card {
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -618,7 +619,7 @@
 }
 
 .pesca-card {
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
@@ -903,7 +904,7 @@
 }
 
 .contacto-card {
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.8);
   padding: 1.5rem;
   border-radius: var(--border-radius);
   text-align: center;
@@ -936,7 +937,7 @@
 }
 
 .redes-sociales {
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.8);
   padding: 1.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-sm);
@@ -972,7 +973,7 @@
 }
 
 .contacto-form {
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.8);
   padding: 2rem;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);

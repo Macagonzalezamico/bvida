@@ -37,7 +37,7 @@ const Pesca = () => {
       <div className="container">
         {/* Card principal de información general de pesca, branding web, con foto, más grande y con nuevo título */}
         <div style={{
-          background: 'var(--white)',
+                      background: 'rgba(255, 255, 255, 0.8)',
           border: '1.5px solid var(--primary-color)',
           borderRadius: '24px',
           boxShadow: '0 4px 24px rgba(212, 175, 55, 0.10)',

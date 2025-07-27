@@ -1,7 +1,26 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useState, Suspense, lazy, memo } from 'react';
 import './App.css';
-import AnimatedBackground from './components/AnimatedBackground';
+
+// Componente de fondo que funciona
+const AnimatedBackground = () => {
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      zIndex: -1,
+      backgroundImage: 'url("/los-pocitosjpg.webp")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      opacity: 0.7
+    }}>
+    </div>
+  );
+};
 
 // Lazy loading de páginas para mejor performance
 const Home = lazy(() => import('./pages/Home'));
@@ -54,7 +73,7 @@ const Navbar = memo(() => {
           Inicio
         </Link>
         <Link to="/cabanas" className={`nav-link ${isActive('/cabanas') ? 'active' : ''}`} onClick={closeMobileMenu}>
-                      Alojamientos
+          Alojamientos
         </Link>
         <Link to="/pesca" className={`nav-link ${isActive('/pesca') ? 'active' : ''}`} onClick={closeMobileMenu}>
           Pesca

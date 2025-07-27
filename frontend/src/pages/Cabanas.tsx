@@ -62,7 +62,7 @@ const Cabanas = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             style={{
-              background: 'var(--white)',
+              background: 'rgba(255, 255, 255, 0.8)',
               border: '1.5px solid var(--primary-color)',
               borderRadius: '24px',
               boxShadow: '0 8px 32px rgba(212, 175, 55, 0.15)',
@@ -142,7 +142,7 @@ const Cabanas = () => {
                   position: 'absolute',
                   top: '1rem',
                   right: '1rem',
-                  background: 'rgba(255, 255, 255, 0.9)',
+                  background: 'rgba(255, 255, 255, 0.8)',
                   padding: '0.5rem 1rem',
                   borderRadius: '20px',
                   fontSize: '0.9rem',
@@ -298,7 +298,7 @@ const Cabanas = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           style={{
-            background: 'var(--white)',
+            background: 'rgba(255, 255, 255, 0.8)',
             border: '1.5px solid var(--primary-color)',
             borderRadius: '24px',
             boxShadow: '0 4px 24px rgba(212, 175, 55, 0.10)',
@@ -324,13 +324,13 @@ const Cabanas = () => {
               backgroundClip: 'text'
             }}
           >
-            📸 Galería de Nuestras Casas
+            📸 Galería de Nuestras Departamentos
           </motion.h3>
           
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+            gap: '2.5rem',
             marginBottom: '2rem'
           }}>
             {imagenesCabanas.map((imagen, index) => (
@@ -358,7 +358,7 @@ const Cabanas = () => {
                   alt={`Casa ${index + 1}`}
                   style={{
                     width: '100%',
-                    height: '200px',
+                    height: '350px',
                     objectFit: 'cover',
                     objectPosition: 'center'
                   }}
@@ -367,7 +367,7 @@ const Cabanas = () => {
                     const fallback = document.createElement('div');
                     fallback.style.cssText = `
                       width: 100%;
-                      height: 200px;
+                      height: 350px;
                       background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
                       display: flex;
                       align-items: center;
@@ -402,7 +402,7 @@ const Cabanas = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           style={{
-            background: 'var(--white)',
+            background: 'rgba(255, 255, 255, 0.8)',
             border: '1.5px solid var(--primary-color)',
             borderRadius: '24px',
             boxShadow: '0 4px 24px rgba(212, 175, 55, 0.10)',
@@ -499,18 +499,18 @@ const Cabanas = () => {
                     cursor: 'pointer',
                     padding: '0.75rem',
                     borderRadius: '12px',
-                    background: 'rgba(255, 255, 255, 0.7)',
+                    background: 'rgba(255, 255, 255, 0.8)',
                     border: '1px solid rgba(212, 175, 55, 0.2)',
                     transition: 'all 0.3s ease',
                     boxShadow: '0 2px 8px rgba(212, 175, 55, 0.1)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
                     e.currentTarget.style.transform = 'translateY(-2px)';
                     e.currentTarget.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.2)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = '0 2px 8px rgba(212, 175, 55, 0.1)';
                   }}
@@ -605,7 +605,7 @@ const Cabanas = () => {
                 style={{
                   padding: '1.5rem',
                   borderRadius: '16px',
-                  background: 'rgba(255, 255, 255, 0.7)',
+                  background: 'rgba(255, 255, 255, 0.8)',
                   border: '1.5px solid rgba(212, 175, 55, 0.2)',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
@@ -614,12 +614,12 @@ const Cabanas = () => {
                   flex: '1'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
                   e.currentTarget.style.transform = 'translateY(-5px)';
                   e.currentTarget.style.boxShadow = '0 8px 24px rgba(212, 175, 55, 0.2)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = '0 4px 16px rgba(212, 175, 55, 0.1)';
                 }}
