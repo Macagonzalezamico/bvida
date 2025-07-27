@@ -324,13 +324,13 @@ const Cabanas = () => {
               backgroundClip: 'text'
             }}
           >
-            📸 Galería de Nuestras Cabañas
+            📸 Galería de Nuestras Casas
           </motion.h3>
           
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem',
             marginBottom: '2rem'
           }}>
             {imagenesCabanas.map((imagen, index) => (
@@ -355,10 +355,10 @@ const Cabanas = () => {
               >
                 <img 
                   src={imagen}
-                  alt={`Cabaña ${index + 1}`}
+                  alt={`Casa ${index + 1}`}
                   style={{
                     width: '100%',
-                    height: '150px',
+                    height: '200px',
                     objectFit: 'cover',
                     objectPosition: 'center'
                   }}
@@ -367,7 +367,7 @@ const Cabanas = () => {
                     const fallback = document.createElement('div');
                     fallback.style.cssText = `
                       width: 100%;
-                      height: 150px;
+                      height: 200px;
                       background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
                       display: flex;
                       align-items: center;
@@ -393,19 +393,7 @@ const Cabanas = () => {
             ))}
           </div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            style={{
-              textAlign: 'center',
-              fontSize: '0.9rem',
-              color: 'var(--text-secondary)',
-              fontStyle: 'italic'
-            }}
-          >
-            💡 Haz clic en cualquier imagen para verla en la vista principal
-          </motion.div>
+
         </motion.div>
 
         {/* Card principal de información general */}
