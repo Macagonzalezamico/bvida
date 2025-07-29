@@ -6,10 +6,9 @@ import '../styles/CalendarioTurnero.css';
 
 interface Reserva {
   _id: string;
-  tipo: 'pesca' | 'alojamiento';
-  casa?: 'casa1' | 'casa2';
-  turno?: '8:00-12:00' | '14:00-18:00';
-  fecha?: string;
+  tipo: 'pesca_embarcada' | 'alojamiento_casa1' | 'alojamiento_casa2';
+  turnoPesca?: '8:00-12:00' | '14:00-18:00';
+  fechaPesca?: string;
   fechaEntrada?: string;
   fechaSalida?: string;
   cantidadPersonas: number;
@@ -60,8 +59,8 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
       
       // Filtrar reservas del mes actual
       const reservasMes = data.filter((reserva: Reserva) => {
-        if (tipo === 'pesca' && reserva.fecha) {
-          const fechaReserva = new Date(reserva.fecha);
+        if (tipo === 'pesca' && reserva.fechaPesca) {
+          const fechaReserva = new Date(reserva.fechaPesca);
           return fechaReserva >= inicioMes && fechaReserva <= finMes && reserva.estado !== 'cancelada';
         } else if (tipo === 'alojamiento' && reserva.fechaEntrada && reserva.fechaSalida) {
           const entrada = new Date(reserva.fechaEntrada);
@@ -87,8 +86,8 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
     const diasOcupados: Date[] = [];
     
     reservas.forEach(reserva => {
-      if (tipo === 'pesca' && reserva.fecha) {
-        diasOcupados.push(new Date(reserva.fecha));
+      if (tipo === 'pesca' && reserva.fechaPesca) {
+        diasOcupados.push(new Date(reserva.fechaPesca));
       } else if (tipo === 'alojamiento' && reserva.fechaEntrada && reserva.fechaSalida) {
         const entrada = new Date(reserva.fechaEntrada);
         const salida = new Date(reserva.fechaSalida);
@@ -106,7 +105,7 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
     
     if (tipo === 'pesca') {
       const reservasDia = reservas.filter(r => 
-        r.fecha && format(new Date(r.fecha), 'yyyy-MM-dd') === fecha
+        r.fechaPesca && format(new Date(r.fechaPesca), 'yyyy-MM-dd') === fecha
       );
       
       const personasReservadas = reservasDia.reduce((sum, r) => sum + r.cantidadPersonas, 0);
@@ -179,10 +178,18 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
     }
   };
 
+  const getTipoDisplay = () => {
+    if (tipo === 'pesca') {
+      return '🎣 Pesca Embarcada';
+    } else {
+      return casa === 'casa1' ? '🏠 Casa 1' : '🏠 Casa 2';
+    }
+  };
+
   return (
     <div className="calendario-turnero-container">
       <div className="calendario-header">
-        <h3>📅 Calendario de Disponibilidad</h3>
+        <h3>📅 Calendario de Disponibilidad - {getTipoDisplay()}</h3>
         <div className="calendario-leyenda">
           <div className="leyenda-item">
             <span className="leyenda-color disponible"></span>

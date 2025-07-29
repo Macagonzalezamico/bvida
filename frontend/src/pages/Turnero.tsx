@@ -4,10 +4,9 @@ import '../styles/Turnero.css';
 
 interface Reserva {
   _id: string;
-  tipo: 'pesca' | 'alojamiento';
-  casa?: 'casa1' | 'casa2';
-  turno?: '8:00-12:00' | '14:00-18:00';
-  fecha?: string;
+  tipo: 'pesca_embarcada' | 'alojamiento_casa1' | 'alojamiento_casa2';
+  turnoPesca?: '8:00-12:00' | '14:00-18:00';
+  fechaPesca?: string;
   fechaEntrada?: string;
   fechaSalida?: string;
   cantidadPersonas: number;
@@ -103,6 +102,19 @@ const Turnero: React.FC = () => {
       const salida = new Date(fechaSalida);
       const dias = Math.ceil((salida.getTime() - entrada.getTime()) / (1000 * 60 * 60 * 24));
       return dias * 25000; // $25,000 por día
+    }
+  };
+
+  const getTipoDisplay = (tipo: string) => {
+    switch (tipo) {
+      case 'pesca_embarcada':
+        return '🎣 Pesca Embarcada';
+      case 'alojamiento_casa1':
+        return '🏠 Casa 1';
+      case 'alojamiento_casa2':
+        return '🏠 Casa 2';
+      default:
+        return tipo;
     }
   };
 
@@ -204,7 +216,7 @@ const Turnero: React.FC = () => {
     <div className="turnero-container">
       <div className="turnero-header">
         <h1>🏖️ Sistema de Turnero - BuenaVida</h1>
-        <p>Reserva tu salida de pesca o alojamiento</p>
+        <p>Reserva tu salida de pesca embarcada o alojamiento</p>
       </div>
 
       <div className="turnero-content">
@@ -236,7 +248,7 @@ const Turnero: React.FC = () => {
                     checked={tipoReserva === 'alojamiento'}
                     onChange={(e) => setTipoReserva(e.target.value as 'pesca' | 'alojamiento')}
                   />
-                  🏠 Alojamiento
+                  🏠 Alojamiento en Casa
                 </label>
               </div>
             </div>
@@ -246,19 +258,19 @@ const Turnero: React.FC = () => {
               <div className="form-group">
                 <label>Casa:</label>
                 <select value={casa} onChange={(e) => setCasa(e.target.value as 'casa1' | 'casa2')}>
-                  <option value="casa1">Casa 1</option>
-                  <option value="casa2">Casa 2</option>
+                  <option value="casa1">🏠 Casa 1</option>
+                  <option value="casa2">🏠 Casa 2</option>
                 </select>
               </div>
             )}
 
-            {/* Turno (solo para pesca) */}
+            {/* Turno (solo para pesca embarcada) */}
             {tipoReserva === 'pesca' && (
               <div className="form-group">
-                <label>Turno:</label>
+                <label>Turno de Pesca Embarcada:</label>
                 <select value={turno} onChange={(e) => setTurno(e.target.value as '8:00-12:00' | '14:00-18:00')}>
-                  <option value="8:00-12:00">8:00 - 12:00</option>
-                  <option value="14:00-18:00">14:00 - 18:00</option>
+                  <option value="8:00-12:00">🌅 8:00 - 12:00 (Mañana)</option>
+                  <option value="14:00-18:00">🌇 14:00 - 18:00 (Tarde)</option>
                 </select>
               </div>
             )}
@@ -266,7 +278,7 @@ const Turnero: React.FC = () => {
             {/* Fechas */}
             <div className="form-group">
               {tipoReserva === 'pesca' ? (
-                <label>Fecha de Pesca:</label>
+                <label>Fecha de Pesca Embarcada:</label>
               ) : (
                 <label>Fechas de Alojamiento:</label>
               )}
@@ -385,10 +397,10 @@ const Turnero: React.FC = () => {
           
           {tipoReserva === 'pesca' && fecha && (
             <div className="disponibilidad-pesca">
-              <h3>Turnos para {formatearFecha(fecha)}:</h3>
+              <h3>Turnos de Pesca Embarcada para {formatearFecha(fecha)}:</h3>
               {Object.entries(disponibilidad).map(([turno, info]) => (
                 <div key={turno} className={`turno-info ${info.disponible ? 'disponible' : 'no-disponible'}`}>
-                  <h4>{turno}</h4>
+                  <h4>🎣 {turno}</h4>
                   <p>Estado: {info.disponible ? '✅ Disponible' : '❌ Completo'}</p>
                   <p>Personas reservadas: {info.personasReservadas || 0}/6</p>
                   <p>Capacidad restante: {info.capacidadRestante || 0} personas</p>
@@ -399,7 +411,7 @@ const Turnero: React.FC = () => {
 
           {tipoReserva === 'alojamiento' && fechaEntrada && fechaSalida && (
             <div className="disponibilidad-alojamiento">
-              <h3>Disponibilidad para {casa === 'casa1' ? 'Casa 1' : 'Casa 2'}:</h3>
+              <h3>Disponibilidad para {casa === 'casa1' ? '🏠 Casa 1' : '🏠 Casa 2'}:</h3>
               <div className={`casa-info ${(disponibilidad as DisponibilidadAlojamiento).disponible ? 'disponible' : 'no-disponible'}`}>
                 <p>Estado: {(disponibilidad as DisponibilidadAlojamiento).disponible ? '✅ Disponible' : '❌ Ocupada'}</p>
                 {(disponibilidad as DisponibilidadAlojamiento).reservas && (disponibilidad as DisponibilidadAlojamiento).reservas!.length > 0 && (
@@ -431,8 +443,7 @@ const Turnero: React.FC = () => {
                 <div key={reserva._id} className={`reserva-card ${reserva.estado}`}>
                   <div className="reserva-header">
                     <h3>
-                      {reserva.tipo === 'pesca' ? '🎣' : '🏠'} 
-                      {reserva.tipo === 'pesca' ? 'Pesca' : `Alojamiento - ${reserva.casa === 'casa1' ? 'Casa 1' : 'Casa 2'}`}
+                      {getTipoDisplay(reserva.tipo)}
                     </h3>
                     <span className={`estado ${reserva.estado}`}>
                       {reserva.estado === 'pendiente' ? '⏳ Pendiente' : 
@@ -446,10 +457,10 @@ const Turnero: React.FC = () => {
                     <p><strong>Teléfono:</strong> {reserva.telefono}</p>
                     <p><strong>Personas:</strong> {reserva.cantidadPersonas}</p>
                     
-                    {reserva.tipo === 'pesca' ? (
+                    {reserva.tipo === 'pesca_embarcada' ? (
                       <>
-                        <p><strong>Fecha:</strong> {formatearFecha(reserva.fecha!)}</p>
-                        <p><strong>Turno:</strong> {reserva.turno}</p>
+                        <p><strong>Fecha:</strong> {formatearFecha(reserva.fechaPesca!)}</p>
+                        <p><strong>Turno:</strong> {reserva.turnoPesca}</p>
                       </>
                     ) : (
                       <>

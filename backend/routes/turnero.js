@@ -8,7 +8,20 @@ router.get('/', async (req, res) => {
     const { tipo, fecha, casa } = req.query;
     let filter = {};
     
-    if (tipo) filter.tipo = tipo;
+    if (tipo) {
+      if (tipo === 'pesca') {
+        filter.tipo = 'pesca_embarcada';
+      } else if (tipo === 'alojamiento') {
+        if (casa === 'casa1') {
+          filter.tipo = 'alojamiento_casa1';
+        } else if (casa === 'casa2') {
+          filter.tipo = 'alojamiento_casa2';
+        } else {
+          filter.tipo = { $in: ['alojamiento_casa1', 'alojamiento_casa2'] };
+        }
+      }
+    }
+    
     if (fecha) {
       const fechaInicio = new Date(fecha);
       fechaInicio.setHours(0, 0, 0, 0);
@@ -16,7 +29,7 @@ router.get('/', async (req, res) => {
       fechaFin.setHours(23, 59, 59, 999);
       
       if (tipo === 'pesca') {
-        filter.fecha = { $gte: fechaInicio, $lte: fechaFin };
+        filter.fechaPesca = { $gte: fechaInicio, $lte: fechaFin };
       } else {
         filter.$or = [
           { fechaEntrada: { $lte: fechaFin, $gte: fechaInicio } },
@@ -25,9 +38,8 @@ router.get('/', async (req, res) => {
         ];
       }
     }
-    if (casa) filter.casa = casa;
     
-    const reservas = await Reserva.find(filter).sort({ fecha: 1 });
+    const reservas = await Reserva.find(filter).sort({ createdAt: -1 });
     res.json(reservas);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -52,16 +64,16 @@ router.get('/disponibilidad', async (req, res) => {
     let disponibilidad = {};
     
     if (tipo === 'pesca') {
-      // Verificar disponibilidad de turnos de pesca
+      // Verificar disponibilidad de turnos de pesca embarcada
       reservas = await Reserva.find({
-        tipo: 'pesca',
-        fecha: { $gte: fechaConsulta, $lte: fechaFin },
+        tipo: 'pesca_embarcada',
+        fechaPesca: { $gte: fechaConsulta, $lte: fechaFin },
         estado: { $ne: 'cancelada' }
       });
       
       const turnos = ['8:00-12:00', '14:00-18:00'];
       turnos.forEach(turno => {
-        const reservasTurno = reservas.filter(r => r.turno === turno);
+        const reservasTurno = reservas.filter(r => r.turnoPesca === turno);
         const personasReservadas = reservasTurno.reduce((sum, r) => sum + r.cantidadPersonas, 0);
         disponibilidad[turno] = {
           disponible: personasReservadas < 6,
@@ -76,9 +88,10 @@ router.get('/disponibilidad', async (req, res) => {
         return res.status(400).json({ error: 'Casa es requerida para alojamiento' });
       }
       
+      const tipoCasa = casa === 'casa1' ? 'alojamiento_casa1' : 'alojamiento_casa2';
+      
       reservas = await Reserva.find({
-        tipo: 'alojamiento',
-        casa: casa,
+        tipo: tipoCasa,
         estado: { $ne: 'cancelada' },
         $or: [
           { fechaEntrada: { $lte: fechaFin, $gte: fechaConsulta } },
@@ -122,6 +135,22 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
     
+    // Determinar el tipo específico de reserva
+    let tipoReserva;
+    if (tipo === 'pesca') {
+      tipoReserva = 'pesca_embarcada';
+    } else if (tipo === 'alojamiento') {
+      if (casa === 'casa1') {
+        tipoReserva = 'alojamiento_casa1';
+      } else if (casa === 'casa2') {
+        tipoReserva = 'alojamiento_casa2';
+      } else {
+        return res.status(400).json({ error: 'Casa debe ser casa1 o casa2' });
+      }
+    } else {
+      return res.status(400).json({ error: 'Tipo debe ser pesca o alojamiento' });
+    }
+    
     // Validar disponibilidad antes de crear la reserva
     let conflicto = false;
     
@@ -136,9 +165,9 @@ router.post('/', async (req, res) => {
       fechaFin.setHours(23, 59, 59, 999);
       
       const reservasExistentes = await Reserva.find({
-        tipo: 'pesca',
-        turno: turno,
-        fecha: { $gte: fechaReserva, $lte: fechaFin },
+        tipo: 'pesca_embarcada',
+        turnoPesca: turno,
+        fechaPesca: { $gte: fechaReserva, $lte: fechaFin },
         estado: { $ne: 'cancelada' }
       });
       
@@ -147,13 +176,12 @@ router.post('/', async (req, res) => {
         conflicto = true;
       }
     } else {
-      if (!casa || !fechaEntrada || !fechaSalida) {
-        return res.status(400).json({ error: 'Casa, fecha de entrada y salida son requeridos para alojamiento' });
+      if (!fechaEntrada || !fechaSalida) {
+        return res.status(400).json({ error: 'Fecha de entrada y salida son requeridos para alojamiento' });
       }
       
       const reservasExistentes = await Reserva.find({
-        tipo: 'alojamiento',
-        casa: casa,
+        tipo: tipoReserva,
         estado: { $ne: 'cancelada' },
         $or: [
           { fechaEntrada: { $lt: fechaSalida, $gte: fechaEntrada } },
@@ -172,21 +200,25 @@ router.post('/', async (req, res) => {
     }
     
     // Crear la reserva
-    const reserva = new Reserva({
-      tipo,
-      casa,
-      turno,
-      fecha: tipo === 'pesca' ? new Date(fecha) : undefined,
-      fechaEntrada: tipo === 'alojamiento' ? new Date(fechaEntrada) : undefined,
-      fechaSalida: tipo === 'alojamiento' ? new Date(fechaSalida) : undefined,
+    const reservaData = {
+      tipo: tipoReserva,
       cantidadPersonas,
       nombre,
       email,
       telefono,
       monto,
       observaciones
-    });
+    };
     
+    if (tipo === 'pesca') {
+      reservaData.turnoPesca = turno;
+      reservaData.fechaPesca = new Date(fecha);
+    } else {
+      reservaData.fechaEntrada = new Date(fechaEntrada);
+      reservaData.fechaSalida = new Date(fechaSalida);
+    }
+    
+    const reserva = new Reserva(reservaData);
     await reserva.save();
     res.status(201).json(reserva);
   } catch (error) {
