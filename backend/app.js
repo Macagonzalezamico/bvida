@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var cabanasRouter = require('./routes/cabanas');
 var pescaRouter = require('./routes/pesca');
 var reservasRouter = require('./routes/reservas');
+var turneroRouter = require('./routes/turnero');
 var pagosRouter = require('./routes/pagos');
 
 var app = express();
@@ -34,6 +35,7 @@ app.use('/users', usersRouter);
 app.use('/cabanas', cabanasRouter);
 app.use('/pesca', pescaRouter);
 app.use('/reservas', reservasRouter);
+app.use('/turnero', turneroRouter);
 app.use('/pagos', pagosRouter);
 
 module.exports = app;
