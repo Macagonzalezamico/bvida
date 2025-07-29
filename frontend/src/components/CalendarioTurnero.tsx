@@ -6,7 +6,7 @@ import '../styles/CalendarioTurnero.css';
 
 interface Reserva {
   _id: string;
-  tipo: 'pesca_embarcada' | 'alojamiento_casa1' | 'alojamiento_casa2';
+  tipo: 'pesca_embarcada' | 'alojamiento_casa1' | 'alojamiento_casa2' | 'combo_pesca_casa1' | 'combo_pesca_casa2';
   turnoPesca?: '8:00-12:00' | '14:00-18:00';
   fechaPesca?: string;
   fechaEntrada?: string;
@@ -17,7 +17,7 @@ interface Reserva {
 }
 
 interface CalendarioTurneroProps {
-  tipo: 'pesca' | 'alojamiento';
+  tipo: 'pesca' | 'alojamiento' | 'combo';
   casa?: 'casa1' | 'casa2';
   onDateSelect: (date: Date) => void;
   selectedDate?: Date;
@@ -50,7 +50,7 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
         fecha: inicioMes.toISOString().split('T')[0]
       });
       
-      if (tipo === 'alojamiento' && casa) {
+      if ((tipo === 'alojamiento' || tipo === 'combo') && casa) {
         params.append('casa', casa);
       }
       
@@ -62,7 +62,7 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
         if (tipo === 'pesca' && reserva.fechaPesca) {
           const fechaReserva = new Date(reserva.fechaPesca);
           return fechaReserva >= inicioMes && fechaReserva <= finMes && reserva.estado !== 'cancelada';
-        } else if (tipo === 'alojamiento' && reserva.fechaEntrada && reserva.fechaSalida) {
+        } else if ((tipo === 'alojamiento' || tipo === 'combo') && reserva.fechaEntrada && reserva.fechaSalida) {
           const entrada = new Date(reserva.fechaEntrada);
           const salida = new Date(reserva.fechaSalida);
           return (
@@ -88,7 +88,7 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
     reservas.forEach(reserva => {
       if (tipo === 'pesca' && reserva.fechaPesca) {
         diasOcupados.push(new Date(reserva.fechaPesca));
-      } else if (tipo === 'alojamiento' && reserva.fechaEntrada && reserva.fechaSalida) {
+      } else if ((tipo === 'alojamiento' || tipo === 'combo') && reserva.fechaEntrada && reserva.fechaSalida) {
         const entrada = new Date(reserva.fechaEntrada);
         const salida = new Date(reserva.fechaSalida);
         const dias = eachDayOfInterval({ start: entrada, end: salida });
@@ -181,8 +181,10 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
   const getTipoDisplay = () => {
     if (tipo === 'pesca') {
       return '🎣 Pesca Embarcada';
-    } else {
+    } else if (tipo === 'alojamiento') {
       return casa === 'casa1' ? '🏠 Casa 1' : '🏠 Casa 2';
+    } else {
+      return casa === 'casa1' ? '🎣🏠 Combo Casa 1' : '🎣🏠 Combo Casa 2';
     }
   };
 

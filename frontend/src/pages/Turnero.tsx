@@ -4,7 +4,7 @@ import '../styles/Turnero.css';
 
 interface Reserva {
   _id: string;
-  tipo: 'pesca_embarcada' | 'alojamiento_casa1' | 'alojamiento_casa2';
+  tipo: 'pesca_embarcada' | 'alojamiento_casa1' | 'alojamiento_casa2' | 'combo_pesca_casa1' | 'combo_pesca_casa2';
   turnoPesca?: '8:00-12:00' | '14:00-18:00';
   fechaPesca?: string;
   fechaEntrada?: string;
@@ -32,10 +32,25 @@ interface DisponibilidadAlojamiento {
   reservas?: Reserva[];
 }
 
-type Disponibilidad = DisponibilidadPesca | DisponibilidadAlojamiento;
+interface DisponibilidadCombo {
+  alojamiento: {
+    disponible: boolean;
+    reservas?: Reserva[];
+  };
+  pesca: {
+    [key: string]: {
+      disponible: boolean;
+      personasReservadas?: number;
+      capacidadRestante?: number;
+      reservas?: Reserva[];
+    };
+  };
+}
+
+type Disponibilidad = DisponibilidadPesca | DisponibilidadAlojamiento | DisponibilidadCombo;
 
 const Turnero: React.FC = () => {
-  const [tipoReserva, setTipoReserva] = useState<'pesca' | 'alojamiento'>('pesca');
+  const [tipoReserva, setTipoReserva] = useState<'pesca' | 'alojamiento' | 'combo'>('pesca');
   const [casa, setCasa] = useState<'casa1' | 'casa2'>('casa1');
   const [turno, setTurno] = useState<'8:00-12:00' | '14:00-18:00'>('8:00-12:00');
   const [fecha, setFecha] = useState('');
@@ -82,7 +97,7 @@ const Turnero: React.FC = () => {
         fecha: fecha
       });
       
-      if (tipoReserva === 'alojamiento') {
+      if (tipoReserva === 'alojamiento' || tipoReserva === 'combo') {
         params.append('casa', casa);
       }
       
@@ -97,12 +112,20 @@ const Turnero: React.FC = () => {
   const calcularMonto = () => {
     if (tipoReserva === 'pesca') {
       return cantidadPersonas * 15000; // $15,000 por persona
-    } else {
+    } else if (tipoReserva === 'alojamiento') {
       const entrada = new Date(fechaEntrada);
       const salida = new Date(fechaSalida);
       const dias = Math.ceil((salida.getTime() - entrada.getTime()) / (1000 * 60 * 60 * 24));
       return dias * 25000; // $25,000 por día
+    } else if (tipoReserva === 'combo') {
+      const entrada = new Date(fechaEntrada);
+      const salida = new Date(fechaSalida);
+      const dias = Math.ceil((salida.getTime() - entrada.getTime()) / (1000 * 60 * 60 * 24));
+      const montoPesca = cantidadPersonas * 15000; // $15,000 por persona
+      const montoAlojamiento = dias * 25000; // $25,000 por día
+      return montoPesca + montoAlojamiento;
     }
+    return 0;
   };
 
   const getTipoDisplay = (tipo: string) => {
@@ -113,6 +136,10 @@ const Turnero: React.FC = () => {
         return '🏠 Casa 1';
       case 'alojamiento_casa2':
         return '🏠 Casa 2';
+      case 'combo_pesca_casa1':
+        return '🎣🏠 Combo Pesca + Casa 1';
+      case 'combo_pesca_casa2':
+        return '🎣🏠 Combo Pesca + Casa 2';
       default:
         return tipo;
     }
@@ -128,11 +155,11 @@ const Turnero: React.FC = () => {
       const monto = calcularMonto();
       const reservaData = {
         tipo: tipoReserva,
-        casa: tipoReserva === 'alojamiento' ? casa : undefined,
-        turno: tipoReserva === 'pesca' ? turno : undefined,
-        fecha: tipoReserva === 'pesca' ? fecha : undefined,
-        fechaEntrada: tipoReserva === 'alojamiento' ? fechaEntrada : undefined,
-        fechaSalida: tipoReserva === 'alojamiento' ? fechaSalida : undefined,
+        casa: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? casa : undefined,
+        turno: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? turno : undefined,
+        fecha: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? fecha : undefined,
+        fechaEntrada: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? fechaEntrada : undefined,
+        fechaSalida: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? fechaSalida : undefined,
         cantidadPersonas,
         nombre,
         email,
@@ -207,7 +234,7 @@ const Turnero: React.FC = () => {
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
-    if (tipoReserva === 'pesca') {
+    if (tipoReserva === 'pesca' || tipoReserva === 'combo') {
       setFecha(date.toISOString().split('T')[0]);
     }
   };
@@ -216,7 +243,7 @@ const Turnero: React.FC = () => {
     <div className="turnero-container">
       <div className="turnero-header">
         <h1>🏖️ Sistema de Turnero - BuenaVida</h1>
-        <p>Reserva tu salida de pesca embarcada o alojamiento</p>
+        <p>Reserva tu salida de pesca embarcada, alojamiento o combo completo</p>
       </div>
 
       <div className="turnero-content">
@@ -237,7 +264,7 @@ const Turnero: React.FC = () => {
                     type="radio"
                     value="pesca"
                     checked={tipoReserva === 'pesca'}
-                    onChange={(e) => setTipoReserva(e.target.value as 'pesca' | 'alojamiento')}
+                    onChange={(e) => setTipoReserva(e.target.value as 'pesca' | 'alojamiento' | 'combo')}
                   />
                   🎣 Pesca Embarcada
                 </label>
@@ -246,15 +273,24 @@ const Turnero: React.FC = () => {
                     type="radio"
                     value="alojamiento"
                     checked={tipoReserva === 'alojamiento'}
-                    onChange={(e) => setTipoReserva(e.target.value as 'pesca' | 'alojamiento')}
+                    onChange={(e) => setTipoReserva(e.target.value as 'pesca' | 'alojamiento' | 'combo')}
                   />
                   🏠 Alojamiento en Casa
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="combo"
+                    checked={tipoReserva === 'combo'}
+                    onChange={(e) => setTipoReserva(e.target.value as 'pesca' | 'alojamiento' | 'combo')}
+                  />
+                  🎣🏠 Combo Pesca + Alojamiento
                 </label>
               </div>
             </div>
 
-            {/* Casa (solo para alojamiento) */}
-            {tipoReserva === 'alojamiento' && (
+            {/* Casa (para alojamiento y combo) */}
+            {(tipoReserva === 'alojamiento' || tipoReserva === 'combo') && (
               <div className="form-group">
                 <label>Casa:</label>
                 <select value={casa} onChange={(e) => setCasa(e.target.value as 'casa1' | 'casa2')}>
@@ -264,8 +300,8 @@ const Turnero: React.FC = () => {
               </div>
             )}
 
-            {/* Turno (solo para pesca embarcada) */}
-            {tipoReserva === 'pesca' && (
+            {/* Turno (para pesca y combo) */}
+            {(tipoReserva === 'pesca' || tipoReserva === 'combo') && (
               <div className="form-group">
                 <label>Turno de Pesca Embarcada:</label>
                 <select value={turno} onChange={(e) => setTurno(e.target.value as '8:00-12:00' | '14:00-18:00')}>
@@ -279,8 +315,10 @@ const Turnero: React.FC = () => {
             <div className="form-group">
               {tipoReserva === 'pesca' ? (
                 <label>Fecha de Pesca Embarcada:</label>
-              ) : (
+              ) : tipoReserva === 'alojamiento' ? (
                 <label>Fechas de Alojamiento:</label>
+              ) : (
+                <label>Fechas del Combo:</label>
               )}
               
               {tipoReserva === 'pesca' ? (
@@ -291,7 +329,7 @@ const Turnero: React.FC = () => {
                   min={new Date().toISOString().split('T')[0]}
                   required
                 />
-              ) : (
+              ) : tipoReserva === 'alojamiento' ? (
                 <div className="fechas-alojamiento">
                   <div>
                     <label>Entrada:</label>
@@ -305,6 +343,39 @@ const Turnero: React.FC = () => {
                   </div>
                   <div>
                     <label>Salida:</label>
+                    <input
+                      type="date"
+                      value={fechaSalida}
+                      onChange={(e) => setFechaSalida(e.target.value)}
+                      min={fechaEntrada || new Date().toISOString().split('T')[0]}
+                      required
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="fechas-combo">
+                  <div>
+                    <label>Fecha de Pesca:</label>
+                    <input
+                      type="date"
+                      value={fecha}
+                      onChange={(e) => setFecha(e.target.value)}
+                      min={new Date().toISOString().split('T')[0]}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label>Entrada alojamiento:</label>
+                    <input
+                      type="date"
+                      value={fechaEntrada}
+                      onChange={(e) => setFechaEntrada(e.target.value)}
+                      min={new Date().toISOString().split('T')[0]}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label>Salida alojamiento:</label>
                     <input
                       type="date"
                       value={fechaSalida}
@@ -374,6 +445,14 @@ const Turnero: React.FC = () => {
             {/* Precio */}
             <div className="precio-info">
               <h3>💰 Precio Total: {formatearPrecio(calcularMonto())}</h3>
+              {tipoReserva === 'combo' && (
+                <div className="precio-desglose">
+                  <p>Desglose:</p>
+                  <p>• Pesca: {formatearPrecio(cantidadPersonas * 15000)}</p>
+                  <p>• Alojamiento: {formatearPrecio(fechaEntrada && fechaSalida ? 
+                    Math.ceil((new Date(fechaSalida).getTime() - new Date(fechaEntrada).getTime()) / (1000 * 60 * 60 * 24)) * 25000 : 0)}</p>
+                </div>
+              )}
             </div>
 
             <button type="submit" disabled={loading} className="btn-reservar">
@@ -388,7 +467,7 @@ const Turnero: React.FC = () => {
           
           <CalendarioTurnero
             tipo={tipoReserva}
-            casa={tipoReserva === 'alojamiento' ? casa : undefined}
+            casa={(tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? casa : undefined}
             onDateSelect={handleDateSelect}
             selectedDate={selectedDate}
           />
@@ -398,7 +477,7 @@ const Turnero: React.FC = () => {
           {tipoReserva === 'pesca' && fecha && (
             <div className="disponibilidad-pesca">
               <h3>Turnos de Pesca Embarcada para {formatearFecha(fecha)}:</h3>
-              {Object.entries(disponibilidad).map(([turno, info]) => (
+              {Object.entries(disponibilidad as DisponibilidadPesca).map(([turno, info]) => (
                 <div key={turno} className={`turno-info ${info.disponible ? 'disponible' : 'no-disponible'}`}>
                   <h4>🎣 {turno}</h4>
                   <p>Estado: {info.disponible ? '✅ Disponible' : '❌ Completo'}</p>
@@ -427,6 +506,33 @@ const Turnero: React.FC = () => {
                     </ul>
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {tipoReserva === 'combo' && fecha && fechaEntrada && fechaSalida && (
+            <div className="disponibilidad-combo">
+              <h3>Disponibilidad del Combo para {casa === 'casa1' ? '🏠 Casa 1' : '🏠 Casa 2'}:</h3>
+              
+              {/* Disponibilidad de Alojamiento */}
+              <div className="combo-alojamiento">
+                <h4>🏠 Alojamiento:</h4>
+                <div className={`casa-info ${(disponibilidad as DisponibilidadCombo).alojamiento.disponible ? 'disponible' : 'no-disponible'}`}>
+                  <p>Estado: {(disponibilidad as DisponibilidadCombo).alojamiento.disponible ? '✅ Disponible' : '❌ Ocupada'}</p>
+                </div>
+              </div>
+
+              {/* Disponibilidad de Pesca */}
+              <div className="combo-pesca">
+                <h4>🎣 Pesca Embarcada para {formatearFecha(fecha)}:</h4>
+                {Object.entries((disponibilidad as DisponibilidadCombo).pesca).map(([turno, info]) => (
+                  <div key={turno} className={`turno-info ${info.disponible ? 'disponible' : 'no-disponible'}`}>
+                    <h5>🎣 {turno}</h5>
+                    <p>Estado: {info.disponible ? '✅ Disponible' : '❌ Completo'}</p>
+                    <p>Personas reservadas: {info.personasReservadas || 0}/6</p>
+                    <p>Capacidad restante: {info.capacidadRestante || 0} personas</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -462,8 +568,15 @@ const Turnero: React.FC = () => {
                         <p><strong>Fecha:</strong> {formatearFecha(reserva.fechaPesca!)}</p>
                         <p><strong>Turno:</strong> {reserva.turnoPesca}</p>
                       </>
+                    ) : reserva.tipo.startsWith('alojamiento_') ? (
+                      <>
+                        <p><strong>Entrada:</strong> {formatearFecha(reserva.fechaEntrada!)}</p>
+                        <p><strong>Salida:</strong> {formatearFecha(reserva.fechaSalida!)}</p>
+                      </>
                     ) : (
                       <>
+                        <p><strong>Fecha Pesca:</strong> {formatearFecha(reserva.fechaPesca!)}</p>
+                        <p><strong>Turno Pesca:</strong> {reserva.turnoPesca}</p>
                         <p><strong>Entrada:</strong> {formatearFecha(reserva.fechaEntrada!)}</p>
                         <p><strong>Salida:</strong> {formatearFecha(reserva.fechaSalida!)}</p>
                       </>

@@ -1,29 +1,29 @@
-/* Estilos para el Sistema de Turnero */
+/* Estilos para el turnero */
 .turnero-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .turnero-header {
   text-align: center;
-  margin-bottom: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #D4AF37, #E6C85C);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: white;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
 }
 
 .turnero-header h1 {
-  margin: 0 0 10px 0;
+  font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
-  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .turnero-header p {
-  margin: 0;
   font-size: 1.2rem;
   opacity: 0.9;
 }
@@ -32,24 +32,24 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
-  margin-top: 30px;
 }
 
-/* Formulario de Reserva */
+/* Formulario de reserva */
 .formulario-reserva {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e1e5e9;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .formulario-reserva h2 {
-  margin: 0 0 25px 0;
-  color: #2c3e50;
+  font-family: 'Playfair Display', serif;
+  color: #2C5F7F;
+  margin-bottom: 25px;
+  text-align: center;
   font-size: 1.8rem;
-  border-bottom: 3px solid #3498db;
-  padding-bottom: 10px;
 }
 
 .form-group {
@@ -60,7 +60,7 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #34495e;
+  color: #2C5F7F;
   font-size: 1rem;
 }
 
@@ -69,49 +69,51 @@
 .form-group textarea {
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #e1e5e9;
+  border: 2px solid #E6E6E6;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  box-sizing: border-box;
+  background: white;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 .form-group small {
   display: block;
   margin-top: 5px;
-  color: #7f8c8d;
+  color: #666;
   font-size: 0.85rem;
 }
 
+/* Radio buttons para tipo de reserva */
 .radio-group {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .radio-group label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  padding: 10px 15px;
-  border: 2px solid #e1e5e9;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 2px solid #E6E6E6;
   border-radius: 8px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: normal;
+  background: white;
+  font-weight: 500;
 }
 
 .radio-group label:hover {
-  border-color: #3498db;
-  background-color: #f8f9fa;
+  border-color: #D4AF37;
+  background: rgba(212, 175, 55, 0.05);
 }
 
 .radio-group input[type="radio"] {
@@ -119,34 +121,83 @@
   margin: 0;
 }
 
+.radio-group input[type="radio"]:checked + label {
+  border-color: #D4AF37;
+  background: rgba(212, 175, 55, 0.1);
+  color: #2C5F7F;
+}
+
+/* Fechas de alojamiento */
 .fechas-alojamiento {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
 
+.fechas-alojamiento > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.fechas-alojamiento label {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* Fechas de combo */
+.fechas-combo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.fechas-combo > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.fechas-combo label {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* Precio */
 .precio-info {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-  color: white;
+  background: linear-gradient(135deg, #D4AF37, #E6C85C);
   padding: 20px;
   border-radius: 10px;
-  text-align: center;
+  color: white;
   margin: 25px 0;
+  text-align: center;
 }
 
 .precio-info h3 {
-  margin: 0;
+  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  margin-bottom: 10px;
 }
 
+.precio-desglose {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.precio-desglose p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+/* Botón de reservar */
 .btn-reservar {
   width: 100%;
   padding: 15px;
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  background: linear-gradient(135deg, #2C5F7F, #4A7BA7);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -156,7 +207,7 @@
 
 .btn-reservar:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+  box-shadow: 0 8px 25px rgba(44, 95, 127, 0.3);
 }
 
 .btn-reservar:disabled {
@@ -164,94 +215,103 @@
   cursor: not-allowed;
 }
 
-/* Mensajes de Error y Éxito */
-.error-message {
-  background: #e74c3c;
-  color: white;
+/* Mensajes de error y éxito */
+.error-message,
+.success-message {
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
   font-weight: 500;
+}
+
+.error-message {
+  background: #FEE;
+  color: #C53030;
+  border: 1px solid #FEB2B2;
 }
 
 .success-message {
-  background: #27ae60;
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-weight: 500;
+  background: #F0FFF4;
+  color: #2F855A;
+  border: 1px solid #9AE6B4;
 }
 
-/* Sección de Disponibilidad */
+/* Sección de disponibilidad */
 .disponibilidad-section {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e1e5e9;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .disponibilidad-section h2 {
-  margin: 0 0 25px 0;
-  color: #2c3e50;
+  font-family: 'Playfair Display', serif;
+  color: #2C5F7F;
+  margin-bottom: 25px;
+  text-align: center;
   font-size: 1.8rem;
-  border-bottom: 3px solid #3498db;
-  padding-bottom: 10px;
 }
 
-.disponibilidad-pesca h3,
-.disponibilidad-alojamiento h3 {
-  color: #34495e;
-  margin-bottom: 20px;
+.disponibilidad-section h3 {
+  color: #2C5F7F;
+  margin: 20px 0 15px 0;
   font-size: 1.3rem;
 }
 
+/* Disponibilidad de pesca */
+.disponibilidad-pesca {
+  display: grid;
+  gap: 15px;
+}
+
 .turno-info {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  border-left: 5px solid #3498db;
-  transition: all 0.3s ease;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid;
 }
 
 .turno-info.disponible {
-  border-left-color: #27ae60;
-  background: linear-gradient(135deg, #d5f4e6, #e8f8f5);
+  border-color: #48BB78;
+  background: rgba(72, 187, 120, 0.1);
 }
 
 .turno-info.no-disponible {
-  border-left-color: #e74c3c;
-  background: linear-gradient(135deg, #fadbd8, #fdf2f2);
+  border-color: #F56565;
+  background: rgba(245, 101, 101, 0.1);
 }
 
 .turno-info h4 {
   margin: 0 0 10px 0;
-  color: #2c3e50;
-  font-size: 1.2rem;
+  color: #2C5F7F;
+  font-size: 1.1rem;
 }
 
 .turno-info p {
   margin: 5px 0;
-  color: #34495e;
+  font-size: 0.9rem;
+}
+
+/* Disponibilidad de alojamiento */
+.disponibilidad-alojamiento {
+  margin-top: 20px;
 }
 
 .casa-info {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
-  border-left: 5px solid #3498db;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid;
 }
 
 .casa-info.disponible {
-  border-left-color: #27ae60;
-  background: linear-gradient(135deg, #d5f4e6, #e8f8f5);
+  border-color: #48BB78;
+  background: rgba(72, 187, 120, 0.1);
 }
 
 .casa-info.no-disponible {
-  border-left-color: #e74c3c;
-  background: linear-gradient(135deg, #fadbd8, #fdf2f2);
+  border-color: #F56565;
+  background: rgba(245, 101, 101, 0.1);
 }
 
 .casa-info ul {
@@ -261,26 +321,50 @@
 
 .casa-info li {
   margin: 5px 0;
-  color: #34495e;
+  font-size: 0.9rem;
 }
 
-/* Sección de Reservas */
+/* Disponibilidad de combo */
+.disponibilidad-combo {
+  margin-top: 20px;
+}
+
+.combo-alojamiento,
+.combo-pesca {
+  margin-bottom: 20px;
+}
+
+.combo-alojamiento h4,
+.combo-pesca h4 {
+  color: #2C5F7F;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.combo-pesca h5 {
+  color: #2C5F7F;
+  margin: 10px 0 5px 0;
+  font-size: 1rem;
+}
+
+/* Sección de reservas */
 .reservas-section {
   grid-column: 1 / -1;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e1e5e9;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 30px;
 }
 
 .reservas-section h2 {
-  margin: 0 0 25px 0;
-  color: #2c3e50;
+  font-family: 'Playfair Display', serif;
+  color: #2C5F7F;
+  margin-bottom: 25px;
+  text-align: center;
   font-size: 1.8rem;
-  border-bottom: 3px solid #3498db;
-  padding-bottom: 10px;
 }
 
 .reservas-list {
@@ -289,32 +373,29 @@
 }
 
 .reserva-card {
-  background: #f8f9fa;
+  background: white;
   border-radius: 12px;
-  padding: 25px;
-  border-left: 5px solid #3498db;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #D4AF37;
   transition: all 0.3s ease;
-  position: relative;
 }
 
 .reserva-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .reserva-card.pendiente {
-  border-left-color: #f39c12;
-  background: linear-gradient(135deg, #fef9e7, #fdf2e9);
+  border-left-color: #F6AD55;
 }
 
 .reserva-card.confirmada {
-  border-left-color: #27ae60;
-  background: linear-gradient(135deg, #d5f4e6, #e8f8f5);
+  border-left-color: #48BB78;
 }
 
 .reserva-card.cancelada {
-  border-left-color: #e74c3c;
-  background: linear-gradient(135deg, #fadbd8, #fdf2f2);
+  border-left-color: #F56565;
   opacity: 0.7;
 }
 
@@ -322,55 +403,50 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E6E6E6;
 }
 
 .reserva-header h3 {
   margin: 0;
-  color: #2c3e50;
-  font-size: 1.3rem;
+  color: #2C5F7F;
+  font-size: 1.2rem;
 }
 
 .estado {
-  padding: 8px 15px;
+  padding: 5px 12px;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  text-transform: uppercase;
 }
 
 .estado.pendiente {
-  background: #f39c12;
-  color: white;
+  background: rgba(246, 173, 85, 0.2);
+  color: #C05621;
 }
 
 .estado.confirmada {
-  background: #27ae60;
-  color: white;
+  background: rgba(72, 187, 120, 0.2);
+  color: #2F855A;
 }
 
 .estado.cancelada {
-  background: #e74c3c;
-  color: white;
+  background: rgba(245, 101, 101, 0.2);
+  color: #C53030;
 }
 
 .reserva-details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .reserva-details p {
-  margin: 0;
-  color: #34495e;
-  line-height: 1.5;
+  margin: 8px 0;
+  font-size: 0.95rem;
 }
 
 .reserva-details strong {
-  color: #2c3e50;
+  color: #2C5F7F;
 }
 
 .reserva-actions {
@@ -380,111 +456,38 @@
 }
 
 .btn-cancelar {
-  padding: 10px 20px;
-  background: #e74c3c;
+  padding: 8px 16px;
+  background: #F56565;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
 .btn-cancelar:hover {
-  background: #c0392b;
+  background: #E53E3E;
   transform: translateY(-1px);
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .turnero-content {
     grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .turnero-header h1 {
-    font-size: 2rem;
   }
   
   .fechas-alojamiento {
     grid-template-columns: 1fr;
   }
   
-  .radio-group {
-    flex-direction: column;
-  }
-  
   .reserva-header {
     flex-direction: column;
     align-items: flex-start;
-  }
-  
-  .reserva-details {
-    grid-template-columns: 1fr;
-  }
-  
-  .reserva-actions {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .turnero-container {
-    padding: 10px;
-  }
-  
-  .formulario-reserva,
-  .disponibilidad-section,
-  .reservas-section {
-    padding: 20px;
-  }
-  
-  .turnero-header {
-    padding: 20px;
+    gap: 10px;
   }
   
   .turnero-header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.formulario-reserva,
-.disponibilidad-section,
-.reservas-section {
-  animation: fadeIn 0.6s ease-out;
-}
-
-.reserva-card {
-  animation: fadeIn 0.4s ease-out;
-}
-
-/* Scrollbar personalizado */
-.reservas-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.reservas-list::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-.reservas-list::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-.reservas-list::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
 } 
