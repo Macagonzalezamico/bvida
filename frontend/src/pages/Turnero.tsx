@@ -266,12 +266,6 @@ const Turnero: React.FC = () => {
                   <div className="opcion-icono">🎣</div>
                   <div className="opcion-contenido">
                     <h3>Pesca Embarcada</h3>
-                    <p>Salida de pesca en el río con guía experto</p>
-                    <div className="opcion-detalles">
-                      <span>⏰ Turnos: 8:00-12:00 / 14:00-18:00</span>
-                      <span>👥 Máximo: 6 personas</span>
-                      <span>💰 Desde $15,000 por persona</span>
-                    </div>
                   </div>
                   <div className="opcion-check">
                     {tipoReserva === 'pesca' && <span>✓</span>}
@@ -285,12 +279,6 @@ const Turnero: React.FC = () => {
                   <div className="opcion-icono">🏠</div>
                   <div className="opcion-contenido">
                     <h3>Alojamiento en Casa</h3>
-                    <p>Hospedaje cómodo en nuestras casas de campo</p>
-                    <div className="opcion-detalles">
-                      <span>🏡 Casas: Casa 1 / Casa 2</span>
-                      <span>👥 Máximo: 8 personas</span>
-                      <span>💰 Desde $25,000 por día</span>
-                    </div>
                   </div>
                   <div className="opcion-check">
                     {tipoReserva === 'alojamiento' && <span>✓</span>}
@@ -303,13 +291,7 @@ const Turnero: React.FC = () => {
                 >
                   <div className="opcion-icono">🎣🏠</div>
                   <div className="opcion-contenido">
-                    <h3>Combo Completo</h3>
-                    <p>Pesca + Alojamiento - La experiencia completa</p>
-                    <div className="opcion-detalles">
-                      <span>🎯 Incluye: Pesca + Casa + Descuento</span>
-                      <span>👥 Máximo: 8 personas</span>
-                      <span>💰 Precio especial combinado</span>
-                    </div>
+                    <h3>Combo Pesca + Alojamiento</h3>
                   </div>
                   <div className="opcion-check">
                     {tipoReserva === 'combo' && <span>✓</span>}
