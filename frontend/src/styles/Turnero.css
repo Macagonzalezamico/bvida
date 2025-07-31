@@ -91,7 +91,120 @@
   font-size: 0.85rem;
 }
 
-/* Radio buttons para tipo de reserva */
+/* Nuevas opciones de reserva con tarjetas elegantes */
+.opciones-reserva {
+  display: grid;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.opcion-reserva {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #E6E6E6;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.opcion-reserva::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(230, 200, 92, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.opcion-reserva:hover::before {
+  opacity: 1;
+}
+
+.opcion-reserva:hover {
+  border-color: #D4AF37;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+}
+
+.opcion-reserva.seleccionada {
+  border-color: #D4AF37;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(230, 200, 92, 0.1));
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.opcion-icono {
+  font-size: 2.5rem;
+  margin-right: 20px;
+  min-width: 60px;
+  text-align: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.opcion-contenido {
+  flex: 1;
+}
+
+.opcion-contenido h3 {
+  font-family: 'Playfair Display', serif;
+  color: #2C5F7F;
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.opcion-contenido p {
+  color: #666;
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.opcion-detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.opcion-detalles span {
+  font-size: 0.85rem;
+  color: #2C5F7F;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.opcion-check {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #D4AF37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-left: 15px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.opcion-reserva.seleccionada .opcion-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Radio buttons para tipo de reserva (mantener para compatibilidad) */
 .radio-group {
   display: flex;
   flex-direction: column;
@@ -489,5 +602,25 @@
   
   .turnero-header h1 {
     font-size: 2rem;
+  }
+
+  .opcion-reserva {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .opcion-icono {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .opcion-check {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .opcion-detalles {
+    align-items: center;
   }
 } 
