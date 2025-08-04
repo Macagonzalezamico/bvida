@@ -55,7 +55,7 @@ const Contacto = () => {
               <div className="contacto-card">
                 <div className="contacto-icon">📧</div>
                 <h3>Email</h3>
-                <p style={{ color: '#111' }}>aldogonzzalezz@yahoo.com.ar</p>
+                <p style={{ color: '#111' }}>makagonzalez17@gmail.com</p>
               </div>
               
               <div className="contacto-card">
