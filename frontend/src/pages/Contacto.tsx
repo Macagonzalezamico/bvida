@@ -9,6 +9,10 @@ const Contacto = () => {
     mensaje: ''
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -16,10 +20,39 @@ const Contacto = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Mensaje de contacto:', formData);
-    // Aquí se enviaría al backend
+    setLoading(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      const response = await fetch('http://localhost:5000/contacto', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess('¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.');
+        setFormData({
+          nombre: '',
+          email: '',
+          asunto: '',
+          mensaje: ''
+        });
+      } else {
+        setError(data.error || 'Error al enviar el mensaje. Por favor, intenta nuevamente.');
+      }
+    } catch (error) {
+      setError('Error de conexión. Por favor, verifica tu conexión e intenta nuevamente.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -93,6 +126,9 @@ const Contacto = () => {
           >
             <h2>Envíanos un mensaje</h2>
             
+            {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">{success}</div>}
+            
             <div className="form-group">
               <label htmlFor="nombre">Nombre completo *</label>
               <input
@@ -142,41 +178,15 @@ const Contacto = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary btn-large">
-              Enviar Mensaje
+            <button 
+              type="submit" 
+              className="btn btn-primary btn-large"
+              disabled={loading}
+            >
+              {loading ? 'Enviando...' : 'Enviar Mensaje'}
             </button>
           </motion.form>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mapa-section"
-        >
-          <h2>Ubicación</h2>
-          <div className="mapa-container">
-            <div className="mapa-placeholder">
-              <div className="mapa-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                <h3 style={{ color: '#111', fontSize: '2rem', fontWeight: 'bold' }}>📍 BuenaVida</h3>
-                <p style={{ color: '#111', marginBottom: 0 }}><span style={{ fontWeight: 'bold' }}>Acceso desde:</span> Ruta Nacional Nº 3 Km 918</p>
-                <p style={{ color: '#111', marginTop: 0, marginBottom: '0.5rem' }}>Buenos Aires, Argentina</p>
-                <div className="mapa-info">
-                  <p style={{ margin: 0 }}><span style={{ color: '#111', fontWeight: 'bold' }}>Coordenadas:</span><span style={{ color: '#111' }}> -40.436567, -62.422773</span></p>
-                  <p style={{ margin: 0 }}><span style={{ color: '#111', fontWeight: 'bold' }}>Distancia desde Ruta Nacional Nº 3:</span><span style={{ color: '#111' }}> 40km</span></p>
-                </div>
-                <a
-                  href="https://www.google.com/maps?q=-40.436567,-62.422773"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                >
-                  Ver en Google Maps
-                </a>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

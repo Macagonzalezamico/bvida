@@ -12,6 +12,7 @@ var pescaRouter = require('./routes/pesca');
 var reservasRouter = require('./routes/reservas');
 var turneroRouter = require('./routes/turnero');
 var pagosRouter = require('./routes/pagos');
+var contactoRouter = require('./routes/contacto');
 
 var app = express();
 
@@ -37,5 +38,6 @@ app.use('/pesca', pescaRouter);
 app.use('/reservas', reservasRouter);
 app.use('/turnero', turneroRouter);
 app.use('/pagos', pagosRouter);
+app.use('/contacto', contactoRouter);
 
 module.exports = app;
