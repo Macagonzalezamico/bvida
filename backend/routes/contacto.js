@@ -4,6 +4,9 @@ const router = express.Router();
 // Modelo para mensajes de contacto
 const Contacto = require('../models/Contacto');
 
+// Servicio de email
+const { enviarEmailContacto, enviarEmailConfirmacion } = require('../config/email');
+
 // Obtener todos los mensajes de contacto
 router.get('/', async (req, res) => {
   try {
@@ -40,12 +43,31 @@ router.post('/', async (req, res) => {
     
     await nuevoMensaje.save();
     
+    // Enviar email de notificación al administrador
+    try {
+      await enviarEmailContacto({ nombre, email, asunto, mensaje });
+      console.log('Email de notificación enviado al administrador');
+    } catch (emailError) {
+      console.error('Error al enviar email de notificación:', emailError);
+      // No fallamos la respuesta si el email falla, solo lo registramos
+    }
+    
+    // Enviar email de confirmación al usuario
+    try {
+      await enviarEmailConfirmacion({ nombre, email, asunto, mensaje });
+      console.log('Email de confirmación enviado al usuario');
+    } catch (emailError) {
+      console.error('Error al enviar email de confirmación:', emailError);
+      // No fallamos la respuesta si el email falla, solo lo registramos
+    }
+    
     res.status(201).json({
       success: true,
-      message: 'Mensaje enviado exitosamente',
+      message: 'Mensaje enviado exitosamente. Te hemos enviado un email de confirmación.',
       data: nuevoMensaje
     });
   } catch (error) {
+    console.error('Error en POST /contacto:', error);
     res.status(500).json({ error: error.message });
   }
 });
