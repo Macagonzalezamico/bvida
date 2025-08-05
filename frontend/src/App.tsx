@@ -27,7 +27,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Cabanas = lazy(() => import('./pages/Cabanas'));
 const Pesca = lazy(() => import('./pages/Pesca'));
 const Reservas = lazy(() => import('./pages/Reservas'));
-const Turnero = lazy(() => import('./pages/Turnero'));
+
 const Contacto = lazy(() => import('./pages/Contacto'));
 
 // Componente de loading optimizado
@@ -82,9 +82,7 @@ const Navbar = memo(() => {
         <Link to="/reservas" className={`nav-link ${isActive('/reservas') ? 'active' : ''}`} onClick={closeMobileMenu}>
           Reservas
         </Link>
-        <Link to="/turnero" className={`nav-link ${isActive('/turnero') ? 'active' : ''}`} onClick={closeMobileMenu}>
-          Turnero
-        </Link>
+
         <Link to="/contacto" className={`nav-link ${isActive('/contacto') ? 'active' : ''}`} onClick={closeMobileMenu}>
           Contacto
         </Link>
@@ -111,7 +109,7 @@ const App = () => {
               <Route path="/cabanas" element={<Cabanas />} />
               <Route path="/pesca" element={<Pesca />} />
               <Route path="/reservas" element={<Reservas />} />
-              <Route path="/turnero" element={<Turnero />} />
+
               <Route path="/contacto" element={<Contacto />} />
             </Routes>
           </Suspense>
