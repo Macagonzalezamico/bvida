@@ -30,19 +30,20 @@
 
 .reservas-content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 30px;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
   align-items: start;
 }
 
 /* Sección de Información */
 .reserva-info {
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .reserva-info h2 {
@@ -97,9 +98,10 @@
 /* Sección del Formulario */
 .turnero-section {
   background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .turnero-section h2 {
@@ -124,29 +126,36 @@
 
 .opciones-reserva {
   display: grid;
-  gap: 10px;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .opcion-reserva {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background: #f8f9fa;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border: 2px solid #e9ecef;
-  border-radius: 10px;
+  border-radius: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .opcion-reserva:hover {
   border-color: #D4AF37;
-  background: #fff3cd;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
 }
 
 .opcion-reserva.seleccionada {
-  background: #D4AF37;
+  background: linear-gradient(135deg, #D4AF37 0%, #E6C85C 100%);
   border-color: #D4AF37;
   color: white;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  transform: translateY(-1px);
 }
 
 .opcion-icono {
@@ -208,7 +217,7 @@
 
 /* Formulario */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .form-group label {
@@ -223,11 +232,12 @@
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px;
+  padding: 15px;
   border: 2px solid #e9ecef;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   transition: all 0.3s ease;
+  background: #f8f9fa;
 }
 
 .form-group input:focus,
@@ -236,6 +246,8 @@
   outline: none;
   border-color: #D4AF37;
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  background: white;
+  transform: translateY(-1px);
 }
 
 .form-row {
@@ -261,12 +273,13 @@
 
 /* Precio */
 .precio-section {
-  background: #D4AF37;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 25px 0;
+  background: linear-gradient(135deg, #D4AF37 0%, #E6C85C 100%);
+  padding: 25px;
+  border-radius: 15px;
+  margin: 30px 0;
   text-align: center;
   color: white;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
 }
 
 .precio-section h3 {
@@ -306,20 +319,24 @@
 /* Botón de Reservar */
 .btn-reservar {
   width: 100%;
-  padding: 15px;
-  background: #28a745;
+  padding: 18px;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
+  border-radius: 15px;
+  font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .btn-reservar:hover:not(:disabled) {
-  background: #218838;
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
 }
 
 .btn-reservar:disabled {
