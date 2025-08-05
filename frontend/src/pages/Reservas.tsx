@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import CalendarioTurnero from '../components/CalendarioTurnero';
-import '../styles/Turnero.css';
+import '../styles/Reservas.css';
 
 interface Reserva {
   _id: string;
