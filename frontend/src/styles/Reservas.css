@@ -30,8 +30,15 @@
 
 .reservas-content {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 40px;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.formulario-calendario-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
   align-items: start;
 }
 
@@ -368,11 +375,24 @@
 
 /* Calendario */
 .calendario-section {
-  background: white;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  position: relative;
+  overflow: hidden;
+  height: fit-content;
+}
+
+.calendario-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #D4AF37, #E6C85C);
 }
 
 .calendario-section h2 {
@@ -488,6 +508,11 @@
 /* Responsive Design */
 @media (max-width: 1000px) {
   .reservas-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .formulario-calendario-container {
     grid-template-columns: 1fr;
     gap: 20px;
   }

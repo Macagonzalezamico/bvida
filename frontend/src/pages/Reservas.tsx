@@ -273,13 +273,15 @@ const Reservas: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Formulario de Turnero */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="turnero-section"
-          >
+          {/* Contenedor principal del formulario y calendario */}
+          <div className="formulario-calendario-container">
+            {/* Formulario de Turnero */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="turnero-section"
+            >
             <h2>📝 Nueva Reserva</h2>
             
             {/* Tipo de Reserva */}
@@ -522,20 +524,20 @@ const Reservas: React.FC = () => {
 
           {/* Calendario */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
             className="calendario-section"
           >
             <h2>📅 Calendario de Disponibilidad</h2>
             <CalendarioTurnero
               tipo={tipoReserva}
+              casa={casa}
               onDateSelect={handleDateSelect}
               selectedDate={selectedDate}
             />
           </motion.div>
-
-
+          </div>
         </div>
       </div>
     </div>
