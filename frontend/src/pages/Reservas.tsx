@@ -535,52 +535,7 @@ const Reservas: React.FC = () => {
             />
           </motion.div>
 
-          {/* Lista de reservas existentes */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="reservas-existentes"
-          >
-            <h2>📋 Reservas Existentes</h2>
-            <div className="reservas-lista">
-              {reservas.map((reserva) => (
-                <div key={reserva._id} className="reserva-item">
-                  <div className="reserva-header">
-                    <h4>{getTipoDisplay(reserva.tipo)}</h4>
-                    <span className={`estado ${reserva.estado}`}>
-                      {reserva.estado}
-                    </span>
-                  </div>
-                  <div className="reserva-details">
-                    <p><strong>Cliente:</strong> {reserva.nombre}</p>
-                    <p><strong>Email:</strong> {reserva.email}</p>
-                    <p><strong>Teléfono:</strong> {reserva.telefono}</p>
-                    <p><strong>Personas:</strong> {reserva.cantidadPersonas}</p>
-                    {reserva.fechaPesca && (
-                      <p><strong>Fecha Pesca:</strong> {formatearFecha(reserva.fechaPesca)} - {reserva.turnoPesca}</p>
-                    )}
-                    {reserva.fechaEntrada && (
-                      <p><strong>Entrada:</strong> {formatearFecha(reserva.fechaEntrada)}</p>
-                    )}
-                    {reserva.fechaSalida && (
-                      <p><strong>Salida:</strong> {formatearFecha(reserva.fechaSalida)}</p>
-                    )}
-                    <p><strong>Monto:</strong> {formatearPrecio(reserva.monto)}</p>
-                    {reserva.observaciones && (
-                      <p><strong>Observaciones:</strong> {reserva.observaciones}</p>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => cancelarReserva(reserva._id)}
-                    className="btn-cancelar"
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+
         </div>
       </div>
     </div>
