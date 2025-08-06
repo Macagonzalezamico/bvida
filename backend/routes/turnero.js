@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Reserva = require('../models/Reserva');
+const { enviarEmailConfirmacionReserva } = require('../config/email');
 
 // Obtener todas las reservas
 router.get('/', async (req, res) => {
@@ -331,6 +332,10 @@ router.post('/', async (req, res) => {
     
     const reserva = new Reserva(reservaData);
     await reserva.save();
+    
+    // NO enviar email aquí - se enviará solo después del pago aprobado
+    console.log(`Reserva ${reserva._id} creada en estado pendiente`);
+    
     res.status(201).json(reserva);
   } catch (error) {
     res.status(500).json({ error: error.message });

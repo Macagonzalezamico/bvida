@@ -27,8 +27,9 @@ const Home = lazy(() => import('./pages/Home'));
 const Cabanas = lazy(() => import('./pages/Cabanas'));
 const Pesca = lazy(() => import('./pages/Pesca'));
 const Reservas = lazy(() => import('./pages/Reservas'));
-
 const Contacto = lazy(() => import('./pages/Contacto'));
+const PagoExitoso = lazy(() => import('./pages/PagoExitoso'));
+const PagoFallido = lazy(() => import('./pages/PagoFallido'));
 
 // Componente de loading optimizado
 const PageLoader = () => (
@@ -109,8 +110,9 @@ const App = () => {
               <Route path="/cabanas" element={<Cabanas />} />
               <Route path="/pesca" element={<Pesca />} />
               <Route path="/reservas" element={<Reservas />} />
-
               <Route path="/contacto" element={<Contacto />} />
+              <Route path="/pago-exitoso" element={<PagoExitoso />} />
+              <Route path="/pago-fallido" element={<PagoFallido />} />
             </Routes>
           </Suspense>
         </main>

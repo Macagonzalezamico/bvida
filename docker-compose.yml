@@ -13,7 +13,7 @@ services:
       - "5000:5000"
     environment:
       - MONGODB_URI=mongodb://mongo:27017/bvida
-      - MERCADOPAGO_TOKEN=tu_token_aqui
+      - MERCADOPAGO_TOKEN=TEST-1234567890abcdef1234567890abcdef-123456-123456
       - FRONTEND_URL=http://localhost:4000
       - EMAIL_USER=makagonzalez17@gmail.com
       - EMAIL_PASS=kiii lajt ydbv shex

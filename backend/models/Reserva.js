@@ -37,9 +37,7 @@ const ReservaSchema = new mongoose.Schema({
     type: Number, 
     required: true,
     min: 1,
-    max: function() { 
-      return this.tipo === 'pesca_embarcada' ? 6 : 8; // Máximo 6 para pesca, 8 para alojamiento/combo
-    }
+    max: 8 // Máximo general, la validación específica se hará en el middleware
   },
   nombre: { 
     type: String, 
@@ -78,6 +76,20 @@ const ReservaSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true
+});
+
+// Middleware para validar cantidad de personas según el tipo
+ReservaSchema.pre('save', function(next) {
+  if (this.tipo === 'pesca_embarcada' || this.tipo.startsWith('combo_pesca_')) {
+    if (this.cantidadPersonas > 6) {
+      return next(new Error('Máximo 6 personas para pesca embarcada'));
+    }
+  } else if (this.tipo.startsWith('alojamiento_')) {
+    if (this.cantidadPersonas > 8) {
+      return next(new Error('Máximo 8 personas para alojamiento'));
+    }
+  }
+  next();
 });
 
 // Índices para optimizar consultas

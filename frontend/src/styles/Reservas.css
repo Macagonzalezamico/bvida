@@ -84,50 +84,25 @@
   transform: translateY(-2px);
 }
 
-/* Columna izquierda: Info */
-.left-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Columna derecha: Formulario */
-.right-column {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Sección de Información más compacta */
-.reserva-info {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 15px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-  padding: 25px;
+/* Información de reservas - Ocupa todo el ancho arriba */
+.info-section-full {
   width: 100%;
+  margin-bottom: 25px;
 }
 
-.reserva-info:hover {
-  background: rgba(255, 255, 255, 0.6);
-  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
-  transform: translateY(-2px);
-}
-
-.reserva-info h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center;
-  font-weight: 600;
+/* Contenedor para formulario y calendario lado a lado */
+.formulario-calendario-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: start;
 }
 
 /* Grid de tarjetas de información más compacto */
 .info-cards {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .info-card {
@@ -572,26 +547,19 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-  .reservas-content {
+  .formulario-calendario-container {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
   
-  .left-column {
+  .info-cards {
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
-  }
-  
-  .right-column {
-    gap: 15px;
-  }
-  
-  .calendario-unificado {
-    margin-top: 20px;
   }
 }
 
 @media (max-width: 1000px) {
-  .reservas-content {
+  .formulario-calendario-container {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -603,10 +571,6 @@
   .info-cards {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-  }
-  
-  .calendario-unificado {
-    margin-top: 20px;
   }
 }
 
@@ -643,12 +607,9 @@
     padding: 20px;
   }
   
-  .calendario-unificado {
-    margin-top: 15px;
-  }
-  
-  .calendario-unificado .calendario-turnero-container {
-    padding: 20px;
+  .info-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 }
 
@@ -668,14 +629,6 @@
   }
   
   .reserva-box {
-    padding: 15px;
-  }
-  
-  .calendario-unificado {
-    margin-top: 15px;
-  }
-  
-  .calendario-unificado .calendario-turnero-container {
     padding: 15px;
   }
   
@@ -723,4 +676,133 @@
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
   transform: translateY(-2px);
+}
+
+/* Estilos para la sección de pago */
+.pago-section {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reserva-info-pago {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(40, 167, 69, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #28a745;
+}
+
+.reserva-info-pago h4 {
+  margin: 0 0 10px 0;
+  color: #28a745;
+  font-size: 18px;
+}
+
+.reserva-info-pago p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.estado-pendiente {
+  background: #ffc107;
+  color: #856404;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.btn-pagar {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  margin-bottom: 10px;
+}
+
+.btn-pagar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.btn-pagar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-verificar {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #17a2b8, #138496);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+  margin-bottom: 10px;
+}
+
+.btn-verificar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+}
+
+.btn-verificar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-pagar-simulado {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #6f42c1, #5a32a3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+  margin-bottom: 10px;
+}
+
+.btn-pagar-simulado:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(111, 66, 193, 0.4);
+}
+
+.btn-nueva-reserva {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn-nueva-reserva:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
 } 

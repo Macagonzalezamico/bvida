@@ -68,6 +68,10 @@ const Reservas: React.FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [calendarRefreshTrigger, setCalendarRefreshTrigger] = useState(0);
+  const [reservaCreada, setReservaCreada] = useState<Reserva | null>(null);
+  const [mostrarPago, setMostrarPago] = useState(false);
+  const [verificandoPago, setVerificandoPago] = useState(false);
 
   const API_BASE = 'http://localhost:5000/turnero';
 
@@ -80,6 +84,17 @@ const Reservas: React.FC = () => {
       verificarDisponibilidad();
     }
   }, [fecha, tipoReserva, casa]);
+
+  // Verificar estado de reserva pendiente cada 10 segundos
+  useEffect(() => {
+    if (reservaCreada && reservaCreada.estado === 'pendiente') {
+      const interval = setInterval(() => {
+        verificarEstadoReserva();
+      }, 10000); // Verificar cada 10 segundos
+
+      return () => clearInterval(interval);
+    }
+  }, [reservaCreada]);
 
   const cargarReservas = async () => {
     try {
@@ -149,9 +164,10 @@ const Reservas: React.FC = () => {
       }
 
       const reservaData = {
-        tipo: tipoEspecifico,
-        turnoPesca: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? turno : undefined,
-        fechaPesca: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? fecha : undefined,
+        tipo: tipoReserva,
+        casa: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? casa : undefined,
+        turno: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? turno : undefined,
+        fecha: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? fecha : undefined,
         fechaEntrada: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? fechaEntrada : undefined,
         fechaSalida: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? fechaSalida : undefined,
         cantidadPersonas,
@@ -171,9 +187,12 @@ const Reservas: React.FC = () => {
       });
 
       if (response.ok) {
-        setSuccess('¡Reserva creada exitosamente!');
-        limpiarFormulario();
+        const reservaData = await response.json();
+        setReservaCreada(reservaData);
+        setSuccess('¡Reserva creada exitosamente! La reserva está pendiente de pago. Completa el pago para confirmarla.');
+        setMostrarPago(true);
         cargarReservas();
+        setCalendarRefreshTrigger(prev => prev + 1); // Forzar actualización del calendario
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Error al crear la reserva');
@@ -195,6 +214,68 @@ const Reservas: React.FC = () => {
     setTelefono('');
     setObservaciones('');
     setSelectedDate(undefined);
+    setReservaCreada(null);
+    setMostrarPago(false);
+  };
+
+  const crearPreferenciaPago = async () => {
+    if (!reservaCreada) return;
+    
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:5000/pagos/crear', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          descripcion: `Reserva ${getTipoDisplay(reservaCreada.tipo)} - ${reservaCreada.nombre}`,
+          monto: reservaCreada.monto,
+          reservaId: reservaCreada._id
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Redirigir a MercadoPago
+        window.location.href = data.init_point;
+      } else {
+        setError('Error al crear la preferencia de pago');
+      }
+    } catch (error) {
+      setError('Error de conexión al procesar el pago');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verificarEstadoReserva = async () => {
+    if (!reservaCreada) return;
+    
+    try {
+      setVerificandoPago(true);
+      const response = await fetch(`${API_BASE}/${reservaCreada._id}`);
+      
+      if (response.ok) {
+        const reservaActualizada = await response.json();
+        
+        if (reservaActualizada.estado === 'confirmada') {
+          setSuccess('¡Pago confirmado! Tu reserva ha sido confirmada exitosamente. Revisa tu email para más detalles.');
+          setReservaCreada(reservaActualizada);
+          cargarReservas();
+          setCalendarRefreshTrigger(prev => prev + 1);
+          
+          // Limpiar después de 5 segundos
+          setTimeout(() => {
+            limpiarFormulario();
+          }, 5000);
+        }
+      }
+    } catch (error) {
+      console.error('Error al verificar estado de reserva:', error);
+    } finally {
+      setVerificandoPago(false);
+    }
   };
 
   const cancelarReserva = async (id: string) => {
@@ -248,50 +329,47 @@ const Reservas: React.FC = () => {
       </motion.div>
 
       <div className="container">
-        <div className="reservas-content">
-          {/* Columna Izquierda: Info */}
-          <div className="left-column">
-            {/* Información de Reservas */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="reserva-box"
-            >
-              <h2>Información de Reserva</h2>
-              <div className="info-cards">
-                <div className="info-card">
-                  <h3>📅 Política de Reservas</h3>
-                  <ul>
-                    <li>Reserva mínima con 24h de anticipación</li>
-                    <li>Pago del 30% al momento de la reserva</li>
-                    <li>Cancelación gratuita hasta 48h antes</li>
-                    <li>Check-in: 15:00h / Check-out: 10:00h</li>
-                  </ul>
-                </div>
-                
-                <div className="info-card">
-                  <h3>💳 Métodos de Pago</h3>
-                  <ul>
-                    <li>MercadoPago</li>
-                    <li>Transferencia bancaria</li>
-                    <li>Efectivo al llegar</li>
-                    <li>Tarjetas de crédito/débito</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
+        {/* Información de Reservas - Ocupa todo el ancho arriba */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="reserva-box info-section-full"
+        >
+          <h2>Información de Reserva</h2>
+          <div className="info-cards">
+            <div className="info-card">
+              <h3>📅 Política de Reservas</h3>
+              <ul>
+                <li>Reserva mínima con 24h de anticipación</li>
+                <li>Pago del 30% al momento de la reserva</li>
+                <li>Cancelación gratuita hasta 48h antes</li>
+                <li>Check-in: 15:00h / Check-out: 10:00h</li>
+              </ul>
+            </div>
+            
+            <div className="info-card">
+              <h3>💳 Métodos de Pago</h3>
+              <ul>
+                <li>MercadoPago</li>
+                <li>Transferencia bancaria</li>
+                <li>Efectivo al llegar</li>
+                <li>Tarjetas de crédito/débito</li>
+              </ul>
+            </div>
           </div>
+        </motion.div>
 
-          {/* Columna Derecha: Formulario */}
-          <div className="right-column">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="reserva-box"
-            >
-              <h2>📝 Nueva Reserva</h2>
+        {/* Formulario y Calendario - Lado a lado abajo */}
+        <div className="formulario-calendario-container">
+          {/* Columna Izquierda: Formulario */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="reserva-box"
+          >
+            <h2>📝 Nueva Reserva</h2>
             
               {/* Tipo de Reserva */}
               <div className="tipo-reserva-section">
@@ -517,35 +595,84 @@ const Reservas: React.FC = () => {
               </div>
 
               {/* Botón de envío */}
-              <button
-                type="button"
-                onClick={handleSubmit}
-                disabled={loading}
-                className="btn-reservar"
-              >
-                {loading ? 'Enviando...' : 'Reservar'}
-              </button>
+              {!mostrarPago ? (
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="btn-reservar"
+                >
+                  {loading ? 'Enviando...' : 'Reservar'}
+                </button>
+              ) : (
+                <div className="pago-section">
+                  <div className="reserva-info-pago">
+                    <h4>🔄 Reserva Pendiente de Pago</h4>
+                    <p><strong>ID:</strong> {reservaCreada?._id}</p>
+                    <p><strong>Estado:</strong> <span className="estado-pendiente">Pendiente</span></p>
+                    <p><strong>Monto:</strong> {formatearPrecio(reservaCreada?.monto || 0)}</p>
+                    <p><strong>Nota:</strong> La reserva se confirmará automáticamente al completar el pago</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={crearPreferenciaPago}
+                    disabled={loading}
+                    className="btn-pagar"
+                  >
+                    {loading ? 'Procesando...' : '💳 Pagar con MercadoPago'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Simular pago exitoso para desarrollo
+                      setSuccess('¡Pago simulado exitosamente! (Modo desarrollo)');
+                      setReservaCreada(prev => prev ? {...prev, estado: 'confirmada', pagado: true} : null);
+                      cargarReservas();
+                      setCalendarRefreshTrigger(prev => prev + 1);
+                    }}
+                    className="btn-pagar-simulado"
+                  >
+                    🧪 Simular Pago (Desarrollo)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={verificarEstadoReserva}
+                    disabled={verificandoPago}
+                    className="btn-verificar"
+                  >
+                    {verificandoPago ? 'Verificando...' : '🔄 Verificar Estado del Pago'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={limpiarFormulario}
+                    className="btn-nueva-reserva"
+                  >
+                    Nueva Reserva
+                  </button>
+                </div>
+              )}
 
               {/* Mensajes de estado */}
               {error && <div className="error-message">{error}</div>}
               {success && <div className="success-message">{success}</div>}
             </motion.div>
-          </div>
-        </div>
 
-        {/* Calendario unificado - ocupa todo el ancho */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="calendario-unificado"
-        >
-          <CalendarioTurnero
-            tipo={tipoReserva}
-            onDateSelect={handleDateSelect}
-            selectedDate={selectedDate}
-          />
-        </motion.div>
+          {/* Columna Derecha: Calendario */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+            className="reserva-box"
+          >
+            <CalendarioTurnero
+              tipo={tipoReserva}
+              casa={casa}
+              onDateSelect={handleDateSelect}
+              selectedDate={selectedDate}
+              refreshTrigger={calendarRefreshTrigger}
+            />
+          </motion.div>
+        </div>
       </div>
     </div>
   );

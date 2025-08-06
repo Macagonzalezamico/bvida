@@ -21,13 +21,15 @@ interface CalendarioTurneroProps {
   casa?: 'casa1' | 'casa2';
   onDateSelect: (date: Date) => void;
   selectedDate?: Date;
+  refreshTrigger?: number; // Prop para forzar actualización
 }
 
 const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
   tipo,
   casa,
   onDateSelect,
-  selectedDate
+  selectedDate,
+  refreshTrigger
 }) => {
   const [reservas, setReservas] = useState<Reserva[]>([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +39,7 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
 
   useEffect(() => {
     cargarReservasMes();
-  }, [tipo, casa, currentMonth]);
+  }, [tipo, casa, currentMonth, refreshTrigger]);
 
   const cargarReservasMes = async () => {
     setLoading(true);
@@ -191,7 +193,7 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
   return (
     <div className="calendario-turnero-container">
       <div className="calendario-header">
-        <h3>📅 Calendario de Disponibilidad - {getTipoDisplay()}</h3>
+        <h3>📅 Calendario - {getTipoDisplay()}</h3>
         <div className="calendario-leyenda">
           <div className="leyenda-item">
             <span className="leyenda-color disponible"></span>
