@@ -1,13 +1,49 @@
 /* Estilos para el Calendario de Turnero */
 .calendario-turnero-container {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
   padding: 30px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.1);
-  margin-bottom: 30px;
-  position: relative;
-  overflow: hidden;
+  border: none;
+}
+
+.calendario-turnero-container:hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+/* Cuando está anidado dentro de .reserva-box, mantener transparencia */
+.reserva-box .calendario-turnero-container {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.reserva-box .calendario-turnero-container:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Restaurar estilos cuando NO está anidado */
+.calendario-turnero-container:not(.reserva-box .calendario-turnero-container) {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  padding: 30px;
+}
+
+.calendario-turnero-container:not(.reserva-box .calendario-turnero-container):hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
 }
 
 .calendario-turnero-container::before {
@@ -21,11 +57,11 @@
 }
 
 .calendario-header {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .calendario-header h3 {
-  margin: 0 0 20px 0;
+  margin: 0 0 15px 0;
   color: #2C5F7F;
   font-size: 1.8rem;
   text-align: center;
@@ -46,28 +82,31 @@
   border-radius: 2px;
 }
 
+/* Leyenda del calendario integrada */
 .calendario-leyenda {
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 25px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  margin-bottom: 15px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .leyenda-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.95rem;
-  color: #2C5F7F;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #333;
   font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
   transition: all 0.3s ease;
+  background: transparent;
 }
 
 .leyenda-item:hover {
@@ -76,11 +115,11 @@
 }
 
 .leyenda-color {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  border: 2px solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .leyenda-color.disponible {
@@ -229,36 +268,37 @@
   gap: 2px;
 }
 
+/* Estilos base de los tiles del calendario más sutiles */
 .calendario-personalizado .react-calendar__tile {
-  position: relative;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border: 2px solid rgba(212, 175, 55, 0.1);
-  padding: 15px 10px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 8px;
+  padding: 12px 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 1rem;
-  min-height: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .calendario-personalizado .react-calendar__tile:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(212, 175, 55, 0.3);
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .calendario-personalizado .react-calendar__tile:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+  background: rgba(248, 249, 250, 0.6);
 }
 
-/* Estados de los días */
+/* Estados de los días más sutiles */
 .calendario-dia {
   position: relative;
 }
@@ -266,18 +306,22 @@
 .dia-disponible {
   background: linear-gradient(135deg, #d5f4e6, #e8f8f5);
   color: #27ae60;
-  border: 2px solid #27ae60;
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  border-radius: 8px;
 }
 
 .dia-disponible:hover {
   background: linear-gradient(135deg, #c3f2d4, #d5f4e6);
-  border-color: #2ecc71;
+  border-color: rgba(39, 174, 96, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.2);
 }
 
 .dia-ocupado {
   background: linear-gradient(135deg, #fadbd8, #fdf2f2);
   color: #e74c3c;
-  border: 2px solid #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 8px;
   cursor: not-allowed;
 }
 
@@ -290,19 +334,25 @@
 .dia-seleccionado {
   background: linear-gradient(135deg, #d6eaf8, #ebf3fd);
   color: #3498db;
-  border: 2px solid #3498db;
-  font-weight: 700;
+  border: 1px solid rgba(52, 152, 219, 0.5);
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
 }
 
 .dia-seleccionado:hover {
   background: linear-gradient(135deg, #c5e1f2, #d6eaf8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
 }
 
 .dia-pasado {
   background: linear-gradient(135deg, #f4f6f6, #f8f9f9);
   color: #95a5a6;
-  border: 2px solid #bdc3c7;
+  border: 1px solid rgba(149, 165, 166, 0.3);
+  border-radius: 8px;
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .dia-pasado:hover {

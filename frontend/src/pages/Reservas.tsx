@@ -98,7 +98,7 @@ const Reservas: React.FC = () => {
         fecha: fecha
       });
       
-      if (tipoReserva === 'alojamiento' || tipoReserva === 'combo') {
+      if ((tipoReserva === 'alojamiento' || tipoReserva === 'combo') && casa) {
         params.append('casa', casa);
       }
       
@@ -111,28 +111,25 @@ const Reservas: React.FC = () => {
   };
 
   const calcularMonto = () => {
-    let montoBase = 0;
-    
     if (tipoReserva === 'pesca') {
-      montoBase = 15000; // Precio por persona para pesca embarcada
+      return 15000 * cantidadPersonas;
     } else if (tipoReserva === 'alojamiento') {
-      montoBase = 25000; // Precio por noche para alojamiento
+      return 25000 * cantidadPersonas;
     } else if (tipoReserva === 'combo') {
-      montoBase = 35000; // Precio combo (pesca + alojamiento)
+      return (15000 + 25000 - 5000) * cantidadPersonas; // Descuento de combo
     }
-    
-    return montoBase * cantidadPersonas;
+    return 0;
   };
 
   const getTipoDisplay = (tipo: string) => {
-    const tipos = {
-      'pesca_embarcada': '🎣 Pesca Embarcada',
-      'alojamiento_casa1': '🏠 Alojamiento Casa 1',
-      'alojamiento_casa2': '🏠 Alojamiento Casa 2',
-      'combo_pesca_casa1': '🎣🏠 Combo Pesca + Casa 1',
-      'combo_pesca_casa2': '🎣🏠 Combo Pesca + Casa 2'
-    };
-    return tipos[tipo as keyof typeof tipos] || tipo;
+    switch (tipo) {
+      case 'pesca_embarcada': return '🎣 Pesca Embarcada';
+      case 'alojamiento_casa1': return '🏠 Casa 1';
+      case 'alojamiento_casa2': return '🏠 Casa 2';
+      case 'combo_pesca_casa1': return '🎣🏠 Combo Casa 1';
+      case 'combo_pesca_casa2': return '🎣🏠 Combo Casa 2';
+      default: return tipo;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -142,14 +139,21 @@ const Reservas: React.FC = () => {
     setSuccess('');
 
     try {
+      let tipoEspecifico = '';
+      if (tipoReserva === 'pesca') {
+        tipoEspecifico = 'pesca_embarcada';
+      } else if (tipoReserva === 'alojamiento') {
+        tipoEspecifico = casa === 'casa1' ? 'alojamiento_casa1' : 'alojamiento_casa2';
+      } else if (tipoReserva === 'combo') {
+        tipoEspecifico = casa === 'casa1' ? 'combo_pesca_casa1' : 'combo_pesca_casa2';
+      }
+
       const reservaData = {
-        tipo: tipoReserva === 'pesca' ? 'pesca_embarcada' : 
-              tipoReserva === 'alojamiento' ? `alojamiento_${casa}` : 
-              `combo_pesca_${casa}`,
-        turnoPesca: tipoReserva === 'pesca' || tipoReserva === 'combo' ? turno : undefined,
-        fechaPesca: tipoReserva === 'pesca' || tipoReserva === 'combo' ? fecha : undefined,
-        fechaEntrada: tipoReserva === 'alojamiento' || tipoReserva === 'combo' ? fechaEntrada : undefined,
-        fechaSalida: tipoReserva === 'alojamiento' || tipoReserva === 'combo' ? fechaSalida : undefined,
+        tipo: tipoEspecifico,
+        turnoPesca: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? turno : undefined,
+        fechaPesca: (tipoReserva === 'pesca' || tipoReserva === 'combo') ? fecha : undefined,
+        fechaEntrada: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? fechaEntrada : undefined,
+        fechaSalida: (tipoReserva === 'alojamiento' || tipoReserva === 'combo') ? fechaSalida : undefined,
         cantidadPersonas,
         nombre,
         email,
@@ -163,17 +167,16 @@ const Reservas: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(reservaData)
+        body: JSON.stringify(reservaData),
       });
-
-      const data = await response.json();
 
       if (response.ok) {
         setSuccess('¡Reserva creada exitosamente!');
         limpiarFormulario();
         cargarReservas();
       } else {
-        setError(data.error || 'Error al crear la reserva');
+        const errorData = await response.json();
+        setError(errorData.message || 'Error al crear la reserva');
       }
     } catch (error) {
       setError('Error de conexión. Por favor, verifica tu conexión e intenta nuevamente.');
@@ -183,37 +186,36 @@ const Reservas: React.FC = () => {
   };
 
   const limpiarFormulario = () => {
-    setNombre('');
-    setEmail('');
-    setTelefono('');
-    setObservaciones('');
     setFecha('');
     setFechaEntrada('');
     setFechaSalida('');
     setCantidadPersonas(1);
+    setNombre('');
+    setEmail('');
+    setTelefono('');
+    setObservaciones('');
+    setSelectedDate(undefined);
   };
 
   const cancelarReserva = async (id: string) => {
-    if (window.confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
-      try {
-        const response = await fetch(`${API_BASE}/${id}`, {
-          method: 'DELETE'
-        });
-        
-        if (response.ok) {
-          setSuccess('Reserva cancelada exitosamente');
-          cargarReservas();
-        } else {
-          setError('Error al cancelar la reserva');
-        }
-      } catch (error) {
-        setError('Error de conexión');
+    try {
+      const response = await fetch(`${API_BASE}/${id}`, {
+        method: 'DELETE',
+      });
+      
+      if (response.ok) {
+        setSuccess('Reserva cancelada exitosamente');
+        cargarReservas();
+      } else {
+        setError('Error al cancelar la reserva');
       }
+    } catch (error) {
+      setError('Error de conexión');
     }
   };
 
   const formatearFecha = (fecha: string) => {
-    return new Date(fecha).toLocaleDateString('es-AR');
+    return new Date(fecha).toLocaleDateString('es-ES');
   };
 
   const formatearPrecio = (precio: number) => {
@@ -225,8 +227,13 @@ const Reservas: React.FC = () => {
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
-    const formattedDate = date.toISOString().split('T')[0];
-    setFecha(formattedDate);
+    const fechaFormateada = date.toISOString().split('T')[0];
+    
+    if (tipoReserva === 'pesca') {
+      setFecha(fechaFormateada);
+    } else if (tipoReserva === 'alojamiento') {
+      setFechaEntrada(fechaFormateada);
+    }
   };
 
   return (
@@ -242,301 +249,303 @@ const Reservas: React.FC = () => {
 
       <div className="container">
         <div className="reservas-content">
-          {/* Información de Reservas */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="reserva-info"
-          >
-            <h2>Información de Reserva</h2>
-            <div className="info-cards">
-              <div className="info-card">
-                <h3>📅 Política de Reservas</h3>
-                <ul>
-                  <li>Reserva mínima con 24h de anticipación</li>
-                  <li>Pago del 30% al momento de la reserva</li>
-                  <li>Cancelación gratuita hasta 48h antes</li>
-                  <li>Check-in: 15:00h / Check-out: 10:00h</li>
-                </ul>
-              </div>
-              
-              <div className="info-card">
-                <h3>💳 Métodos de Pago</h3>
-                <ul>
-                  <li>MercadoPago</li>
-                  <li>Transferencia bancaria</li>
-                  <li>Efectivo al llegar</li>
-                  <li>Tarjetas de crédito/débito</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Formulario de Turnero */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="turnero-section"
-          >
-            <h2>📝 Nueva Reserva</h2>
-            
-            {/* Tipo de Reserva */}
-            <div className="tipo-reserva-section">
-              <h3>Tipo de Reserva:</h3>
-              <div className="opciones-reserva">
-                <div 
-                  className={`opcion-reserva ${tipoReserva === 'pesca' ? 'seleccionada' : ''}`}
-                  onClick={() => setTipoReserva('pesca')}
-                >
-                  <div className="opcion-icono">🎣</div>
-                  <div className="opcion-contenido">
-                    <h4>Pesca Embarcada</h4>
-                  </div>
-                  <div className="opcion-check">✓</div>
-                </div>
-                
-                <div 
-                  className={`opcion-reserva ${tipoReserva === 'alojamiento' ? 'seleccionada' : ''}`}
-                  onClick={() => setTipoReserva('alojamiento')}
-                >
-                  <div className="opcion-icono">🏠</div>
-                  <div className="opcion-contenido">
-                    <h4>Alojamiento en Casa</h4>
-                  </div>
-                  <div className="opcion-check">✓</div>
-                </div>
-                
-                <div 
-                  className={`opcion-reserva ${tipoReserva === 'combo' ? 'seleccionada' : ''}`}
-                  onClick={() => setTipoReserva('combo')}
-                >
-                  <div className="opcion-icono">🎣🏠</div>
-                  <div className="opcion-contenido">
-                    <h4>Combo Pesca + Alojamiento</h4>
-                  </div>
-                  <div className="opcion-check">✓</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Casa (solo para alojamiento y combo) */}
-            {(tipoReserva === 'alojamiento' || tipoReserva === 'combo') && (
-              <div className="form-group">
-                <label>Casa:</label>
-                <div className="casa-options">
-                  <button
-                    type="button"
-                    className={`casa-btn ${casa === 'casa1' ? 'active' : ''}`}
-                    onClick={() => setCasa('casa1')}
-                  >
-                    Casa 1
-                  </button>
-                  <button
-                    type="button"
-                    className={`casa-btn ${casa === 'casa2' ? 'active' : ''}`}
-                    onClick={() => setCasa('casa2')}
-                  >
-                    Casa 2
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Turno (solo para pesca y combo) */}
-            {(tipoReserva === 'pesca' || tipoReserva === 'combo') && (
-              <div className="form-group">
-                <label>Turno:</label>
-                <div className="turno-options">
-                  <button
-                    type="button"
-                    className={`turno-btn ${turno === '8:00-12:00' ? 'active' : ''}`}
-                    onClick={() => setTurno('8:00-12:00')}
-                  >
-                    8:00 - 12:00
-                  </button>
-                  <button
-                    type="button"
-                    className={`turno-btn ${turno === '14:00-18:00' ? 'active' : ''}`}
-                    onClick={() => setTurno('14:00-18:00')}
-                  >
-                    14:00 - 18:00
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Fechas del Combo */}
-            {tipoReserva === 'combo' && (
-              <div className="combo-fechas">
-                <h4>Fechas del Combo</h4>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>Fecha de Pesca:</label>
-                    <input
-                      type="date"
-                      value={fecha}
-                      onChange={(e) => setFecha(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Entrada Alojamiento:</label>
-                    <input
-                      type="date"
-                      value={fechaEntrada}
-                      onChange={(e) => setFechaEntrada(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Salida Alojamiento:</label>
-                    <input
-                      type="date"
-                      value={fechaSalida}
-                      onChange={(e) => setFechaSalida(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Fecha única para pesca o alojamiento */}
-            {tipoReserva !== 'combo' && (
-              <div className="form-group">
-                <label>
-                  {tipoReserva === 'pesca' ? 'Fecha de Pesca:' : 'Fecha de Entrada:'}
-                </label>
-                <input
-                  type="date"
-                  value={tipoReserva === 'pesca' ? fecha : fechaEntrada}
-                  onChange={(e) => {
-                    if (tipoReserva === 'pesca') {
-                      setFecha(e.target.value);
-                    } else {
-                      setFechaEntrada(e.target.value);
-                    }
-                  }}
-                  required
-                />
-              </div>
-            )}
-
-            {/* Fecha de salida para alojamiento */}
-            {tipoReserva === 'alojamiento' && (
-              <div className="form-group">
-                <label>Fecha de Salida:</label>
-                <input
-                  type="date"
-                  value={fechaSalida}
-                  onChange={(e) => setFechaSalida(e.target.value)}
-                  required
-                />
-              </div>
-            )}
-
-            {/* Cantidad de personas */}
-            <div className="form-group">
-              <label>Cantidad de Personas:</label>
-              <input
-                type="number"
-                min="1"
-                max={tipoReserva === 'pesca' ? 6 : 8}
-                value={cantidadPersonas}
-                onChange={(e) => setCantidadPersonas(parseInt(e.target.value))}
-                required
-              />
-            </div>
-
-            {/* Información personal */}
-            <div className="form-group">
-              <label>Nombre:</label>
-              <input
-                type="text"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Email:</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Teléfono:</label>
-              <input
-                type="tel"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Observaciones:</label>
-              <textarea
-                value={observaciones}
-                onChange={(e) => setObservaciones(e.target.value)}
-                rows={3}
-              />
-            </div>
-
-            {/* Precio */}
-            <div className="precio-section">
-              <h3>Precio Total: {formatearPrecio(calcularMonto())}</h3>
-              {tipoReserva === 'combo' && (
-                <div className="precio-desglose">
-                  <p>Desglose:</p>
+          {/* Columna Izquierda: Info */}
+          <div className="left-column">
+            {/* Información de Reservas */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="reserva-box"
+            >
+              <h2>Información de Reserva</h2>
+              <div className="info-cards">
+                <div className="info-card">
+                  <h3>📅 Política de Reservas</h3>
                   <ul>
-                    <li>Pesca Embarcada: {formatearPrecio(15000 * cantidadPersonas)}</li>
-                    <li>Alojamiento: {formatearPrecio(25000 * cantidadPersonas)}</li>
-                    <li>Descuento Combo: -{formatearPrecio(5000 * cantidadPersonas)}</li>
+                    <li>Reserva mínima con 24h de anticipación</li>
+                    <li>Pago del 30% al momento de la reserva</li>
+                    <li>Cancelación gratuita hasta 48h antes</li>
+                    <li>Check-in: 15:00h / Check-out: 10:00h</li>
                   </ul>
                 </div>
-              )}
-            </div>
+                
+                <div className="info-card">
+                  <h3>💳 Métodos de Pago</h3>
+                  <ul>
+                    <li>MercadoPago</li>
+                    <li>Transferencia bancaria</li>
+                    <li>Efectivo al llegar</li>
+                    <li>Tarjetas de crédito/débito</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
-            {/* Botón de envío */}
-            <button
-              type="button"
-              onClick={handleSubmit}
-              disabled={loading}
-              className="btn-reservar"
+          {/* Columna Derecha: Formulario */}
+          <div className="right-column">
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="reserva-box"
             >
-              {loading ? 'Enviando...' : 'Reservar'}
-            </button>
+              <h2>📝 Nueva Reserva</h2>
+            
+              {/* Tipo de Reserva */}
+              <div className="tipo-reserva-section">
+                <h3>Tipo de Reserva:</h3>
+                <div className="opciones-reserva">
+                  <div 
+                    className={`opcion-reserva ${tipoReserva === 'pesca' ? 'seleccionada' : ''}`}
+                    onClick={() => setTipoReserva('pesca')}
+                  >
+                    <div className="opcion-icono">🎣</div>
+                    <div className="opcion-contenido">
+                      <h4>Pesca Embarcada</h4>
+                    </div>
+                    <div className="opcion-check">✓</div>
+                  </div>
+                  
+                  <div 
+                    className={`opcion-reserva ${tipoReserva === 'alojamiento' ? 'seleccionada' : ''}`}
+                    onClick={() => setTipoReserva('alojamiento')}
+                  >
+                    <div className="opcion-icono">🏠</div>
+                    <div className="opcion-contenido">
+                      <h4>Alojamiento en Casa</h4>
+                    </div>
+                    <div className="opcion-check">✓</div>
+                  </div>
+                  
+                  <div 
+                    className={`opcion-reserva ${tipoReserva === 'combo' ? 'seleccionada' : ''}`}
+                    onClick={() => setTipoReserva('combo')}
+                  >
+                    <div className="opcion-icono">🎣🏠</div>
+                    <div className="opcion-contenido">
+                      <h4>Combo Pesca + Alojamiento</h4>
+                    </div>
+                    <div className="opcion-check">✓</div>
+                  </div>
+                </div>
+              </div>
 
-            {/* Mensajes de estado */}
-            {error && <div className="error-message">{error}</div>}
-            {success && <div className="success-message">{success}</div>}
-          </motion.div>
+              {/* Casa (solo para alojamiento y combo) */}
+              {(tipoReserva === 'alojamiento' || tipoReserva === 'combo') && (
+                <div className="form-group">
+                  <label>Casa:</label>
+                  <div className="casa-options">
+                    <button
+                      type="button"
+                      className={`casa-btn ${casa === 'casa1' ? 'active' : ''}`}
+                      onClick={() => setCasa('casa1')}
+                    >
+                      Casa 1
+                    </button>
+                    <button
+                      type="button"
+                      className={`casa-btn ${casa === 'casa2' ? 'active' : ''}`}
+                      onClick={() => setCasa('casa2')}
+                    >
+                      Casa 2
+                    </button>
+                  </div>
+                </div>
+              )}
 
-          {/* Calendario */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="calendario-section"
-          >
-            <h2>📅 Calendario de Disponibilidad</h2>
-            <CalendarioTurnero
-              tipo={tipoReserva}
-              onDateSelect={handleDateSelect}
-              selectedDate={selectedDate}
-            />
-          </motion.div>
+              {/* Turno (solo para pesca y combo) */}
+              {(tipoReserva === 'pesca' || tipoReserva === 'combo') && (
+                <div className="form-group">
+                  <label>Turno:</label>
+                  <div className="turno-options">
+                    <button
+                      type="button"
+                      className={`turno-btn ${turno === '8:00-12:00' ? 'active' : ''}`}
+                      onClick={() => setTurno('8:00-12:00')}
+                    >
+                      8:00 - 12:00
+                    </button>
+                    <button
+                      type="button"
+                      className={`turno-btn ${turno === '14:00-18:00' ? 'active' : ''}`}
+                      onClick={() => setTurno('14:00-18:00')}
+                    >
+                      14:00 - 18:00
+                    </button>
+                  </div>
+                </div>
+              )}
 
+              {/* Fechas del Combo */}
+              {tipoReserva === 'combo' && (
+                <div className="combo-fechas">
+                  <h4>Fechas del Combo</h4>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Fecha de Pesca:</label>
+                      <input
+                        type="date"
+                        value={fecha}
+                        onChange={(e) => setFecha(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Entrada Alojamiento:</label>
+                      <input
+                        type="date"
+                        value={fechaEntrada}
+                        onChange={(e) => setFechaEntrada(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Salida Alojamiento:</label>
+                      <input
+                        type="date"
+                        value={fechaSalida}
+                        onChange={(e) => setFechaSalida(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
 
+              {/* Fecha única para pesca o alojamiento */}
+              {tipoReserva !== 'combo' && (
+                <div className="form-group">
+                  <label>
+                    {tipoReserva === 'pesca' ? 'Fecha de Pesca:' : 'Fecha de Entrada:'}
+                  </label>
+                  <input
+                    type="date"
+                    value={tipoReserva === 'pesca' ? fecha : fechaEntrada}
+                    onChange={(e) => {
+                      if (tipoReserva === 'pesca') {
+                        setFecha(e.target.value);
+                      } else {
+                        setFechaEntrada(e.target.value);
+                      }
+                    }}
+                    required
+                  />
+                </div>
+              )}
+
+              {/* Fecha de salida para alojamiento */}
+              {tipoReserva === 'alojamiento' && (
+                <div className="form-group">
+                  <label>Fecha de Salida:</label>
+                  <input
+                    type="date"
+                    value={fechaSalida}
+                    onChange={(e) => setFechaSalida(e.target.value)}
+                    required
+                  />
+                </div>
+              )}
+
+              {/* Cantidad de personas */}
+              <div className="form-group">
+                <label>Cantidad de Personas:</label>
+                <input
+                  type="number"
+                  min="1"
+                  max={tipoReserva === 'pesca' ? 6 : 8}
+                  value={cantidadPersonas}
+                  onChange={(e) => setCantidadPersonas(parseInt(e.target.value))}
+                  required
+                />
+              </div>
+
+              {/* Información personal */}
+              <div className="form-group">
+                <label>Nombre:</label>
+                <input
+                  type="text"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Email:</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Teléfono:</label>
+                <input
+                  type="tel"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Observaciones:</label>
+                <textarea
+                  value={observaciones}
+                  onChange={(e) => setObservaciones(e.target.value)}
+                  rows={3}
+                />
+              </div>
+
+              {/* Precio */}
+              <div className="precio-section">
+                <h3>Precio Total: {formatearPrecio(calcularMonto())}</h3>
+                {tipoReserva === 'combo' && (
+                  <div className="precio-desglose">
+                    <p>Desglose:</p>
+                    <ul>
+                      <li>Pesca Embarcada: {formatearPrecio(15000 * cantidadPersonas)}</li>
+                      <li>Alojamiento: {formatearPrecio(25000 * cantidadPersonas)}</li>
+                      <li>Descuento Combo: -{formatearPrecio(5000 * cantidadPersonas)}</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Botón de envío */}
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={loading}
+                className="btn-reservar"
+              >
+                {loading ? 'Enviando...' : 'Reservar'}
+              </button>
+
+              {/* Mensajes de estado */}
+              {error && <div className="error-message">{error}</div>}
+              {success && <div className="success-message">{success}</div>}
+            </motion.div>
+          </div>
         </div>
+
+        {/* Calendario unificado - ocupa todo el ancho */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="calendario-unificado"
+        >
+          <CalendarioTurnero
+            tipo={tipoReserva}
+            onDateSelect={handleDateSelect}
+            selectedDate={selectedDate}
+          />
+        </motion.div>
       </div>
     </div>
   );
