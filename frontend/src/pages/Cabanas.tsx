@@ -582,7 +582,7 @@ const Cabanas = () => {
               flexWrap: 'wrap'
             }}>
                           {[
-                { icon: '🏠', title: 'Check-in/Check-out', text: 'Check-in: 15:00hs | Check-out: 10:00hs' },
+                { icon: '🏠', title: 'Check-in/Check-out', text: 'Check-in: 10:00hs | Check-out: 10:00hs' },
                 { icon: '📞', title: 'Reservas', text: 'Reserva con anticipación' },
                 { icon: '🐕', title: 'Mascotas', text: 'Se aceptan mascotas' },
                 { icon: '🚗', title: 'Estacionamiento', text: 'Incluido sin costo adicional' }

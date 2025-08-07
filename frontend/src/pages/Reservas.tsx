@@ -350,7 +350,7 @@ const Reservas: React.FC = () => {
                 <li>Reserva mínima con 24h de anticipación</li>
                 <li>Pago del 30% al momento de la reserva</li>
                 <li>Cancelación gratuita hasta 48h antes</li>
-                <li>Check-in: 15:00h / Check-out: 10:00h</li>
+                <li>Check-in: 10:00hs / Check-out: 10:00h</li>
               </ul>
             </div>
             
