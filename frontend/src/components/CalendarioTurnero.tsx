@@ -190,6 +190,23 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
     }
   };
 
+  // Configuración del locale español para react-calendar
+  const localeConfig = {
+    locale: 'es-ES',
+    formatShortWeekday: (locale: string, date: Date) => {
+      return format(date, 'EEE', { locale: es }).toUpperCase();
+    },
+    formatDay: (locale: string, date: Date) => {
+      return format(date, 'd');
+    },
+    formatMonth: (locale: string, date: Date) => {
+      return format(date, 'MMMM', { locale: es });
+    },
+    formatYear: (locale: string, date: Date) => {
+      return format(date, 'yyyy');
+    }
+  };
+
   return (
     <div className="calendario-turnero-container">
       <div className="calendario-header">
@@ -228,10 +245,14 @@ const CalendarioTurnero: React.FC<CalendarioTurneroProps> = ({
           tileClassName={tileClassName}
           tileContent={tileContent}
           onActiveStartDateChange={handleActiveStartDateChange}
-          locale="es"
+          locale="es-ES"
           minDate={new Date()}
           maxDate={addDays(new Date(), 365)} // Máximo 1 año adelante
           className="calendario-personalizado"
+          formatShortWeekday={localeConfig.formatShortWeekday}
+          formatDay={localeConfig.formatDay}
+          formatMonth={localeConfig.formatMonth}
+          formatYear={localeConfig.formatYear}
         />
       </div>
       

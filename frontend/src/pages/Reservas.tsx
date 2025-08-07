@@ -126,6 +126,11 @@ const Reservas: React.FC = () => {
   };
 
   const calcularMonto = () => {
+    // Para pruebas: $1 por persona
+    return cantidadPersonas * 1;
+    
+    // Código original para producción:
+    /*
     if (tipoReserva === 'pesca') {
       return 15000 * cantidadPersonas;
     } else if (tipoReserva === 'alojamiento') {
@@ -134,6 +139,7 @@ const Reservas: React.FC = () => {
       return (15000 + 25000 - 5000) * cantidadPersonas; // Descuento de combo
     }
     return 0;
+    */
   };
 
   const getTipoDisplay = (tipo: string) => {

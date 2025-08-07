@@ -21,11 +21,6 @@ router.post('/crear', async (req, res) => {
           quantity: 1
         }
       ],
-      back_urls: {
-        success: process.env.FRONTEND_URL + '/pago-exitoso?reserva=' + reservaId,
-        failure: process.env.FRONTEND_URL + '/pago-fallido?reserva=' + reservaId
-      },
-      auto_return: 'approved',
       external_reference: reservaId,
       metadata: { reservaId }
     };

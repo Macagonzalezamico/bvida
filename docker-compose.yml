@@ -13,8 +13,12 @@ services:
       - "5000:5000"
     environment:
       - MONGODB_URI=mongodb://mongo:27017/bvida
-      - MERCADOPAGO_TOKEN=TEST-1234567890abcdef1234567890abcdef-123456-123456
+      - MERCADOPAGO_TOKEN=APP_USR-7619237250289702-080618-5e089334b7e4e9f6993ffae5d446f5cb-68389981
+      - MERCADOPAGO_PUBLIC_KEY=APP_USR-11f3ba80-7c4c-4627-b2f2-dbb8f7645089
       - FRONTEND_URL=http://localhost:4000
+      - MERCADOPAGO_SUCCESS_URL=http://localhost:4000/pago-exitoso
+      - MERCADOPAGO_FAILURE_URL=http://localhost:4000/pago-fallido
+      - NGROK_URL=https://webhook.site/tu-url-unica
       - EMAIL_USER=makagonzalez17@gmail.com
       - EMAIL_PASS=kiii lajt ydbv shex
     depends_on:
