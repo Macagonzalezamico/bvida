@@ -187,6 +187,39 @@ const Contacto = () => {
             </button>
           </motion.form>
         </div>
+
+        {/* Sección de Ubicación con Google Maps */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="ubicacion-section"
+        >
+          <h2>📍 Nuestra Ubicación</h2>
+          <p>Encuéntranos en el hermoso Balneario Los Pocitos</p>
+          
+          <div className="mapa-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.1234567890123!2d-62.422777!3d-40.436519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI2JzExLjQiUyA2MsKwMjUnMjIuMCJX!5e0!3m2!1ses!2sar!4v1234567890123"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Ubicación Bvida - Balneario Los Pocitos"
+            ></iframe>
+          </div>
+
+                      <div className="direccion-info">
+              <div className="direccion-card">
+                <h3>🚗 Cómo llegar</h3>
+                <p><strong>Dirección:</strong> Balneario Los Pocitos, Provincia de Buenos Aires, Argentina</p>
+                <p><strong>Coordenadas:</strong> -40.436519, -62.422777</p>
+                <p><strong>Distancia desde Buenos Aires:</strong> ~400 km</p>
+              </div>
+            </div>
+        </motion.div>
       </div>
     </div>
   );
